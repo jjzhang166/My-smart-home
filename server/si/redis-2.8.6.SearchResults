@@ -1,0 +1,6 @@
+---- chatSetOrGetNodeInfo Matches (5 in 3 files) ----
+Mychat.c (z:\home\user\job8.0\server\redis\redis-2.8.6\src):         chatSetOrGetNodeInfo(c->username,c->nodename,"off",OPERATION_SET_INFO);
+Mychat.c (z:\home\user\job8.0\server\redis\redis-2.8.6\src):    chatSetOrGetNodeInfo(c->username,c->nodename,state,OPERATION_GET_INFO);
+Mychat.c (z:\home\user\job8.0\server\redis\redis-2.8.6\src):    chatSetOrGetNodeInfo(c->username,c->nodename,"on",OPERATION_SET_INFO);
+Mydictuser.c (z:\home\user\job8.0\server\redis\redis-2.8.6\src):void   chatSetOrGetNodeInfo(char * username,char * nodename,char * state, int operation)
+Myuser.h (z:\home\user\job8.0\server\redis\redis-2.8.6\src):extern void   chatSetOrGetNodeInfo(char * username,char * nodename,char * state, int operation);
