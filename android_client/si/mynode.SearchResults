@@ -1,0 +1,6 @@
+---- TabFragment Matches (7 in 2 files) ----
+FragmentTabActivity.java (z:\local\lizi\mynode\src\net\neilgoodman\android\fragmenttabstutorial\activity):import net.neilgoodman.android.fragmenttabstutorial.fragment.TabFragment;
+FragmentTabActivity.java (z:\local\lizi\mynode\src\net\neilgoodman\android\fragmenttabstutorial\activity):        // Grab the instance of TabFragment that was included with the layout and have it
+FragmentTabActivity.java (z:\local\lizi\mynode\src\net\neilgoodman\android\fragmenttabstutorial\activity):        TabFragment tabFragment = (TabFragment) fm.findFragmentById(R.id.fragment_tab);
+FragmentTabActivity.java (z:\local\lizi\mynode\src\net\neilgoodman\android\fragmenttabstutorial\activity):        tabFragment.gotoGridView();
+TabFragment.java (z:\local\lizi\mynode\src\net\neilgoodman\android\fragmenttabstutorial\fragment):public class TabFragment extends Fragment {
