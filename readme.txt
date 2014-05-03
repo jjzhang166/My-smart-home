@@ -22,3 +22,6 @@
      
 5   更详细的说明，麻烦移步：
     http://git.oschina.net/xmeter/My-smart-home/wikis/home
+    
+6
+    希望有新的小伙伴加入，随时联系： liyongming1982@163.com
