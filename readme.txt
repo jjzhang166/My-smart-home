@@ -18,7 +18,7 @@
      www
      http服务器用的代码，简单的web控制 
 
-     有任何问题可以联系,或者要添加测试用户等  :   liyongming1982@163.com
+     有任何问题,或者要添加测试用户等  :  随时联系 liyongming1982@163.com
      
 5   更详细的说明，麻烦移步：
     http://git.oschina.net/xmeter/My-smart-home/wikis/home
