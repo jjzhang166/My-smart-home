@@ -5,7 +5,9 @@
          cd  src
           make    
          怎么运行：
+          php mysql.php  (创建数据库和表格，及插入调试用户及数据，脚本在目录 debug_script )
           ./redis-server --loglevel verbose    (--loglevel verbose 表示带调试信息，默认端口为6379)
+          python fakeClient.py  (模拟真实用户及智能数据节点，可根据实际情况修改)
 2
       android_client  
        为andriod平台的客户端，用eclipse打开即可。
@@ -21,7 +23,8 @@
      有任何问题,或者要添加测试用户等  :  随时联系 liyongming1982@163.com
      
 5   更详细的说明，麻烦移步：
-    http://git.oschina.net/xmeter/My-smart-home/wikis/home
+
+    http://git.oschina.net/xmeter/My-smart-home/wikis/pages
     
 6
     希望有新的小伙伴加入，随时联系： liyongming1982@163.com
