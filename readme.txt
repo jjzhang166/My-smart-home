@@ -22,9 +22,16 @@
 
      有任何问题,或者要添加测试用户等  :  随时联系 liyongming1982@163.com
      
-5   更详细的说明，麻烦移步：
+     
+   硬件介绍：
+   
+   http://git.oschina.net/xmeter/My-smart-home/wikis/%E7%A1%AC%E4%BB%B6%E9%83%A8%E5%88%86%E4%BB%8B%E7%BB%8D
+   
+   
+     
+   更详细的说明，麻烦移步：
 
     http://git.oschina.net/xmeter/My-smart-home/wikis/pages
     
-6
+
     希望有新的小伙伴加入，随时联系： liyongming1982@163.com
