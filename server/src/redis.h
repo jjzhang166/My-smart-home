@@ -74,7 +74,7 @@
 #define REDIS_MAX_HZ            500 
 #define REDIS_SERVERPORT        6379    /* TCP port */
 #define REDIS_TCP_BACKLOG       511     /* TCP listen backlog */
-#define REDIS_MAXIDLETIME       600     /* default client timeout: infinite */
+#define REDIS_MAXIDLETIME       120     /* default client timeout: infinite */
 #define REDIS_DEFAULT_DBNUM     16
 #define REDIS_CONFIGLINE_MAX    1024
 #define REDIS_DBCRON_DBS_PER_CALL 16
@@ -88,7 +88,8 @@
 #define REDIS_AOF_REWRITE_ITEMS_PER_CMD 64
 #define REDIS_SLOWLOG_LOG_SLOWER_THAN 10000
 #define REDIS_SLOWLOG_MAX_LEN 128
-#define REDIS_MAX_CLIENTS 10000
+// modified by yongming.li for the ability of the server
+#define REDIS_MAX_CLIENTS 1000
 #define REDIS_AUTHPASS_MAX_LEN 512
 #define REDIS_DEFAULT_SLAVE_PRIORITY 100
 #define REDIS_REPL_TIMEOUT 60

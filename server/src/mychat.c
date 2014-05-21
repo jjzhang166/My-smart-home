@@ -19,6 +19,7 @@
 #include "credis.h"
 #include "mychat.h"
 #include "myuser.h"
+#include "mydebug.h"
 
 /*
 use hash dict to speed up search  
@@ -26,6 +27,13 @@ use hash dict to speed up search
 
 void  chatNotifyUserInfo(redisClient *c)
 {
+
+    // added by yongming.li for nothing should to notify  for invalid client 
+    if(c->isvaliduser==0  || c->isvalidnode==0)
+    {
+    	     return;
+    }
+    //////////////////////////////////////////////////////////
     if(c->mynode_type==MYNODE_TYPE_USER)
     {
          chat_sendtoclient("userinfo",c,c->username,"all","off",MYNODE_TYPE_USER);
@@ -52,25 +60,6 @@ void mychat_reply(redisClient *c,char * str)
    return;
 }
 
-void dumpClients()
-{
-    int i=0;
-    int numclients = listLength(server.clients);
-    redisClient *c;
-    listNode *head;
-    printf("-----------------------------------------------------------------------------\r\n");
-    while(i++<numclients) {
-        listRotate(server.clients);
-        head = listFirst(server.clients);
-        c = listNodeValue(head);
-        if(c==NULL)
-        { 
-           break;
-        }
-        printf("name:%s id:%s nodename:%s  type:%d\r\n",c->username,c->userid,c->nodename,c->mynode_type);
-    }
-    printf("-----------------------------------------------------------------------------\r\n");
-}
 void chat_sendtoclient(char * tag ,redisClient *c , char * from , char * to ,char * message, unsigned char  toType)
 {
     int numclients = listLength(server.clients);
@@ -80,7 +69,7 @@ void chat_sendtoclient(char * tag ,redisClient *c , char * from , char * to ,cha
     int  slen;
     char sbuf[1024];
 
-    printf("chat_sendtoclient  from %s to %s  \r\n",from,to);
+    //printf(" from  %-20s  to  %-20s  \r\n",from,to);
     while(i++<numclients) {
         listRotate(server.clients);
         head = listFirst(server.clients);
@@ -92,7 +81,6 @@ void chat_sendtoclient(char * tag ,redisClient *c , char * from , char * to ,cha
         //  so i think it is better ths , a node cant talk to any other node 
          if(ctemp->mynode_type!= toType)
          {
-             //printf("ctemp->mynode_type!= toType  \r\n");
              continue;
          }
 
@@ -140,7 +128,6 @@ int chat_register(redisClient *c) {
     
         
     c->argv[2] = tryObjectEncoding(c->argv[2]);
-    printf("c->argv[2]->ptr is %s \r\n",c->argv[2]->ptr);
     if (setTypeIsMember(set,c->argv[2]))
         //addReply(c,shared.cone);
         return  1;
@@ -173,7 +160,7 @@ void chatLogin(redisClient *c)
     {
     	    //addReplyError(c,"chat  , sorry , wrong username or password ,please check carefully");
     	    //mychat_reply(c,"fail");
-    	    addReplyString(c,"login fail\r\n",strlen("login fail\r\n"));
+    	    addReplyString(c,"login fail wrongNameorPasswd\r\n",strlen("login fail wrongNameorPasswd\r\n"));
     	    c->isvaliduser=0;
     	    c->isvalidnode=0;
     	    return;
@@ -182,7 +169,7 @@ void chatLogin(redisClient *c)
     chatSetOrGetUserInfo(c->argv[2]->ptr,state,OPERATION_GET_INFO);
     if(!strcmp(state,"on"))
     {
-         addReplyString(c,"login fail\r\n",strlen("login fail\r\n"));
+         addReplyString(c,"login fail alreadylogin\r\n",strlen("login fail alreadylogin\r\n"));
          printf("%s , you have already login \r\n",c->argv[2]->ptr);
          c->isvaliduser=0;
     	    c->isvalidnode=0;
@@ -224,7 +211,7 @@ void nodeLogin(redisClient *c)
     username=getNameByUserid(userid);
     if(username==NULL)
     {
-         addReplyString(c,"login fail\r\n",strlen("login fail\r\n"));
+         addReplyString(c,"login fail wrongNameorPasswd\r\n",strlen("login fail wrongNameorPasswd\r\n"));
     	    c->isvaliduser=0;
     	    c->isvalidnode=0;
     	    return;
@@ -235,7 +222,7 @@ void nodeLogin(redisClient *c)
     chatSetOrGetNodeInfo(c->username,c->nodename,state,OPERATION_GET_INFO);
     if(!strcmp(state,"on"))
     {
-         addReplyString(c,"login fail\r\n",strlen("login fail\r\n"));
+         addReplyString(c,"login fail alreadylogin\r\n",strlen("login fail alreadylogin\r\n"));
          printf("%s , you have already login \r\n",c->argv[2]->ptr);
          c->isvaliduser=0;
     	    c->isvalidnode=0;
@@ -282,7 +269,6 @@ void nodeLogin(redisClient *c)
 
 void nodeSay(redisClient *c)
 {
-    dumpClients();
     if(c->mynode_type==MYNODE_TYPE_USER)
     {
     	    chat_sendtoclient("node",c,c->username,c->argv[2]->ptr,c->argv[3]->ptr,MYNODE_TYPE_NODE);
@@ -311,6 +297,12 @@ void nodeCommand(redisClient *c)
      	    nodeSay(c);
      	    return;
      }
+     if(!strcmp(c->argv[1]->ptr,"heartbeat"))
+     {
+          // added by yongming.li for update lastinteraction time
+     	    return;
+     }
+     
      return;
 }
 void chatCommand(redisClient *c) 
@@ -330,13 +322,18 @@ void chatCommand(redisClient *c)
      	    chatUserInfo(c);
      	    return;
      }
-     #if 0
-      if(!strcmp(c->argv[1]->ptr,"register"))
+     if(!strcmp(c->argv[1]->ptr,"heartbeat"))
      {
-     	    chatSay(c);
+           // added by yongming.li for update lastinteraction time
      	    return;
      }
-     #endif 
+      if(!strcmp(c->argv[1]->ptr,"debug"))
+     {
+         myDebugEntry(c);
+     	    return;
+     }
+
+     
      // addReplyError(c,"chat  , sorry , invalid  command ( now only support : say logo regisgter)");
      return;
 }

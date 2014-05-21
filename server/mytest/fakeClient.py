@@ -27,20 +27,17 @@ while True:
     tcpCliSock.send('chat say yongming %s\r\n'%ii) 
     if(ii==30):
         ii=20
-    nodeclient.send('node say self %s\r\n'%ii) 
+    nodeclient.send('node say self name=temperature,value=%s,measurement=C\r\n'%ii) 
 
     if(ii==23):
-        tvclient.send('node say self close\r\n')
+        tvclient.send('node say self name=light,state=close,brightness:0;name=tv,state=open,channel=cctv5\r\n')
     if(ii==28):
-        tvclient.send('node say self open\r\n')
+        tvclient.send('node say self name=light,state=open,brightness:255;name=tv,state=close,channel=cctv5\r\n')
 
-    # tcpCliSock.send('chat say yinzhi hello_yinzhi_%s\r\n'%ii) 
-    #data=tcpCliSock.recv(BUFSIZ) 
-    #if not data:  
-    #   break  
-    # print data  
     print 'again'
     time.sleep(15) 
-    
+
+nodeclient.close()
+tvclient.close()   
 tcpCliSock.close()  
 

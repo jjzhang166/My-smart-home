@@ -29,31 +29,12 @@ struct redisCommand *lookupCommandByCString(char *s) {
 
 extern dict * myuserdict;
 
-#define  MY_NAME_LENGTH  256
-
 void  myuser_init()
 {
       // do nothing now
 }
 
-typedef struct _MyNodeInfo {
-    char   name[MY_NAME_LENGTH]; 
-    char   line[10]; 
-} MyNodeInfo;
 
-typedef struct _MyNodeUserInfo {
-    char   name[MY_NAME_LENGTH]; 
-    char   userid[MY_NAME_LENGTH]; 
-    char   line[MY_NAME_LENGTH]; 
-    MyNodeInfo nodes[MYNODE_MAX_NODES];
-    unsigned int index;
-    struct  _MyNodeUserInfo * next;
-} MyNodeUserInfo;
-
-typedef struct _MyAllNodeUserInfo {
-    struct _MyNodeUserInfo  * userInfo; 
-    unsigned int index;
-} MyAllNodeUserInfo;
 
 MyAllNodeUserInfo myAllNodeUserInfo={NULL,0};
 
@@ -72,7 +53,7 @@ struct _MyNodeUserInfo * newMyNodeUserInfo()
 void   insertUserInfo(char * userid , char * username)
 {
     MyNodeUserInfo * nodeuseinfo = newMyNodeUserInfo();
-    printf("nodeuseinfo is %p   \r\n",nodeuseinfo);
+    //printf("nodeuseinfo is %p   \r\n",nodeuseinfo);
     MyNodeUserInfo * tempnodeuseinfo = myAllNodeUserInfo.userInfo;
     strcpy(nodeuseinfo->name,username);
     strcpy(nodeuseinfo->userid,userid);
@@ -121,7 +102,7 @@ int    insertNodeToUserInfo(char * username , char * nodename)
         strcpy(nodeuseinfo->nodes[nodeIndex].name,nodename);
         strcpy(nodeuseinfo->nodes[nodeIndex].line,"off");
         nodeuseinfo->index=nodeIndex+1;
-        printf("insertNodeToUserInfo  %s  %s  index is %d\r\n",username,nodename,nodeuseinfo->index);
+        //printf("insertNodeToUserInfo  %s  %s  index is %d\r\n",username,nodename,nodeuseinfo->index);
         return 1;
 
 }

@@ -1,3 +1,15 @@
+mynode3.2_redis-2.8.6
+-------   added mydebug ,出问题的时候打印服务器当前状态
+-------   修改脚本，增加root用户，用于调试
+
+mynode3.1_redis-2.8.6
+-------   redisLog  替换 printf , 简化调试方式
+-------   调整60秒 ，client没有交互的话，将此链接关闭，释放资源 
+-------   delete directory ：　home_update　and  si (it is my mistake that added to the git repo)
+
+mynode3.0_redis-2.8.6
+-------   加入简单beatheart 机制 
+
 mynode2.9_redis-2.8.6
 -------   两个同样的用户不能同时登录 
     

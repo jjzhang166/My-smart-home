@@ -60,7 +60,6 @@ int insert_all_node(char * userid,char * username)
          while (row = mysql_fetch_row(res)) 
          { 
                sprintf(buf,"%s",row[0]);
-               //printf("hadd  buf is %s \r\n",buf);
                insertNodeToUserInfo(username,row[0]);
          }  
      
@@ -81,7 +80,6 @@ int do_mysql_dump_redis(void *arg)
      int i=0;
 
      mysql_init(&mysql);
-     printf("mysql_real_connect begin \r\n");
      if(!mysql_real_connect(&mysql,"localhost","root",
                      "123456","mynode",0,NULL,0))
      {
