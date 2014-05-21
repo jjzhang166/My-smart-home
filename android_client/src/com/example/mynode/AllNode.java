@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 
 import com.example.mynode.chat.ChatActivity;
 import com.example.mynode.node.NodetemperatureActivity;
+import com.example.mynode.node.SpecialNodeLight;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -83,15 +84,23 @@ public class AllNode extends Activity {
 		                setTitle("选择"+arg2+"个"+map.get("ItemTitle")); 
 		                Intent intent=null;
 		            	//  0 means chart mode (show datas)
+		                String name = (String)map.get("ItemTitle");
 		            	if(nodeMode==0)
 		            	{
 			                intent = new Intent(AllNode.this,NodetemperatureActivity.class); 
-				            intent.putExtra("name",(String)map.get("ItemTitle"));
+				            intent.putExtra("name",name);
 		            	}
 		            	//  1 means chat mode (control the node)
 		            	if(nodeMode==1)
 		            	{
 			                intent = new Intent(AllNode.this,ChatActivity.class); 
+				            intent.putExtra("name",name);
+				            intent.putExtra("mode", "node");
+		            	}
+		            	if(name.equalsIgnoreCase("light"))
+		            	{
+		            		
+			                intent = new Intent(AllNode.this,SpecialNodeLight.class); 
 				            intent.putExtra("name",(String)map.get("ItemTitle"));
 				            intent.putExtra("mode", "node");
 		            	}

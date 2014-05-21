@@ -28,6 +28,7 @@ import org.achartengine.chart.PointStyle;
 
 import com.example.mynode.MyConfig;
 import com.example.mynode.MyParse;
+import com.example.mynode.MyParseCommon;
 import com.example.mynode.R;
 
 public class NodetemperatureActivity extends Activity {
@@ -195,7 +196,10 @@ public class NodetemperatureActivity extends Activity {
         	{
         		Log.e(TAG, "message_"+j+" is "+messageList.get(j)); 
 		        dataset.clear();
-			    series.add(j,Double.parseDouble(messageList.get(j)));
+			    //series.add(j,Double.parseDouble(messageList.get(j)));
+			    
+			    series.add(j,Double.parseDouble(MyParseCommon.getValueFromMessageByName(messageList.get(j),"value")));
+			
 			    
 			    dataset.addSeries(series);
         	}

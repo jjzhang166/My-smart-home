@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.mynode.*;
 
 import com.example.mynode.*;
+import com.example.mynode.node.SpecialNodeLight;
 import com.example.mynode.rssreader.RssReader;
 import com.example.mynode.setting.MySetting;
 import com.example.mynode.setting.MySettingActivity;
@@ -92,12 +93,11 @@ public class LocationGridFragment extends Fragment {
     	}
 
 	    
-	    if(position==4)
+	 if(position==4)
     	{
     		intent = new Intent(activity,RssReader.class); 
     	}
 
-	    
 	    try
 	    {
 	    	startActivity(intent); 	    	

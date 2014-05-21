@@ -1,6 +1,7 @@
 package com.example.mynode;
   
 import android.app.Activity;  
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;  
@@ -29,6 +30,7 @@ public class LoginActivity extends Activity implements OnClickListener{
 
 
 	private Thread mThread; 
+	private Thread mThreadHeartBeat; 
     @Override  
     
     public void onCreate(Bundle savedInstanceState) {  
@@ -90,8 +92,17 @@ public class LoginActivity extends Activity implements OnClickListener{
     		{
     			return;
     		}
+    		
+    		//Intent serviceIntent = new Intent();
+    		//serviceIntent.setAction("Start.MyBatteryService");
+    		//startService(serviceIntent);
+    		
 		    mThread = new Thread(runnable);  
 		    mThread.start();
+		    // added by yongming.li for heart beat
+		    mThreadHeartBeat = new Thread(runnableHeartBeat);  
+		    mThreadHeartBeat.start();
+		    
 			break;
 		default:
 			break;
@@ -117,14 +128,22 @@ public class LoginActivity extends Activity implements OnClickListener{
             proressBar.setVisibility(View.INVISIBLE);
          }  
      };  
-    Runnable runnable = new Runnable() { 
-    	public void run() {
-    		//MyClient client = new MyClient();
-    		//client.open();
+	Runnable runnable = new Runnable() {
+		public void run() {
+			MyConfig.myClient.start();
+		}
+	};
 
-    		MyConfig.myClient.start();
-    	}   		
-};
+	Runnable runnableHeartBeat = new Runnable() {
+		public void run() {
+			try {
+				MyConfig.myHeartBeat.start();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	};
 
 }  
 

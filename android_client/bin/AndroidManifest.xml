@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="14"
         android:targetSdkVersion="17" />
 
     <application
@@ -60,12 +60,10 @@
             android:name="com.example.mynode.NoFinish"
             android:label="@string/title_activity_no_finish" >
         </activity>
-        
         <activity
             android:name="com.example.mynode.rssreader.RssReader"
             android:label="@string/title_activity_rssread" >
         </activity>
-        
         <activity
             android:name="com.example.mynode.setting.MySettingActivity"
             android:label="@string/title_activity_my_setting"
@@ -73,6 +71,17 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="android.preference.PreferenceActivity" />
+        </activity>
+
+        <service android:name="com.example.mynode.MyBatteryService" >
+            <intent-filter>
+                <action android:name="Start.MyBatteryService" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name="com.example.mynode.node.SpecialNodeLight"
+            android:label="@string/title_activity_special_node_light" >
         </activity>
     </application>
 

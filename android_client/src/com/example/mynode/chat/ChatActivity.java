@@ -25,6 +25,7 @@ import java.util.HashMap;
 
 import com.example.mynode.MyConfig;
 import com.example.mynode.MyParse;
+import com.example.mynode.MyParseCommon;
 import com.example.mynode.R;
 
 public class ChatActivity extends Activity {
@@ -94,13 +95,14 @@ public class ChatActivity extends Activity {
                 // TODO Auto-generated method stub
 
             	if(arg0==sendButton)
-            	{
-            		
-            		String str = String.format("chat say %s %s ",getFromwho(),messageText.getText().toString());
+            	{ 
+            		String name = getFromwho();
+            		String parentname = MyParseCommon.getParentNameByName(userNodeList,name);
+            		String str = String.format("chat say %s %s ",parentname,messageText.getText().toString());
             		
                     if(chatmode.equalsIgnoreCase("node"))
                     {
-                    	str = String.format("node say %s %s ",getFromwho(),messageText.getText().toString());
+                    	str = String.format("node say %s name=%s,value=%s ",parentname,name,messageText.getText().toString());
                     }
             		Log.e(TAG, str); 	
             		MyConfig.myClient.runCmd(str);
@@ -233,10 +235,11 @@ public class ChatActivity extends Activity {
     }
 	private Handler mHandler = new Handler() {  
         public void handleMessage (Message msg) {//此方法在ui线程运行  
-        	String str = (String)msg.obj;
+        	
             switch(msg.what) {  
             case MyConfig.MSG_CHAT_UPDATE: 
-            	//Log.e(TAG, "handleMessage>>>>>>");
+            	String str = (String)msg.obj;
+            	Log.e(TAG, "handleMessage>>>>>> str is"+str);
             	String temp[] = str.split(":");
             	String mFromWho=temp[0];
             	mRevText=temp[1];

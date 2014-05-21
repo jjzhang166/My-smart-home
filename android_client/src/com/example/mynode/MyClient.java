@@ -95,6 +95,10 @@ public class MyClient  extends Service
 
 	public void runCmd(String cmd) {
 		try {
+			if(out==null)
+			{
+				return;
+			}
 			out.println(cmd);
 		} catch (Exception e) {
 			Log.e(TAG, e.toString());
@@ -111,12 +115,17 @@ public class MyClient  extends Service
 	   { 
 	        out.close();  
 	        br.close();  
-	        socket.close();   
+	        socket.close(); 
+	        
+	        out=null;
+	        br=null;
+	        socket=null;
+	        
 	        sendCmd.clear();
 	   }
 	   catch (Exception e)   
 	   {  
-	            Log.e(TAG, e.toString());  
+	            Log.e(TAG, "myclose  : "+e.toString());  
 	   }  
 	}
 

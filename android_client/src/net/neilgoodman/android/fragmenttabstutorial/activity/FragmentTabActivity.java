@@ -17,6 +17,7 @@ public class FragmentTabActivity extends FragmentActivity {
 	 
               //  added by yongming.li for net status
 		String str = MyClient.getCurrentNetStatus(getApplicationContext());
+			  
 		Toast.makeText(FragmentTabActivity.this, str,
 					Toast.LENGTH_SHORT).show(); 
 		setTitle(str);

@@ -6,6 +6,8 @@ public final class MyConfig {
      public static final int SERVER_PORT = 6379;
      public static final String SERVER_IP = "115.29.235.211";
      public static MyClient  myClient = new MyClient();
+     public static MyHeartBeat  myHeartBeat = new MyHeartBeat();
+     
      
      public  static final int MSG_SUCCESS = 0;
      public  static final int MSG_FAILURE = 1;
