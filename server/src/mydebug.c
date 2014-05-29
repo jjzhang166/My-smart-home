@@ -5,7 +5,6 @@
 #include <string.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "mydump.h"
 #include <stdlib.h>
 #include <errno.h>  
 #include <unistd.h>  
@@ -14,6 +13,7 @@
 #include <sys/stat.h>  
 #include <sys/msg.h> 
 
+#include "mydump.h"
 #include "credis.h"
 #include "mychat.h"
 #include "myuser.h"
@@ -53,7 +53,7 @@ int dumpAlluser(redisClient *c) {
     
     while((de = dictNext(di)) != NULL) {
         MyNodeUserInfo * nodeuseinfo  = dictGetVal(de);
-        sprintf(buf,"username : %-25s\r\n",nodeuseinfo->name);
+        sprintf(buf,"username : %-25s and userid : %-25s\r\n ",nodeuseinfo->name,nodeuseinfo->userid);
         //redisLog(REDIS_NOTICE,"name : %-25s\r\n",nodeuseinfo->name);
         addReplyString(c,buf,strlen(buf));
 
@@ -71,7 +71,7 @@ int dumpAlluser(redisClient *c) {
 }
 void  myDebugEntry(redisClient *c)
 {
-      if(strcmp(c->username,"root"))
+      if(strcmp(c->username,MY_REDIS_ROOT_NAME))
       {
       	     return;
       }
@@ -79,4 +79,16 @@ void  myDebugEntry(redisClient *c)
       dumpAlluser(c);
       return;
 }
+
+void  myAddUser(redisClient *c)
+{
+      if(strcmp(c->username,MY_REDIS_ROOT_NAME))
+      {
+      	     return;
+      }
+      //insertUserInfo(char * userid , char * username)
+      insertUserInfo(c->argv[2]->ptr , c->argv[3]->ptr);
+      return;
+}
+
 

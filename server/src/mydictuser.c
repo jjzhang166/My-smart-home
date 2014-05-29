@@ -52,8 +52,19 @@ struct _MyNodeUserInfo * newMyNodeUserInfo()
 
 void   insertUserInfo(char * userid , char * username)
 {
-    MyNodeUserInfo * nodeuseinfo = newMyNodeUserInfo();
-    //printf("nodeuseinfo is %p   \r\n",nodeuseinfo);
+     MyNodeUserInfo * nodeuseinfo = NULL;
+    // added by yongming.li  
+    // if  username already exit in dict , so return directly , do nothing of this case
+    sds nameTemp = sdsnew(username);
+    nodeuseinfo = dictFetchValue(myuserdict, nameTemp);
+    sdsfree(nameTemp);
+    if(nodeuseinfo!=NULL)
+    {
+    	     return ;
+    }
+    ///////////////////////////////////////////////////////////////////
+      
+    nodeuseinfo = newMyNodeUserInfo();
     MyNodeUserInfo * tempnodeuseinfo = myAllNodeUserInfo.userInfo;
     strcpy(nodeuseinfo->name,username);
     strcpy(nodeuseinfo->userid,userid);
@@ -61,9 +72,8 @@ void   insertUserInfo(char * userid , char * username)
     // init something
     nodeuseinfo->index=0;
 
-    //sds name = sdsnew(username);
+
     dictAdd(myuserdict, sdsnew(username),nodeuseinfo);
-    //sdsfree(name);
     
     myAllNodeUserInfo.index=myAllNodeUserInfo.index+1;
     myAllNodeUserInfo.userInfo=nodeuseinfo;

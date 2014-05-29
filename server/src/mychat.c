@@ -332,6 +332,11 @@ void chatCommand(redisClient *c)
          myDebugEntry(c);
      	    return;
      }
+      if(!strcmp(c->argv[1]->ptr,"adduser"))
+     {
+         myAddUser(c);
+     	    return;
+     }
 
      
      // addReplyError(c,"chat  , sorry , invalid  command ( now only support : say logo regisgter)");
