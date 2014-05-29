@@ -34,7 +34,7 @@ mysql_query("CREATE  TABLE alluser (userid VARCHAR(50) UNIQUE,name VARCHAR(50) ,
 mysql_query("CREATE  TABLE friends  (name VARCHAR(50) ,friendsname VARCHAR(50) UNIQUE)",$con);
 // insert fake data
 
-$arr=array("yongming", ,"ckrissun","xiaodong","liyi", "shaohui","xiaoxiong","test","root");
+$arr=array("yongming", "liyi", "shaohui","xiaoxiong","test","root");
 
 foreach ($arr as $value)
 {
