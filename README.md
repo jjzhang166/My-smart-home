@@ -10,13 +10,17 @@
 `编译:`
     
     cd src
+    make distclean
     make    
+    
 
 `运行:`
     
     php mysql.php  (创建数据库和表格，及插入调试用户及数据，脚本在目录 debug_script)
     ./redis-server --loglevel verbose (--loglevel verbose 表示带调试信息，默认端口为6379)
     python fakeClient.py (模拟真实用户及智能数据节点，可根据实际情况修改)
+    
+    
 
 
 #### android_client  
@@ -28,7 +32,7 @@ andriod平台的客户端，使用eclipse打开即可。
 #### debug_script
 ===
 mysql数据库初始化，测试用例的一些脚本
-
+所有脚本都是和服务器相关，所以脚本移动到 server/mytest ，这里的将不再更新维护。
 
 
 #### www
