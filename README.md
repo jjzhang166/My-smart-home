@@ -51,6 +51,7 @@ http服务器代码，简单的web控制，有任何问题,或者要添加测试
 ===
 更详细的说明，麻烦移步 [WiKi](http://git.oschina.net/xmeter/My-smart-home/wikis/pages)
 
-希望有新的小伙伴加入，随时联系 <liyongming1982@163.com>
-                               <ckrissun@gmail.com>
-                               <siz@sonwa.cn>
+希望有新的小伙伴加入， `随时联系:`
+    <liyongming1982@163.com>
+    <ckrissun@gmail.com>
+    <siz@sonwa.cn>
