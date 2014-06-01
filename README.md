@@ -10,8 +10,7 @@
 `编译:`
     
     cd src
-    make distclean
-    make    
+    make distclean && make
     
 
 `运行:`
@@ -53,6 +52,6 @@ http服务器代码，简单的web控制，有任何问题,或者要添加测试
 
 希望有新的小伙伴加入， `随时联系:`
 ===
-    <liyongming1982@163.com>
-    <ckrissun@gmail.com>
-    <siz@sonwa.cn>
+  <liyongming1982@163.com>
+  <ckrissun@gmail.com>
+  <siz@sonwa.cn>

@@ -12,21 +12,21 @@
 #if   MYNODE_ARRAY_SEARCH_USER
 
 typedef struct _MyNodeInfo {
-    char   name[MY_NAME_LENGTH]; 
-    char   line[10]; 
+    char   name[MY_NAME_LENGTH];
+    char   line[10];
 } MyNodeInfo;
 
 typedef struct _MyNodeUserInfo {
-    char   name[MY_NAME_LENGTH]; 
-    char   userid[MY_NAME_LENGTH]; 
-    char   line[MY_NAME_LENGTH]; 
+    char   name[MY_NAME_LENGTH];
+    char   userid[MY_NAME_LENGTH];
+    char   line[MY_NAME_LENGTH];
     MyNodeInfo nodes[MYNODE_MAX_NODES];
     unsigned int index;
     struct  _MyNodeUserInfo * next;
 } MyNodeUserInfo;
 
 typedef struct _MyAllNodeUserInfo {
-    struct _MyNodeUserInfo  * userInfo; 
+    struct _MyNodeUserInfo  * userInfo;
     unsigned int index;
 } MyAllNodeUserInfo;
 
@@ -40,7 +40,7 @@ void myuser_init()
 
 struct _MyNodeUserInfo * newMyNodeUserInfo()
 {
-      MyNodeUserInfo * nodeuseinfo= malloc(sizeof(MyNodeUserInfo));
+      MyNodeUserInfo * nodeuseinfo= zmalloc(sizeof(MyNodeUserInfo));
       nodeuseinfo->next=NULL;
       nodeuseinfo->index=0;
       memset(nodeuseinfo->name,0X00,MY_NAME_LENGTH);
@@ -58,7 +58,7 @@ void   insertUserInfo(char * userid , char * name)
     strcpy(nodeuseinfo->userid,userid);
     strcpy(nodeuseinfo->line,"off");
     // init something
-    nodeuseinfo->index=0; 
+    nodeuseinfo->index=0;
     myAllNodeUserInfo.index=myAllNodeUserInfo.index+1;
 
     myAllNodeUserInfo.userInfo=nodeuseinfo;
@@ -82,11 +82,11 @@ int    insertNodeToUserInfo(char * username , char * nodename)
                       if(!strcmp(nodename,nodeuseinfo->nodes[j].name))
                      {
                            return 0;
-                     }  
+                     }
               }
               if(nodeuseinfo->index>=MYNODE_MAX_NODES)
              {
-                   return -1;    
+                   return -1;
              }
              strcpy(nodeuseinfo->nodes[nodeIndex].name,nodename);
              strcpy(nodeuseinfo->nodes[nodeIndex].line,"off");
@@ -150,7 +150,7 @@ void   getAllNodeInfo(redisClient *c )
 
 char *   getUseridByName(redisClient *c)
 {
-   
+
     MyNodeUserInfo * nodeuseinfo = NULL;
     for(nodeuseinfo=myAllNodeUserInfo.userInfo;nodeuseinfo!=NULL;nodeuseinfo=nodeuseinfo->next)
     {
@@ -205,8 +205,8 @@ void   chatUpdateNodeInfo(char * username,char * nodename,char * state,)
                      {
                            sprintf(nodeuseinfo->nodes[j].line,"%s",state);
                            return ;
-                     }  
-              }         
+                     }
+              }
              break;
          }
     }

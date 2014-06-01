@@ -50,7 +50,7 @@ foreach ($arr as $value)
   mysql_query(sprintf("insert into node values('%s', 'temperature','0','0')",md5($email)),$con);
 
   mysql_query(sprintf("insert into emailmd5 values('%s','%s')",$email,md5($email)),$con);
-  
+
 }
 //  remember free resource
 echo "close mysql connect \r\n" ;

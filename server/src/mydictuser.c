@@ -40,20 +40,20 @@ MyAllNodeUserInfo myAllNodeUserInfo={NULL,0};
 
 struct _MyNodeUserInfo * newMyNodeUserInfo()
 {
-      MyNodeUserInfo * nodeuseinfo= malloc(sizeof(MyNodeUserInfo));
+      MyNodeUserInfo * nodeuseinfo= zmalloc(sizeof(MyNodeUserInfo));
       nodeuseinfo->next=NULL;
       nodeuseinfo->index=0;
       memset(nodeuseinfo->name,0X00,MY_NAME_LENGTH);
       memset(nodeuseinfo->userid,0X00,MY_NAME_LENGTH);
       memset(nodeuseinfo->line,0X00,MY_NAME_LENGTH);
-      
+
       return nodeuseinfo;
 }
 
 void   insertUserInfo(char * userid , char * username)
 {
      MyNodeUserInfo * nodeuseinfo = NULL;
-    // added by yongming.li  
+    // added by yongming.li
     // if  username already exit in dict , so return directly , do nothing of this case
     sds nameTemp = sdsnew(username);
     nodeuseinfo = dictFetchValue(myuserdict, nameTemp);
@@ -63,7 +63,7 @@ void   insertUserInfo(char * userid , char * username)
     	     return ;
     }
     ///////////////////////////////////////////////////////////////////
-      
+
     nodeuseinfo = newMyNodeUserInfo();
     MyNodeUserInfo * tempnodeuseinfo = myAllNodeUserInfo.userInfo;
     strcpy(nodeuseinfo->name,username);
@@ -74,7 +74,7 @@ void   insertUserInfo(char * userid , char * username)
 
 
     dictAdd(myuserdict, sdsnew(username),nodeuseinfo);
-    
+
     myAllNodeUserInfo.index=myAllNodeUserInfo.index+1;
     myAllNodeUserInfo.userInfo=nodeuseinfo;
     nodeuseinfo->next = tempnodeuseinfo;
@@ -96,18 +96,18 @@ int    insertNodeToUserInfo(char * username , char * nodename)
     	{
     	     return -2;
     	}
-    
+
           int nodeIndex =nodeuseinfo->index;
           for(int j=0;j<nodeIndex;j++)
          {
                  if(!strcmp(nodename,nodeuseinfo->nodes[j].name))
                 {
                       return 0;
-                }  
+                }
          }
          if(nodeuseinfo->index>=MYNODE_MAX_NODES)
         {
-              return -1;    
+              return -1;
         }
         strcpy(nodeuseinfo->nodes[nodeIndex].name,nodename);
         strcpy(nodeuseinfo->nodes[nodeIndex].line,"off");
@@ -160,7 +160,7 @@ void   getAllNodeInfo(redisClient *c )
     	{
     	     return ;
     	}
-    
+
         int nodeIndex =nodeuseinfo->index;
         for(int j=0;j<nodeIndex;j++)
        {
@@ -216,7 +216,7 @@ void   chatSetOrGetUserInfo(char * username,char * state,int operation)
      	{
      	     strcpy(nodeuseinfo->line,state);
      	}
-     
+
      return;
 }
 
@@ -235,7 +235,7 @@ void   chatSetOrGetNodeInfo(char * username,char * nodename,char * state, int op
      {
              if(!strcmp(nodename,nodeuseinfo->nodes[j].name))
             {
-               
+
                     if(operation==OPERATION_GET_INFO)
 								     	{
 								     	     sprintf(state,"%s",nodeuseinfo->nodes[j].line);
@@ -245,8 +245,8 @@ void   chatSetOrGetNodeInfo(char * username,char * nodename,char * state, int op
 								     	     sprintf(nodeuseinfo->nodes[j].line,"%s",state);
 								     	}
                   return ;
-            }  
-     } 
+            }
+     }
     return;
 }
 
