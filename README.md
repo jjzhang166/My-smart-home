@@ -27,6 +27,10 @@
 andriod平台的客户端，使用eclipse打开即可。
 
 
+#### iOS_client
+===
+iOS平台的客户端，使用xcode5或以上打开即可。
+
 
 #### debug_script
 ===
