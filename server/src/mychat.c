@@ -21,6 +21,16 @@
 #include "myuser.h"
 #include "mydebug.h"
 
+/*
+ * wrong definitions
+ */
+static char *errChatInvalidUser = "chat fail invalidUser\r\n";
+static char *errChatTooBigMsg   = "chat fail tooBigMessage\r\n";
+static char *errWrongNameOrPwd  = "login fail wrongNameOrPasswd\r\n";
+static char *errAlreadyLogin    = "login fail alreadyLogin\r\n";
+static char *errTooManyNodes    = "login fail tooManyNode\r\n";
+static char *errNodeNoLogin     = "node fail nologin\r\n";
+
 
 void _chatSend(char *tag, redisClient *c, char *from, char *to, char *message, unsigned char toType);
 
@@ -30,24 +40,18 @@ void _chatSend(char *tag, redisClient *c, char *from, char *to, char *message, u
 
 void  chatNotifyUserInfo(redisClient *c)
 {
-
     // added by yongming.li for nothing should to notify  for invalid client
-    if(c->isvaliduser==0  || c->isvalidnode==0)
-    {
-    	     return;
+    if(c->isvaliduser==0  || c->isvalidnode==0) {
+        return;
     }
     //////////////////////////////////////////////////////////
-    if(c->mynode_type==MYNODE_TYPE_USER)
-    {
-         _chatSend("userinfo",c,c->username,"all","off",MYNODE_TYPE_USER);
-         chatSetOrGetUserInfo(c->username,"off",OPERATION_SET_INFO);
+    if(c->mynode_type==MYNODE_TYPE_USER) {
+        _chatSend("userinfo",c,c->username,"all","off",MYNODE_TYPE_USER);
+        chatSetOrGetUserInfo(c->username,"off",OPERATION_SET_INFO);
+    } else if(c->mynode_type==MYNODE_TYPE_NODE) {
+        _chatSend("nodeinfo",c,c->nodename,c->username,"off",MYNODE_TYPE_USER);
+        chatSetOrGetNodeInfo(c->username,c->nodename,"off",OPERATION_SET_INFO);
     }
-    if(c->mynode_type==MYNODE_TYPE_NODE)
-    {
-         _chatSend("nodeinfo",c,c->nodename,c->username,"off",MYNODE_TYPE_USER);
-         chatSetOrGetNodeInfo(c->username,c->nodename,"off",OPERATION_SET_INFO);
-    }
-
 }
 
 // -lmysqlclient  for gcc
@@ -110,28 +114,27 @@ void _chatSend(char *tag, redisClient *c, char *from, char *to, char *message, u
 
 int chat_register(redisClient *c) {
     robj *set;
-    if ((set = lookupKeyReadOrReply(c,c->argv[1],shared.czero)) == NULL)
-    	{
-    	    return 0;
-    	}
-
+    if ((set = lookupKeyReadOrReply(c,c->argv[1],shared.czero)) == NULL) {
+        return 0;
+    }
 
     c->argv[2] = tryObjectEncoding(c->argv[2]);
-    if (setTypeIsMember(set,c->argv[2]))
+    if (setTypeIsMember(set,c->argv[2])) {
         //addReply(c,shared.cone);
         return  1;
-    else
+    } else {
         //addReply(c,shared.czero);
         return 0;
+    }
 }
 
 void chatSay(redisClient *c)
 {
-
-    if(!(c->isvaliduser))
-    {
-        //addReplyError(c,"chat fail ");
-        addReplyString(c,"chat  fail\r\n",strlen("chat  fail\r\n"));
+    if(!(c->isvaliduser)) {
+        addReplyString(c, errChatInvalidUser, strlen(errChatInvalidUser));
+        return;
+    } else if ((strlen(c->argv[3]->ptr)) > MYCHAT_MAX_MESSAGE) {
+        addReplyString(c, errChatTooBigMsg, strlen(errChatTooBigMsg));
         return;
     }
 
@@ -145,26 +148,23 @@ void chatLogin(redisClient *c)
     char state[256]={0x00};
 
     ret=is_valid_user(c->argv[2]->ptr,c->argv[3]->ptr);
-    if(ret<=0)
-    {
-    	    //addReplyError(c,"chat  , sorry , wrong username or password ,please check carefully");
-    	    //mychat_reply(c,"fail");
-    	    addReplyString(c,"login fail wrongNameorPasswd\r\n",strlen("login fail wrongNameorPasswd\r\n"));
-    	    c->isvaliduser=0;
-    	    c->isvalidnode=0;
-    	    return;
+    if(ret<=0) {
+        //addReplyError(c,"chat  , sorry , wrong username or password ,please check carefully");
+        //mychat_reply(c,"fail");
+        addReplyString(c, errWrongNameOrPwd, strlen(errWrongNameOrPwd));
+        c->isvaliduser=0;
+        c->isvalidnode=0;
+        return;
     }
 
     chatSetOrGetUserInfo(c->argv[2]->ptr,state,OPERATION_GET_INFO);
-    if(!strcmp(state,"on"))
-    {
-         addReplyString(c,"login fail alreadylogin\r\n",strlen("login fail alreadylogin\r\n"));
-         printf("%s , you have already login \r\n",c->argv[2]->ptr);
-         c->isvaliduser=0;
-    	    c->isvalidnode=0;
-    	    return;
+    if(!strcmp(state,"on")) {
+        addReplyString(c, errAlreadyLogin, strlen(errAlreadyLogin));
+        printf("%s , you have already login\r\n",c->argv[2]->ptr);
+        c->isvaliduser=0;
+        c->isvalidnode=0;
+        return;
     }
-
 
     c->isvaliduser=1;
     c->isvalidnode=1;
@@ -186,51 +186,46 @@ void chatLogin(redisClient *c)
 
 void nodeLogin(redisClient *c)
 {
-    char * username=NULL;
-    char * userid=NULL;
-    char * nodename=NULL;
+    char *username=NULL;
+    char *userid=NULL;
+    char *nodename=NULL;
     char buf[256]={0x00};
     char cmd[256]={0x00};
     char state[256]={0x00};
-    int nodesize=0;
+    int  nodesize=0;
     printf("nodeLogin %s  %s \r\n",c->argv[2]->ptr,c->argv[3]->ptr);
 
     userid=c->argv[2]->ptr;
     nodename=c->argv[3]->ptr;
     username=getNameByUserid(userid);
-    if(username==NULL)
-    {
-         addReplyString(c,"login fail wrongNameorPasswd\r\n",strlen("login fail wrongNameorPasswd\r\n"));
-    	    c->isvaliduser=0;
-    	    c->isvalidnode=0;
-    	    return;
+    if (username==NULL) {
+        addReplyString(c, errWrongNameOrPwd, strlen(errWrongNameOrPwd));
+        c->isvaliduser=0;
+        c->isvalidnode=0;
+        return;
     }
+
     nodesize=getUserNodeSize(username);
     printf("nodesize is %d \r\n",nodesize);
 
     chatSetOrGetNodeInfo(c->username,c->nodename,state,OPERATION_GET_INFO);
-    if(!strcmp(state,"on"))
-    {
-         addReplyString(c,"login fail alreadylogin\r\n",strlen("login fail alreadylogin\r\n"));
-         printf("%s , you have already login \r\n",c->argv[2]->ptr);
-         c->isvaliduser=0;
-    	    c->isvalidnode=0;
-    	    return;
+    if (!strcmp(state,"on")) {
+        addReplyString(c, errAlreadyLogin, strlen(errAlreadyLogin));
+        printf("%s, you have already login\r\n", c->argv[2]->ptr);
+        c->isvaliduser=0;
+        c->isvalidnode=0;
+        return;
     }
 
     int retInsertNode = insertNodeToUserInfo(username,nodename);
-    if(retInsertNode== (-1))
-    {
-          sprintf(buf,"login fail toomanynode\r\n");
-          addReplyString(c,buf,strlen(buf));
-    	    c->isvaliduser=0;
-    	    c->isvalidnode=0;
-    	    return;
-    }
-    if(retInsertNode==1)
-    {
-            sprintf(cmd,"insert into node values('%s', '%s',  '0','0');",userid,nodename);
-            mysqlRunCommand(cmd);
+    if(retInsertNode== (-1)) {
+        addReplyString(c, errTooManyNodes, strlen(errTooManyNodes));
+        c->isvaliduser=0;
+        c->isvalidnode=0;
+        return;
+    } else if(retInsertNode==1) {
+        sprintf(cmd,"insert into node values('%s', '%s',  '0','0');",userid,nodename);
+        mysqlRunCommand(cmd);
     }
 
     sprintf(buf,"login ok %s\r\n",username);
@@ -239,12 +234,10 @@ void nodeLogin(redisClient *c)
     c->isvalidnode=1;
     c->mynode_type=MYNODE_TYPE_NODE;
 
-
     sprintf(c->username,"%s",username);
     sprintf(c->userid,"%s",userid);
     sprintf(c->nodename,"%s",nodename);
     _chatSend("nodeinfo",c,c->nodename,c->username,"on",MYNODE_TYPE_USER);
-
 
     chatSetOrGetNodeInfo(c->username,c->nodename,"on",OPERATION_SET_INFO);
 
@@ -258,78 +251,60 @@ void nodeLogin(redisClient *c)
 
 void nodeSay(redisClient *c)
 {
-    if(c->mynode_type==MYNODE_TYPE_USER)
-    {
-    	    _chatSend("node",c,c->username,c->argv[2]->ptr,c->argv[3]->ptr,MYNODE_TYPE_NODE);
-    }
-    if(c->mynode_type==MYNODE_TYPE_NODE)
-    {
-    	    _chatSend("node",c,c->nodename,c->username,c->argv[3]->ptr,MYNODE_TYPE_USER);
+    if(c->mynode_type==MYNODE_TYPE_USER) {
+        _chatSend("node",c,c->username,c->argv[2]->ptr,c->argv[3]->ptr,MYNODE_TYPE_NODE);
+    } else if(c->mynode_type==MYNODE_TYPE_NODE) {
+        _chatSend("node",c,c->nodename,c->username,c->argv[3]->ptr,MYNODE_TYPE_USER);
     }
     return;
 }
+
 void nodeCommand(redisClient *c)
 {
-      if(!strcmp(c->argv[1]->ptr,"login"))
-     {
-     	    nodeLogin(c);
-     	    return;
-     }
-     if(!(c->isvalidnode))
-    {
-        addReplyString(c,"node fail nologin\r\n",strlen("node fail nologin\r\n\r\n"));
+    if(!strcmp(c->argv[1]->ptr,"login")) {
+        nodeLogin(c);
         return;
     }
-     /////////////////////////////////////////////////////////////////////
-     if(!strcmp(c->argv[1]->ptr,"say"))
-     {
-     	    nodeSay(c);
-     	    return;
-     }
-     if(!strcmp(c->argv[1]->ptr,"heartbeat"))
-     {
-          // added by yongming.li for update lastinteraction time
-     	    return;
-     }
 
-     return;
+    if(!(c->isvalidnode)) {
+        addReplyString(c, errNodeNoLogin, strlen(errNodeNoLogin));
+        return;
+    }
+
+    /////////////////////////////////////////////////////////////////////
+    if(!strcmp(c->argv[1]->ptr,"say")) {
+        nodeSay(c);
+        return;
+    } else if(!strcmp(c->argv[1]->ptr,"heartbeat")) {
+        // added by yongming.li for update lastinteraction time
+        return;
+    }
+
+    return;
 }
+
 void chatCommand(redisClient *c)
 {
-     if(!strcmp(c->argv[1]->ptr,"login"))
-     {
-     	    chatLogin(c);
-     	    return;
-     }
-     if(!strcmp(c->argv[1]->ptr,"say"))
-     {
-     	    chatSay(c);
-     	    return;
-     }
-     if(!strcmp(c->argv[1]->ptr,"userinfo"))
-     {
-     	    chatUserInfo(c);
-     	    return;
-     }
-     if(!strcmp(c->argv[1]->ptr,"heartbeat"))
-     {
-           // added by yongming.li for update lastinteraction time
-     	    return;
-     }
-      if(!strcmp(c->argv[1]->ptr,"debug"))
-     {
-         myDebugEntry(c);
-     	    return;
-     }
-      if(!strcmp(c->argv[1]->ptr,"adduser"))
-     {
-         myAddUser(c);
-     	    return;
-     }
+    if(!strcmp(c->argv[1]->ptr,"login")) {
+        chatLogin(c);
+        return;
+    } else if(!strcmp(c->argv[1]->ptr,"say")) {
+        chatSay(c);
+        return;
+    } else if(!strcmp(c->argv[1]->ptr,"userinfo")) {
+        chatUserInfo(c);
+        return;
+    } else if(!strcmp(c->argv[1]->ptr,"heartbeat")) {
+        // added by yongming.li for update lastinteraction time
+        return;
+    } else if(!strcmp(c->argv[1]->ptr,"debug")) {
+        myDebugEntry(c);
+        return;
+    } else if(!strcmp(c->argv[1]->ptr,"adduser")) {
+        myAddUser(c);
+        return;
+    }
 
-
-     // addReplyError(c,"chat  , sorry , invalid  command ( now only support : say logo regisgter)");
-     return;
+    // addReplyError(c,"chat  , sorry , invalid  command ( now only support : say logo regisgter)");
+    return;
 }
-
-
