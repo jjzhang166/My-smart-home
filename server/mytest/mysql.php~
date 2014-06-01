@@ -34,7 +34,7 @@ mysql_query("CREATE  TABLE alluser (userid VARCHAR(50) UNIQUE,name VARCHAR(50) ,
 mysql_query("CREATE  TABLE friends  (name VARCHAR(50) ,friendsname VARCHAR(50) UNIQUE)",$con);
 // insert fake data
 
-$arr=array("yongming" ,"ckrissun","xiaodong","liyi", "shaohui","xiaoxiong","test","root");
+$arr=array("yongming" ,"ckrissun","siz","xiaodong","liyi", "shaohui","xiaoxiong","test","root");
 
 foreach ($arr as $value)
 {
@@ -50,7 +50,7 @@ foreach ($arr as $value)
   mysql_query(sprintf("insert into node values('%s', 'temperature','0','0')",md5($email)),$con);
 
   mysql_query(sprintf("insert into emailmd5 values('%s','%s')",$email,md5($email)),$con);
-  
+
 }
 //  remember free resource
 echo "close mysql connect \r\n" ;
