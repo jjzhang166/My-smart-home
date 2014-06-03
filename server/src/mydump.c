@@ -37,21 +37,21 @@ int insert_all_node(char * userid,char * username)
      
      //mysql_query("CREATE  TABLE node  (userid VARCHAR(50) ,nodeid VARCHAR(50),command VARCHAR(50) , value VARCHAR(50))",$con);
      sprintf(query,"select  nodeid  from node where userid='%s' ;",userid);
-     printf("query is %s \r\n",query);
+     redisLog(REDIS_VERBOSE,"query is %s \r\n",query);
 
      
      mysql_init(&mysql);
      if(!mysql_real_connect(&mysql,"localhost","root",
                      "123456","mynode",0,NULL,0))
      {
-         printf("Error connecting to database:%s\n",mysql_error(&mysql));
+         redisLog(REDIS_VERBOSE,"Error connecting to database:%s\n",mysql_error(&mysql));
          return -1;
      }
 
       t=mysql_query(&mysql,query);
      if(t)
      {
-         printf("Error making query:%s\n",mysql_error(&mysql));
+         redisLog(REDIS_VERBOSE,"Error making query:%s\n",mysql_error(&mysql));
      }
      else
      {
@@ -83,15 +83,15 @@ int do_mysql_dump_redis(void *arg)
      if(!mysql_real_connect(&mysql,"localhost","root",
                      "123456","mynode",0,NULL,0))
      {
-         printf("Error connecting to database:%s\n",mysql_error(&mysql));
+         redisLog(REDIS_VERBOSE,"Error connecting to database:%s\n",mysql_error(&mysql));
      }
      else
-         printf("Connected........");
+         redisLog(REDIS_VERBOSE,"Connected........");
 
      t=mysql_query(&mysql,"select  userid,name,password  from alluser;");
      if(t)
      {
-         printf("Error making query:%s\n",mysql_error(&mysql));
+         redisLog(REDIS_VERBOSE,"Error making query:%s\n",mysql_error(&mysql));
      }
      else
      {
@@ -129,28 +129,28 @@ int is_valid_user(char * name ,char * password)
      char query[256] = {0x00};
 
      sprintf(query,"select  *  from alluser where name='%s' and password='%s' ;",name,password);
-     printf("query is %s \r\n",query);
+     redisLog(REDIS_VERBOSE,"query is %s \r\n",query);
 
      mysql_init(&mysql);
      mysql_real_connect(&mysql,"localhost","root","123456","mynode",0,NULL,0);
      t=mysql_query(&mysql,query);
      if(t)
      {
-         printf("Error making query:%s\n",mysql_error(&mysql));
+         redisLog(REDIS_VERBOSE,"Error making query:%s\n",mysql_error(&mysql));
      }
      else
      {
          res = mysql_use_result(&mysql);
          if(row = mysql_fetch_row(res))
          {
-             printf("mysql :  %s logon  is successful \n",name);
+             redisLog(REDIS_VERBOSE,"mysql :  %s logon  is successful \n",name);
              mysql_free_result(res);
              mysql_close(&mysql);
              return 1;
          }
          else
          {
-            printf("mysql : %s logon is failed\n",name);
+            redisLog(REDIS_VERBOSE,"mysql : %s logon is failed\n",name);
 
          }
           mysql_free_result(res);
@@ -159,6 +159,35 @@ int is_valid_user(char * name ,char * password)
      return 0;
 }
 
+//  1 means exist
+int  mysql_is_exist(char * cmd)
+{
+      int t,r;
+      MYSQL_RES *res;
+      MYSQL_ROW row;
+      
+      redisLog(REDIS_VERBOSE,"cmd is %s \r\n",cmd);
+      mysql_query(&my_mysql_query,cmd);
+      if(t)
+     {
+         redisLog(REDIS_VERBOSE,"Error making query:%s\n",mysql_error(&my_mysql_query));
+         return 1;
+     }
+     else
+     {
+         res = mysql_use_result(&my_mysql_query);
+         if(row = mysql_fetch_row(res))
+         {
+             mysql_free_result(res);
+             return 1;
+         }
+         else
+         {
+             mysql_free_result(res);
+             return 0;
+         }
+     	}
+}
 
 void  mysqlRunCommand(char * cmd)
 {
@@ -166,7 +195,7 @@ void  mysqlRunCommand(char * cmd)
      	{
      	    return;
      	}
-     printf("cmd is %s \r\n",cmd);
+     redisLog(REDIS_VERBOSE,"cmd is %s \r\n",cmd);
      mysql_query(&my_mysql_query,cmd);
      return ;
 }

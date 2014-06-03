@@ -160,7 +160,7 @@ void chatLogin(redisClient *c)
     chatSetOrGetUserInfo(c->argv[2]->ptr,state,OPERATION_GET_INFO);
     if(!strcmp(state,"on")) {
         addReplyString(c, errAlreadyLogin, strlen(errAlreadyLogin));
-        printf("%s , you have already login\r\n",c->argv[2]->ptr);
+        redisLog("%s , you have already login\r\n",c->argv[2]->ptr);
         c->isvaliduser=0;
         c->isvalidnode=0;
         return;
@@ -193,7 +193,7 @@ void nodeLogin(redisClient *c)
     char cmd[256]={0x00};
     char state[256]={0x00};
     int  nodesize=0;
-    printf("nodeLogin %s  %s \r\n",c->argv[2]->ptr,c->argv[3]->ptr);
+    redisLog("nodeLogin %s  %s \r\n",c->argv[2]->ptr,c->argv[3]->ptr);
 
     userid=c->argv[2]->ptr;
     nodename=c->argv[3]->ptr;
@@ -206,12 +206,12 @@ void nodeLogin(redisClient *c)
     }
 
     nodesize=getUserNodeSize(username);
-    printf("nodesize is %d \r\n",nodesize);
+    redisLog("nodesize is %d \r\n",nodesize);
 
     chatSetOrGetNodeInfo(c->username,c->nodename,state,OPERATION_GET_INFO);
     if (!strcmp(state,"on")) {
         addReplyString(c, errAlreadyLogin, strlen(errAlreadyLogin));
-        printf("%s, you have already login\r\n", c->argv[2]->ptr);
+        redisLog("%s, you have already login\r\n", c->argv[2]->ptr);
         c->isvaliduser=0;
         c->isvalidnode=0;
         return;

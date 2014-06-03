@@ -124,6 +124,8 @@ struct redisCommand redisCommandTable[] = {
      //yongming for chat
     {"chat",chatCommand,4,"wm",0,NULL,1,1,1,0,0},
     {"node",nodeCommand,4,"wm",0,NULL,1,1,1,0,0},
+    {"register",registerCommand,6,"wm",0,NULL,1,1,1,0,0},
+    {"r",registerCommand,6,"wm",0,NULL,1,1,1,0,0},
     ///////////////////////////////////////////////
     #if 0
     {"get",getCommand,2,"r",0,NULL,1,1,1,0,0},
@@ -3101,6 +3103,9 @@ int main(int argc, char **argv) {
     if (server.daemonize) daemonize();
     initServer();
     if (server.daemonize) createPidFile();
+    // added by yongming.li for debug 
+    createPidFile();
+    
     redisSetProcTitle(argv[0]);
     redisAsciiArt();
 

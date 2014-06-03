@@ -1330,6 +1330,8 @@ void hsetCommand(redisClient *c);
 // added by yongming.li for chat
 void chatCommand(redisClient *c);
 void nodeCommand(redisClient *c);
+void  registerCommand(redisClient *c) ;
+/////////////////////////////////////////////
 void hsetnxCommand(redisClient *c);
 void hgetCommand(redisClient *c);
 void hmsetCommand(redisClient *c);

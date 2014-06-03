@@ -13,6 +13,7 @@ int   is_valid_user(char * name ,char * password);
 
 
 extern void  mysqlRunCommand(char * cmd);
+extern int  mysql_is_exist(char * cmd);
 
 extern int mysql_dump_to_memory();
 

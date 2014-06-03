@@ -1,3 +1,3 @@
 #!/bin/sh
 
-kill `cat redis.pid`
+kill -9 `cat redis.pid`
