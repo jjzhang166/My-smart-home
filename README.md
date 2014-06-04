@@ -60,10 +60,12 @@ http服务器代码，简单的web控制，有任何问题,或者要添加测试
 
 希望有新的小伙伴加入， `随时联系:`
 ===
-  <liyongming1982@163.com>
+  <liyongming1982@163.com>    服务器 硬件 android client
 
-  <ckrissun@gmail.com>
+  <ckrissun@gmail.com>        服务器 协议 硬件
 
-  <siz@sonwa.cn>
+  <siz@sonwa.cn>              iphone client
   
-  <604217454@qq.com>
+  <raythandong@gmail.com>     硬件
+  
+  <604217454@qq.com>          iphone  client
