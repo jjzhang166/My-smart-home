@@ -69,3 +69,5 @@ http服务器代码，简单的web控制，有任何问题,或者要添加测试
   <raythandong@gmail.com>     硬件
   
   <604217454@qq.com>          iphone  client
+  
+  <liduanjun@126.com>         硬件及web 
