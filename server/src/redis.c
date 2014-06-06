@@ -851,7 +851,7 @@ long long getOperationsPerSecond(void) {
 /* Check for timeouts. Returns non-zero if the client was terminated */
 int clientsCronHandleTimeout(redisClient *c) {
     time_t now = server.unixtime;
-    redisLog(REDIS_VERBOSE,"handletimeout  client  c->flags %d",c->flags);
+    //redisLog(REDIS_VERBOSE,"handletimeout  client  c->flags %d",c->flags);
     if (server.maxidletime &&
         !(c->flags & REDIS_SLAVE) &&    /* no timeout for slaves */
         !(c->flags & REDIS_MASTER) &&   /* no timeout for masters */
@@ -874,6 +874,7 @@ int clientsCronHandleTimeout(redisClient *c) {
         freeClient(c);
         return 1;
     } else if (c->flags & REDIS_BLOCKED) {
+         redisLog(REDIS_VERBOSE,"REDIS_BLOCKED client username is %s",c->username);
         if (c->bpop.timeout != 0 && c->bpop.timeout < now) {
             addReply(c,shared.nullmultibulk);
             unblockClientWaitingData(c);
