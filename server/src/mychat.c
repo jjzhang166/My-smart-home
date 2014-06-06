@@ -147,6 +147,12 @@ void chatLogin(redisClient *c)
     char buf[256]={0x00};
     char state[256]={0x00};
 
+        // modiefied by yongming.li for invalid client
+    if(c->isvaliduser  || c->isvalidnode) {
+		addReplyString(c, errAlreadyLogin, strlen(errAlreadyLogin));
+		return;
+    	}
+
     ret=is_valid_user(c->argv[2]->ptr,c->argv[3]->ptr);
     if(ret<=0) {
         //addReplyError(c,"chat  , sorry , wrong username or password ,please check carefully");
@@ -158,9 +164,7 @@ void chatLogin(redisClient *c)
     }
 
     chatSetOrGetUserInfo(c->argv[2]->ptr,state,OPERATION_GET_INFO);
-    // if(!strcmp(state,"on")) {
-    // modiefied by yongming.li for invalid client
-    if(c->isvaliduser  || c->isvalidnode) {
+     if(!strcmp(state,"on")) {
         addReplyString(c, errAlreadyLogin, strlen(errAlreadyLogin));
         redisLog(REDIS_VERBOSE,"%s , you have already login\r\n",c->argv[2]->ptr);
         c->isvaliduser=0;
@@ -197,6 +201,12 @@ void nodeLogin(redisClient *c)
     int  nodesize=0;
     redisLog(REDIS_VERBOSE,"nodeLogin %s  %s \r\n",c->argv[2]->ptr,c->argv[3]->ptr);
 
+// modiefied by yongming.li for invalid client
+    if(c->isvaliduser  || c->isvalidnode) {
+		addReplyString(c, errAlreadyLogin, strlen(errAlreadyLogin));
+		return;
+    	}
+
     userid=c->argv[2]->ptr;
     nodename=c->argv[3]->ptr;
     username=getNameByUserid(userid);
@@ -211,8 +221,7 @@ void nodeLogin(redisClient *c)
     redisLog(REDIS_VERBOSE,"nodesize is %d \r\n",nodesize);
 
     chatSetOrGetNodeInfo(c->username,c->nodename,state,OPERATION_GET_INFO);
-    //if (!strcmp(state,"on")) {
-    if(c->isvaliduser  || c->isvalidnode) {
+    if (!strcmp(state,"on")) {
         addReplyString(c, errAlreadyLogin, strlen(errAlreadyLogin));
         redisLog(REDIS_VERBOSE,"%s, you have already login\r\n", c->argv[2]->ptr);
         c->isvaliduser=0;
