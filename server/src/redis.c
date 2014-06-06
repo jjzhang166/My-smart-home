@@ -851,6 +851,7 @@ long long getOperationsPerSecond(void) {
 /* Check for timeouts. Returns non-zero if the client was terminated */
 int clientsCronHandleTimeout(redisClient *c) {
     time_t now = server.unixtime;
+    redisLog(REDIS_VERBOSE,"handletimeout  client  c->flags %d",c->flags);
     if (server.maxidletime &&
         !(c->flags & REDIS_SLAVE) &&    /* no timeout for slaves */
         !(c->flags & REDIS_MASTER) &&   /* no timeout for masters */
@@ -860,13 +861,16 @@ int clientsCronHandleTimeout(redisClient *c) {
         (now - c->lastinteraction > server.maxidletime))
     {
         //added by yongming.li 
-        if(!strcmp(c->userid,MY_REDIS_ROOT_NAME))
+        if(!strcmp(c->username,MY_REDIS_ROOT_NAME))
         {
         	       //redisLog(REDIS_VERBOSE,"no need to close root client");
-                return 1;   
+                return 0;   
         }
         ///////////////////////////////////////////////////////
-        redisLog(REDIS_VERBOSE,"Closing idle client");
+        if(c->username)
+        {  
+              redisLog(REDIS_VERBOSE,"Closing idle client username is %s",c->username);
+        }
         freeClient(c);
         return 1;
     } else if (c->flags & REDIS_BLOCKED) {
