@@ -289,6 +289,7 @@ void nodeCommand(redisClient *c)
         return;
     } else if(!strcmp(c->argv[1]->ptr,"heartbeat")) {
         // added by yongming.li for update lastinteraction time
+        c->lastinteraction = server.unixtime;
         return;
     }
 
@@ -300,7 +301,14 @@ void chatCommand(redisClient *c)
     if(!strcmp(c->argv[1]->ptr,"login")) {
         chatLogin(c);
         return;
-    } else if(!strcmp(c->argv[1]->ptr,"say")) {
+    } 
+
+     if(!(c->isvaliduser)) {
+        addReplyString(c, errNodeNoLogin, strlen(errNodeNoLogin));
+        return;
+    }
+	
+    if(!strcmp(c->argv[1]->ptr,"say")) {
         chatSay(c);
         return;
     } else if(!strcmp(c->argv[1]->ptr,"userinfo")) {
@@ -308,6 +316,7 @@ void chatCommand(redisClient *c)
         return;
     } else if(!strcmp(c->argv[1]->ptr,"heartbeat")) {
         // added by yongming.li for update lastinteraction time
+        c->lastinteraction = server.unixtime;
         return;
     } else if(!strcmp(c->argv[1]->ptr,"debug")) {
         myDebugEntry(c);

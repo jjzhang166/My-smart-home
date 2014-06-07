@@ -851,7 +851,8 @@ void sendReplyToClient(aeEventLoop *el, int fd, void *privdata, int mask) {
          * as an interaction, since we always send REPLCONF ACK commands
          * that take some time to just fill the socket output buffer.
          * We just rely on data / pings received for timeout detection. */
-        if (!(c->flags & REDIS_MASTER)) c->lastinteraction = server.unixtime;
+         //commented by yongming.li for heart beat
+        //if (!(c->flags & REDIS_MASTER)) c->lastinteraction = server.unixtime;
     }
     if (c->bufpos == 0 && listLength(c->reply) == 0) {
         c->sentlen = 0;
@@ -1161,7 +1162,8 @@ void readQueryFromClient(aeEventLoop *el, int fd, void *privdata, int mask) {
     }
     if (nread) {
         sdsIncrLen(c->querybuf,nread);
-        c->lastinteraction = server.unixtime;
+	 //commented by yongming.li for heart beat
+        //c->lastinteraction = server.unixtime;
         if (c->flags & REDIS_MASTER) c->reploff += nread;
     } else {
         server.current_client = NULL;

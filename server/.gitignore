@@ -9,3 +9,7 @@ redis-server
 deps/lua/src/lua
 deps/lua/src/luac
 deps/lua/src/liblua.a
+
+deps
+
+
