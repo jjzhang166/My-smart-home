@@ -57,8 +57,27 @@ public class LoginActivity extends Activity implements OnClickListener{
     	edittext_password.setText(password);
     	proressBar.setIndeterminate(false);
     	proressBar.setVisibility(View.INVISIBLE);  
-    	
+    	connectServer();
     }  
+    
+    private void connectServer()
+    {
+    	if(MyConfig.myClient.isRunning==true)
+		{
+			return;
+		}
+		
+		//Intent serviceIntent = new Intent();
+		//serviceIntent.setAction("Start.MyBatteryService");
+		//startService(serviceIntent);
+		
+	    mThread = new Thread(runnable);  
+	    mThread.start();
+	    // added by yongming.li for heart beat
+	    mThreadHeartBeat = new Thread(runnableHeartBeat);  
+	    mThreadHeartBeat.start();
+        return;     	
+    }
     
     public void onClick(View v) {
 		//Log.e("main","id is"+R.id.signin_button); 
@@ -87,22 +106,10 @@ public class LoginActivity extends Activity implements OnClickListener{
     		MyConfig.myClient.setHandle(mHandler);
     		String str = String.format("chat login  %s  %s",
     				     name,password);
-    		MyConfig.myClient.insertCmd(str);
-    		if(MyConfig.myClient.isRunning==true)
-    		{
-    			return;
-    		}
     		
-    		//Intent serviceIntent = new Intent();
-    		//serviceIntent.setAction("Start.MyBatteryService");
-    		//startService(serviceIntent);
+    		MyConfig.myClient.runCmd(str);
+    		//MyConfig.myClient.insertCmd(str);
     		
-		    mThread = new Thread(runnable);  
-		    mThread.start();
-		    // added by yongming.li for heart beat
-		    mThreadHeartBeat = new Thread(runnableHeartBeat);  
-		    mThreadHeartBeat.start();
-		    
 			break;
 		default:
 			break;
@@ -117,7 +124,8 @@ public class LoginActivity extends Activity implements OnClickListener{
     					Toast.LENGTH_SHORT).show(); 
                 break;  
             case MyConfig.MSG_LOGIN_FAILURE:  
-    			Toast.makeText(LoginActivity.this, "登录失败",
+            	// added by yongming.li for more info of login fail
+    			Toast.makeText(LoginActivity.this, "登录失败,"+(String)msg.obj,
     					Toast.LENGTH_SHORT).show();  
                 break; 
             case MyConfig.MSG_LOGIN_USERID:  

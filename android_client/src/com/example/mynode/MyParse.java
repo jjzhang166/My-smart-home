@@ -30,7 +30,7 @@ public class MyParse  {
         }
         if(protocolList.get(0).startsWith("fail"))
         {
-        	m_handle.obtainMessage(MyConfig.MSG_LOGIN_FAILURE,"fail").sendToTarget();
+        	m_handle.obtainMessage(MyConfig.MSG_LOGIN_FAILURE,protocolList.get(1)).sendToTarget();
         	return;
         }
 	}
