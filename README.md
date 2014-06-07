@@ -24,8 +24,8 @@
 
 #### android_client  
 ===
-andriod平台的客户端，使用eclipse打开即可。
-
+andriod平台的客户端，使用eclipse打开即可。   
+假如没有android开发环境， 可直接下载最新apk安装即可 : http://git.oschina.net/xmeter/My-smart-home/blob/master/android_client/bin/MyNode.apk
 
 #### iOS_client
 ===
@@ -70,4 +70,4 @@ http服务器代码，简单的web控制，有任何问题,或者要添加测试
   
   <604217454@qq.com>          iphone  client
   
-  <liduanjun@126.com>         硬件及web 
+  <liduanjun@126.com>         硬件及web
