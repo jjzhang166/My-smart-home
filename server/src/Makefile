@@ -30,6 +30,7 @@ INSTALL=install
 
 # Default allocator
 ifeq ($(uname_S),Linux)
+	REDIS_CFLAGS+= -D__linux__
 	MALLOC=jemalloc
 else
 	MALLOC=libc
