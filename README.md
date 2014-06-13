@@ -10,7 +10,9 @@
 `编译:`
     
     cd src
-    make distclean && make
+    make distclean 
+    make && make install
+
     
 
 `运行:`
