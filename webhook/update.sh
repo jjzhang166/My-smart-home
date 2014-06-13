@@ -11,7 +11,7 @@ cd $SRCDIR
 git pull 2>&1
 echo "build server"
 cd $SERVDIR
-make
+make && make install
 echo "start server"
 cd $SERVDIR/bin
 ./start.sh
