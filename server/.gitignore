@@ -1,4 +1,7 @@
 *.o
+*.a
+.make-*
+
 redis-benchmark
 redis-check-aof
 redis-check-dump
@@ -11,5 +14,3 @@ deps/lua/src/luac
 deps/lua/src/liblua.a
 
 deps
-
-

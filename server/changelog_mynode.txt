@@ -1,3 +1,6 @@
+mynode3.4_redis-2.8.6
+-------   removed unused redis-related utils
+
 mynode3.3_redis-2.8.6
 -------   动态添加用户，不需要重启服务器
 -------   添加脚本： redis_client.php 测试动态添加用户
