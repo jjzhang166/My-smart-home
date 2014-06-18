@@ -5,3 +5,4 @@
 ### ChangeLog
 
 * Fix include import path only
+* `timing.c` only reserves the `hardclock` function
