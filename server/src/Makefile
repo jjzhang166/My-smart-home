@@ -111,7 +111,7 @@ QUIET_INSTALL = @printf '    %b %b\n' $(LINKCOLOR)INSTALL$(ENDCOLOR) $(BINCOLOR)
 endif
 
 REDIS_SERVER_NAME=redis-server
-REDIS_SERVER_OBJ= adlist.o ae.o anet.o dict.o redis.o sds.o zmalloc.o lzf_c.o lzf_d.o pqsort.o zipmap.o sha1.o ziplist.o release.o networking.o util.o object.o db.o replication.o rdb.o t_string.o t_list.o t_set.o t_zset.o t_hash.o config.o aof.o pubsub.o multi.o debug.o sort.o intset.o syncio.o migrate.o endianconv.o slowlog.o scripting.o bio.o rio.o rand.o memtest.o crc64.o bitops.o sentinel.o notify.o setproctitle.o mydump.o mychat.o credis.o myuser.o mycommon.o mydictuser.o mydebug.o myregister.o md5.o
+REDIS_SERVER_OBJ= adlist.o ae.o anet.o dict.o redis.o sds.o zmalloc.o lzf_c.o lzf_d.o pqsort.o zipmap.o sha1.o ziplist.o release.o networking.o util.o object.o db.o replication.o rdb.o t_string.o t_list.o t_set.o t_zset.o t_hash.o config.o aof.o pubsub.o multi.o debug.o sort.o intset.o syncio.o migrate.o endianconv.o slowlog.o scripting.o bio.o rio.o rand.o memtest.o crc64.o bitops.o sentinel.o notify.o setproctitle.o mydump.o mychat.o credis.o myuser.o mycommon.o mydictuser.o mydebug.o myregister.o md5.o havege/havege.o havege/timing.o
 REDIS_CLI_NAME=redis-cli
 REDIS_CLI_OBJ=anet.o sds.o adlist.o redis-cli.o zmalloc.o release.o anet.o ae.o crc64.o
 
@@ -169,8 +169,14 @@ $(REDIS_CLI_NAME): $(REDIS_CLI_OBJ)
 %.o: %.c .make-prerequisites
 	$(REDIS_CC) -c $<
 
+havege/havege.o: havege/havege.c
+	$(REDIS_CC) -c $< -o $@
+
+havege/timing.o: havege/timing.c
+	$(REDIS_CC) -c $< -o $@
+
 clean:
-	rm -rf $(REDIS_SERVER_NAME) $(REDIS_CLI_NAME) *.o *.gcda *.gcno *.gcov redis.info lcov-html
+	rm -rf $(REDIS_SERVER_NAME) $(REDIS_CLI_NAME) havege/*.o *.o *.gcda *.gcno *.gcov redis.info lcov-html
 
 .PHONY: clean
 
