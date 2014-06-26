@@ -19,6 +19,8 @@ import android.widget.Toast;
   
 public class LoginActivity extends Activity implements OnClickListener{  
 	private  Button login_button;
+	private  Button send_fake_data_button;
+	private  EditText send_fake_data_editText;
 	private  EditText edittext_name;
 	private  EditText edittext_password;
 	public  TextView textview_userid;
@@ -41,6 +43,16 @@ public class LoginActivity extends Activity implements OnClickListener{
         
     	login_button = (Button) findViewById(R.id.signin_button);
     	login_button.setOnClickListener(LoginActivity.this);
+    	
+    	//added by yongming.li for send fake node data for test android client without control node
+    	// 世界杯期间多看看cctv5吧
+    	
+        String sendData ="node ok light name=light,state=open,brightness:255;name=tv,state=close,channel=cctv5;name=temperature,value=30";
+    	send_fake_data_button = (Button) findViewById(R.id.button_login_send_fake_data);
+    	send_fake_data_button.setOnClickListener(LoginActivity.this);
+    	send_fake_data_editText= (EditText)findViewById(R.id.editText_login_send_fake_data);
+    	send_fake_data_editText.setText(sendData);
+    	
     	
     	proressBar = (ProgressBar)findViewById(R.id.progressBar_login);
     	edittext_name=(EditText)findViewById(R.id.username_edit);
@@ -83,6 +95,10 @@ public class LoginActivity extends Activity implements OnClickListener{
 		//Log.e("main","id is"+R.id.signin_button); 
 		
 		switch (v.getId()) {
+		case R.id.button_login_send_fake_data:
+			 String message = send_fake_data_editText.getText().toString().trim();
+			 MyConfig.myClient.parseMessage(message);
+			 return;
 		case R.id.signin_button:
 			//Toast.makeText(LoginActivity.this, "login begin",
 			//		Toast.LENGTH_SHORT).show();  

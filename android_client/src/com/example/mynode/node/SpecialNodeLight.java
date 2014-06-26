@@ -13,6 +13,10 @@ import com.example.mynode.R.layout;
 import com.example.mynode.R.menu;
 import com.example.mynode.chat.ChatActivity;
 import com.example.mynode.chat.ChatActivityCommon;
+import com.example.mynode.chat.JsonParser;
+import com.iflytek.cloud.RecognizerResult;
+import com.iflytek.cloud.SpeechError;
+import com.iflytek.cloud.ui.RecognizerDialogListener;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -43,13 +47,10 @@ public class SpecialNodeLight extends ChatActivityCommon {
 
 	private  Button login_button;
 	
-	private  EditText edittextSendMessage;
+	//private  EditText edittextSendMessage;
     private SeekBar seekBarBrightness;
     private  Switch  switchState; 
-    
     private  Spinner  spinnerMode;
-    
-    private Button sendButton;
     
     
     public   HashMap<String, Object> messageHashMap = new HashMap<String, Object>();
@@ -106,14 +107,48 @@ public class SpecialNodeLight extends ChatActivityCommon {
     {
     	//login_button = (Button) findViewById(R.id.signin_button);
     	
+    	talkView = (ListView)findViewById(R.id.light_ChatList);
     	myPreInit();
     	
-    	talkView = (ListView)findViewById(R.id.light_ChatList);
+    	
     	
     	
     	sendButton = (Button) findViewById(R.id.SendMessageButton);
     	sendButton.setOnClickListener(messageButtonListener);
- 	
+    	
+    	speechRecognizeButton = (Button) findViewById(R.id.light_button_speechrecognize);
+    	speechRecognizeButton.setOnClickListener(messageButtonListener);
+    	
+    	recognizerDialogListener=new RecognizerDialogListener(){
+	 		public void onResult(RecognizerResult results, boolean isLast) {
+	 			String text = JsonParser.parseIatResult(results.getResultString());
+	 			//mResultText.append(text);
+	 			//mResultText.setSelection(mResultText.length());
+	 			if(text.length()<2)
+	 			{
+	 				return;
+	 			}
+	 			edittextSendMessage.setText(text);
+	 			edittextSendMessage.setSelection(text.length());
+	 			sendMessage="value="+text;
+	 			if(text.contains("开"))
+	 			{
+	 				sendMessage="value=open";
+	 			}
+	 			if(text.contains("关") || text.contains("睡觉"))
+	 			{
+	 				sendMessage="value=close";
+	 			}
+	 			//state
+	 			
+	 			//Log.e(TAG, text); 	
+	 		}
+	 		public void onError(SpeechError error) {
+	 			Log.e(TAG, error.getPlainDescription(true)); 	
+	 		}
+	 	};
+    	
+    	
     	seekBarBrightness = (SeekBar)findViewById(R.id.light_seekbarBar_brightness);
     	seekBarBrightness.setMax(255);
     	seekBarBrightness.setProgress(100);
@@ -195,6 +230,8 @@ public class SpecialNodeLight extends ChatActivityCommon {
 	        	 updateMessage("brightness",String.format("%d",seekBar.getProgress() ));
 	         }  
 	 };
+	 
+           
 	 
 
 }

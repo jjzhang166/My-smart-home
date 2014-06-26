@@ -92,6 +92,15 @@ public class MyClient  extends Service
       
 		
     }
+	
+	public void parseMessage(String msg) {
+		try {
+
+			loginParse.parse(m_handle,msg);
+		} catch (Exception e) {
+			Log.e(TAG, e.toString());
+		}
+	}
 
 	public void runCmd(String cmd) {
 		try {

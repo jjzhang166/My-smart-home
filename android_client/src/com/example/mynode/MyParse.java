@@ -122,6 +122,9 @@ public class MyParse  {
         
 		//Log.e("parse",line);
 		// node ok light  name=light,state=close,brightness:0;name=tv,state=true,channel=cctv5
+		//node ok temperature name=temperature,value=24,measurement=C
+		//node ok light name=light,state=open,brightness:255;name=tv,state=close,channel=cctv5
+		//line="node ok light name=light,state=open,brightness:255;name=tv,state=close,channel=cctv5";
 		try {
 			String strArray[] = line.split("\\s+");
 			protocolList.clear();

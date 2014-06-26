@@ -93,7 +93,7 @@ public class LocationGridFragment extends Fragment {
     	}
 
 	    
-	 if(position==4)
+	     if(position==4)
     	{
     		intent = new Intent(activity,RssReader.class); 
     	}

@@ -27,6 +27,15 @@ import com.example.mynode.MyConfig;
 import com.example.mynode.MyParse;
 import com.example.mynode.MyParseCommon;
 import com.example.mynode.R;
+import com.iflytek.cloud.ErrorCode;
+import com.iflytek.cloud.InitListener;
+import com.iflytek.cloud.RecognizerResult;
+import com.iflytek.cloud.SpeechConstant;
+import com.iflytek.cloud.SpeechError;
+import com.iflytek.cloud.SpeechRecognizer;
+import com.iflytek.cloud.SpeechUtility;
+import com.iflytek.cloud.ui.RecognizerDialog;
+import com.iflytek.cloud.ui.RecognizerDialogListener;
 
 public class ChatActivityCommon extends Activity {
     private static final String TAG = ChatActivityCommon.class.getSimpleName();
@@ -36,9 +45,21 @@ public class ChatActivityCommon extends Activity {
     private String   chatmode;
     public  String  sendMessage="";
     public  ListView talkView;
+    protected EditText edittextSendMessage;
+    
+    protected Button sendButton;
+    protected Button speechRecognizeButton;
+    
+    protected RecognizerDialogListener recognizerDialogListener;
+    
   
     public    ArrayList<ChatMsgEntity> chatlist = new ArrayList<ChatMsgEntity>();
     public    HashMap<String, Object> userNodeList;
+    
+	// 语音听写对象
+	private SpeechRecognizer mIat;
+	// 语音听写UI
+	private RecognizerDialog iatDialog;
     
 
     protected void onStart() {  
@@ -66,6 +87,8 @@ public class ChatActivityCommon extends Activity {
         }
         setTitle("正在同 "+talkToWho+" 聊天"); 
         
+        Log.e(TAG, "正在同 "+talkToWho+" 聊天"); 
+        
         try
         {
         	if(userNodeList.containsKey(talkToWho))
@@ -87,13 +110,19 @@ public class ChatActivityCommon extends Activity {
         {
         	Log.e(TAG, e.toString()); 
         }
+        //added by yongming.li for speech recognize
+        SpeechUtility.createUtility(this, SpeechConstant.APPID +"=53a7d172");
+		// 初始化识别对象
+		mIat = SpeechRecognizer.createRecognizer(this, mInitListener);
+		// 设置参数
+		setParam();
+		// 初始化听写Dialog,如果只使用有UI听写功能,无需创建SpeechRecognizer
+		iatDialog = new RecognizerDialog(this,mInitListener);
+		//////////////////////////////////////////////////////////////////////
     }
     public void onCreate(Bundle savedInstanceState) {
         Log.v(TAG, "onCreate >>>>>>");
         super.onCreate(savedInstanceState);
-    
-           
-        
     }
     public void chatUpdate(String fromWho)
     {
@@ -178,6 +207,14 @@ public class ChatActivityCommon extends Activity {
          @Override
          public void onClick(View arg0) {
              // TODO Auto-generated method stub
+        	 
+        	 
+         	    if(arg0==speechRecognizeButton)
+         	    {
+ 				    iatDialog.setListener(recognizerDialogListener);
+ 				    iatDialog.show();
+ 				    return;
+         	    }
 
 
          		String name = getFromwho();
@@ -196,5 +233,37 @@ public class ChatActivityCommon extends Activity {
          }
 
      };
+     
+     //added by yongming.li for speech recognize
+     /**
+ 	 * 初始化监听器。
+ 	 */
+ 	private InitListener mInitListener = new InitListener() {
+
+ 		@Override
+ 		public void onInit(int code) {
+ 			Log.d(TAG, "SpeechRecognizer init() code = " + code);
+ 			if (code == ErrorCode.SUCCESS) {
+ 				//findViewById(R.id.iat_recognize).setEnabled(true);
+ 				Log.e(TAG, "ErrorCode.SUCCESS"); 	
+ 			}
+ 		}
+ 	};
+ 	
+ 	public void setParam(){
+ 	
+ 		mIat.setParameter(SpeechConstant.DOMAIN, "iat");
+ 		mIat.setParameter(SpeechConstant.LANGUAGE, "zh_cn");
+ 		mIat.setParameter(SpeechConstant.ACCENT, "mandarin");
+ 		// 设置语音前端点
+ 		mIat.setParameter(SpeechConstant.VAD_BOS, "4000");
+ 		// 设置语音后端点
+ 		mIat.setParameter(SpeechConstant.VAD_EOS,  "1000");
+ 		// 设置标点符号
+ 		mIat.setParameter(SpeechConstant.ASR_PTT, "0");
+ 		// 设置音频保存路径
+ 		mIat.setParameter(SpeechConstant.ASR_AUDIO_PATH, "/sdcard/iflytek/wavaudio.pcm");
+ 	}
+     
 
 }

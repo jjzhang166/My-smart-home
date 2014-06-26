@@ -1,3 +1,6 @@
+android_client_1.0.4
+      ---  添加虚拟发送数据功能
+      ---  集成讯飞语言，支持语言控制
 android_client_1.0.3
       ---  添加显示，登录失败提示信息
 android_client_1.0.2
