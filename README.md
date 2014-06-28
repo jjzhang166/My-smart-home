@@ -60,6 +60,13 @@ http服务器代码，简单的web控制，有任何问题,或者要添加测试
 ===
 更详细的说明，麻烦移步 [WiKi](http://git.oschina.net/xmeter/My-smart-home/wikis/pages)
 
+=== 
+   感谢
+   1 感谢xiangjm资助我200元人民币购买3D打印机
+   2 感谢我老婆这个月多给了我点零花钱
+   3 感谢3D淘宝店老板便宜了50元钱 http://3dprinter-diy.taobao.com/?spm=2013.1.0.0.donECP
+   4 ......
+   
 希望有新的小伙伴加入， `随时联系:`
 ===
   <liyongming1982@163.com>    服务器 硬件 android client
