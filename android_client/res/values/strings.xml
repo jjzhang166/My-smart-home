@@ -87,5 +87,12 @@
     <string name="minutes_20">20 minutes</string>
     <string name="minutes_30">30 minutes</string>
     <string name="title_activity_special_node_light">SpecialNodeLight</string>
+    <string name="title_activity_online_update">OnlineUpdate</string>
+    
+    <string name="onlineupdate_current_tip">当前版本：</string>
+    <string name="onlineupdate_last_tip">最新版本：</string>
+    <string name="onlineupdate_get_version">获取最新版本信息</string>
+    <string name="onlineupdate_sure_to_update">确定升级</string>
+    
 
 </resources>

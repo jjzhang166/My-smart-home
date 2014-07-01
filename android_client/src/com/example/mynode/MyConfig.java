@@ -5,6 +5,19 @@ import java.lang.String;
 public final class MyConfig {
      public static final int SERVER_PORT = 6379;
      public static final String SERVER_IP = "115.29.235.211";
+     //public static final String SERVER_FILE_VERSION = "http://"+SERVER_IP+"/download/android/version";
+     //public static final String SERVER_FILE_CHANGELOG = "http://"+SERVER_IP+"/download/android/changelog";
+     //public static final String SERVER_FILE_APK = "http://"+SERVER_IP+"/download/android/MyNode.apk";
+     
+     public static final String SERVER_FILE_VERSION = "http://git.oschina.net/xmeter/My-smart-home/raw/master/android_client/changelog.txt";
+     public static final String SERVER_FILE_CHANGELOG = "http://git.oschina.net/xmeter/My-smart-home/raw/master/android_client/changelog.txt";
+     public static final String SERVER_FILE_APK = "http://git.oschina.net/xmeter/My-smart-home/raw/master/android_client/bin/MyNode.apk";
+     
+     
+     public static final String CURRENT_VERSION = "007";
+     
+     
+     
      public static MyClient  myClient = new MyClient();
      public static MyHeartBeat  myHeartBeat = new MyHeartBeat();
      
@@ -19,6 +32,14 @@ public final class MyConfig {
      public  static final int MSG_USER_NODE_INFO_UPDATE = 20;
      
      public  static final int MSG_CHAT_UPDATE = 30;
+     
+     
+     public  static final int MSG_ONLINEUPDATE_GET_VERSION = 40;
+     public  static final int MSG_ONLINEUPDATE_GET_CHANGELOG = 41;
+     public  static final int MSG_ONLINEUPDATE_GET_APK = 42;
+     public  static final int MSG_ONLINEUPDATE_GET_APK_PROGRESS = 44;
+     public  static final int MSG_ONLINEUPDATE_GET_FAIL = 45;
+     
 
      
      public static final int  PROTOCOL_CODE_DO_NOTHING= 999;

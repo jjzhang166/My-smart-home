@@ -87,11 +87,5 @@
             android:layout_marginTop="10dp" 
             android:layout_below="@id/editText_login_send_fake_data"   
             android:text="发送模拟节点数据"/>
-        
-
-
-            
-       
-
-            
+                  
 </RelativeLayout>

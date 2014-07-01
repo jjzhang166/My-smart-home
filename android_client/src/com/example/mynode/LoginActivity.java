@@ -135,19 +135,12 @@ public class LoginActivity extends Activity implements OnClickListener{
     private Handler mHandler = new Handler() {  
         public void handleMessage (Message msg) {//此方法在ui线程运行  
             switch(msg.what) {  
-            case MyConfig.MSG_LOGIN_SUCCESS:  
+            case MyConfig.MSG_ONLINEUPDATE_GET_VERSION:  
     			Toast.makeText(LoginActivity.this, "登录成功",
     					Toast.LENGTH_SHORT).show(); 
                 break;  
             case MyConfig.MSG_LOGIN_FAILURE:  
-            	// added by yongming.li for more info of login fail
-    			Toast.makeText(LoginActivity.this, "登录失败,"+(String)msg.obj,
-    					Toast.LENGTH_SHORT).show();  
-                break; 
-            case MyConfig.MSG_LOGIN_USERID:  
-            	textview_userid.setText((String)msg.obj);
-                break; 
-                
+                break;   
            }  
             proressBar.setVisibility(View.INVISIBLE);
          }  

@@ -21,6 +21,7 @@ import com.example.mynode.*;
 
 import com.example.mynode.*;
 import com.example.mynode.node.SpecialNodeLight;
+import com.example.mynode.onlineupdate.OnlineUpdate;
 import com.example.mynode.rssreader.RssReader;
 import com.example.mynode.setting.MySetting;
 import com.example.mynode.setting.MySettingActivity;
@@ -97,7 +98,12 @@ public class LocationGridFragment extends Fragment {
     	{
     		intent = new Intent(activity,RssReader.class); 
     	}
-
+	     
+	    if(position==5)
+    	{
+    		intent = new Intent(activity,OnlineUpdate.class); 
+    	}
+	    
 	    try
 	    {
 	    	startActivity(intent); 	    	
