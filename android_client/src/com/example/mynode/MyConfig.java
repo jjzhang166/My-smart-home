@@ -9,7 +9,7 @@ public final class MyConfig {
      //public static final String SERVER_FILE_CHANGELOG = "http://"+SERVER_IP+"/download/android/changelog";
      //public static final String SERVER_FILE_APK = "http://"+SERVER_IP+"/download/android/MyNode.apk";
      
-     public static final String SERVER_FILE_VERSION = "http://git.oschina.net/xmeter/My-smart-home/raw/master/android_client/changelog.txt";
+     public static final String SERVER_FILE_VERSION = "http://git.oschina.net/xmeter/My-smart-home/raw/master/android_client/version.txt";
      public static final String SERVER_FILE_CHANGELOG = "http://git.oschina.net/xmeter/My-smart-home/raw/master/android_client/changelog.txt";
      public static final String SERVER_FILE_APK = "http://git.oschina.net/xmeter/My-smart-home/raw/master/android_client/bin/MyNode.apk";
      
