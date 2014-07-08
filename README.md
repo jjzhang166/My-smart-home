@@ -29,6 +29,11 @@
 andriod平台的客户端，使用eclipse打开即可。   
 假如没有android开发环境， 可直接下载最新apk安装即可 : http://git.oschina.net/xmeter/My-smart-home/blob/master/android_client/bin/MyNode.apk
 
+#### restful  
+===
+提供简单的restful api (get put post delete)，可通过http协议访问，返回json数据结果集。   
+
+
 #### iOS_client
 ===
 iOS平台的客户端，使用xcode5或以上打开即可。
