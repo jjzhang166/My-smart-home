@@ -13,8 +13,9 @@
 package main
 
 import (
-	"github.com/astaxie/beego"
-	"./controllers/"
+  "restful-server/controllers"
+
+  "github.com/astaxie/beego"
 )
 
 //		Objects
@@ -32,10 +33,10 @@ import (
 //}
 
 func main() {
-        //myinit()
-         //beego.Router("/user/?username", &MainController{})
-	beego.Router("/user/", &controllers.MainController{})
-        beego.Router("/user/node/:username", &controllers.NodeController{})
-        //beego.Router("/", &MainController{})
-	beego.Run()
+  //myinit()
+  //beego.Router("/user/?username", &MainController{})
+  beego.Router("/user/", &controllers.MainController{})
+  beego.Router("/user/node/:username", &controllers.NodeController{})
+  //beego.Router("/", &MainController{})
+  beego.Run()
 }
