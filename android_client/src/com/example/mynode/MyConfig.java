@@ -5,6 +5,7 @@ import java.lang.String;
 public final class MyConfig {
      public static final int SERVER_PORT = 6379;
      public static final String SERVER_IP = "115.29.235.211";
+     public static  String USERID = "";
      //public static final String SERVER_FILE_VERSION = "http://"+SERVER_IP+"/download/android/version";
      //public static final String SERVER_FILE_CHANGELOG = "http://"+SERVER_IP+"/download/android/changelog";
      //public static final String SERVER_FILE_APK = "http://"+SERVER_IP+"/download/android/MyNode.apk";
@@ -41,6 +42,7 @@ public final class MyConfig {
      public  static final int MSG_ONLINEUPDATE_GET_FAIL = 45;
      
 
+     public  static final int MSG_NET_FAIL = 50;
      
      public static final int  PROTOCOL_CODE_DO_NOTHING= 999;
      public static final int  PROTOCOL_CODE_LOGIN= 0;

@@ -88,9 +88,10 @@ public class MyClient  extends Service
 	      {  
 	            Log.e(TAG, e.toString());  
 	      } 
+		 m_handle.obtainMessage(MyConfig.MSG_NET_FAIL,
+					"fail").sendToTarget();
+		  
 	  }
-      
-		
     }
 	
 	public void parseMessage(String msg) {

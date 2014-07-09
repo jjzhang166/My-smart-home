@@ -58,7 +58,11 @@ public class LoginActivity extends Activity implements OnClickListener{
     	edittext_name=(EditText)findViewById(R.id.username_edit);
     	edittext_password=(EditText)findViewById(R.id.password_edit);
     	
-    	textview_userid=(TextView)findViewById(R.id.login_getuserid_textview);
+    	//textview_userid=(TextView)findViewById(R.id.login_getuserid_textview);
+    	textview_userid=(TextView)findViewById(R.id.login_real_top_layout_status_textview);
+    	
+
+    	textview_userid.setText(MyConfig.USERID);
     	
     	
 		SharedPreferences  share = LoginActivity.this.getSharedPreferences("perference", MODE_PRIVATE);  
@@ -135,12 +139,25 @@ public class LoginActivity extends Activity implements OnClickListener{
     private Handler mHandler = new Handler() {  
         public void handleMessage (Message msg) {//此方法在ui线程运行  
             switch(msg.what) {  
-            case MyConfig.MSG_ONLINEUPDATE_GET_VERSION:  
+            case MyConfig.MSG_LOGIN_SUCCESS:  
     			Toast.makeText(LoginActivity.this, "登录成功",
     					Toast.LENGTH_SHORT).show(); 
                 break;  
             case MyConfig.MSG_LOGIN_FAILURE:  
-                break;   
+            	// added by yongming.li for more info of login fail
+    			Toast.makeText(LoginActivity.this, "登录失败,"+(String)msg.obj,
+    					Toast.LENGTH_SHORT).show();  
+                break; 
+            case MyConfig.MSG_LOGIN_USERID:  
+            	textview_userid.setText((String)msg.obj);
+            	MyConfig.USERID=(String)msg.obj;
+                break; 
+                
+            case MyConfig.MSG_NET_FAIL:  
+            	MyConfig.USERID="";
+            	textview_userid.setText(MyConfig.USERID);
+                break; 
+                
            }  
             proressBar.setVisibility(View.INVISIBLE);
          }  
