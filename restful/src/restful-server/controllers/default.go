@@ -2,45 +2,13 @@
 package controllers
 
 import (
-  "database/sql"
   "encoding/json"
   "fmt"
 
+  "restful-server/models"
+
   "github.com/astaxie/beego"
-  "github.com/astaxie/beego/orm"
-  _ "github.com/go-sql-driver/mysql"
 )
-
-////////////////////////////////////////////////////////////////////////
-type User struct {
-  userid   string
-  name     string
-  password string
-  email    string
-}
-
-func myinit() {
-  // 需要在init中注册定义的model
-  orm.RegisterModel(new(User))
-  orm.RegisterDriver("mysql", orm.DR_MySQL)
-  orm.RegisterDataBase("mynode", "mysql", "root:123456@/mynode?charset=utf8", 30)
-}
-
-// init mysql driver
-var DefaultDB *sql.DB = nil
-
-func InitMysqlDriver() {
-  var err error
-  DefaultDB, err = sql.Open("mysql", "root:123456@/mynode?charset=utf8")
-  checkErr(err)
-}
-
-// close the mysql driver when progress exited
-func CloseMysqlDriver() {
-  if DefaultDB != nil {
-    DefaultDB.Close()
-  }
-}
 
 /////////////////////////////////////////////////////////////////////////
 type Server struct {
@@ -71,20 +39,10 @@ func (this *MainController) Post() {
   return
 }
 
-type Userinfo struct {
-  UserName  string
-  UserID    string
-  UserEmail string
-}
-type Userinfoslice struct {
-  Userinfos []Userinfo
-}
-
 func (this *MainController) Get() {
 
   //this.Ctx.WriteString("your name is : "+this.Ctx.Input.Param(":username"))
   //return
-  var u Userinfoslice
 
   //this.Ctx.WriteString("lizi")
   //this.Ctx.WriteString(string(b))
@@ -113,21 +71,9 @@ func (this *MainController) Get() {
   //fmt.Println(affect)
   // 查询数据
   //(userid VARCHAR(50) UNIQUE,name VARCHAR(50)  ,password VARCHAR(50),email VARCHAR(50) , PRIMARY KEY (`name`))",$con);
-  rows, err := DefaultDB.Query("SELECT userid, name, email FROM alluser")
-  checkErr(err)
-  for rows.Next() {
-    var userid string
-    var name string
-    var email string
-    err = rows.Scan(&userid, &name, &email)
-    checkErr(err)
-    //fmt.Println(userid)
-    //fmt.Println(name)
-    //fmt.Println(password)
-    //fmt.Println(email)
-    u.Userinfos = append(u.Userinfos, Userinfo{UserName: name, UserID: userid, UserEmail: email})
-  }
-  b, err := json.Marshal(u)
+
+  u := models.GetAllUserInfo()
+  b, err := json.Marshal(map[string][]models.Userinfo{"Userinfos": u})
   if err != nil {
     fmt.Println("json err:", err)
   }
@@ -143,57 +89,24 @@ func (this *MainController) Get() {
   //fmt.Println(affect)
 }
 
-type Nodeinfo struct {
-  NodeID string
-}
-
-type Nodeinfoslice struct {
-  Nodeinfos []Nodeinfo
-}
-
 type NodeController struct {
   beego.Controller
 }
 
 func (this *NodeController) Get() {
-
-  var (
-    node   Nodeinfoslice
-    name   string
-    userid string
-    strSql string
-  )
-
-  name = this.Ctx.Input.Param(":username")
-  strSql = "name is " + name
-  fmt.Println(strSql)
-  strSql = "SELECT userid FROM alluser WHERE name=" + "'" + name + "'"
-  rows, err := DefaultDB.Query(strSql)
-  fmt.Println(strSql)
-  checkErr(err)
-  for rows.Next() {
-    err = rows.Scan(&userid)
-    checkErr(err)
-    fmt.Println("userid is " + userid)
-    break
-  }
+  name := this.Ctx.Input.Param(":username")
+  fmt.Println("name:", name)
+  userid := models.GetUseridByName(name)
+  fmt.Println("userid:", userid)
   // 查询数据
-  strSql = "SELECT nodeid FROM node where userid =" + "'" + userid + "'"
-  fmt.Println(strSql)
-  rows, err = DefaultDB.Query(strSql)
-  checkErr(err)
-  for rows.Next() {
-    var nodeid string
-    err = rows.Scan(&nodeid)
-    checkErr(err)
-    node.Nodeinfos = append(node.Nodeinfos, Nodeinfo{NodeID: nodeid})
-  }
-  b, err := json.Marshal(node)
+  node := models.GetNodeInfo(userid)
+  b, err := json.Marshal(map[string][]models.Nodeinfo{"Nodeinfos": node})
   if err != nil {
     fmt.Println("json err:", err)
   }
   this.Ctx.WriteString(string(b))
 }
+
 func checkErr(err error) {
   if err != nil {
     panic(err)
