@@ -34,9 +34,13 @@ import (
 
 func main() {
   //myinit()
+  // open the mysql driver
+  controllers.InitMysqlDriver()
   //beego.Router("/user/?username", &MainController{})
   beego.Router("/user/", &controllers.MainController{})
   beego.Router("/user/node/:username", &controllers.NodeController{})
   //beego.Router("/", &MainController{})
   beego.Run()
+  // close the mysql driver
+  controllers.CloseMysqlDriver()
 }

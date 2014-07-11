@@ -23,7 +23,23 @@ func myinit() {
   // 需要在init中注册定义的model
   orm.RegisterModel(new(User))
   orm.RegisterDriver("mysql", orm.DR_MySQL)
-  orm.RegisterDataBase("mynode", "mysql", "root:123456@/alluser?charset=utf8", 30)
+  orm.RegisterDataBase("mynode", "mysql", "root:123456@/mynode?charset=utf8", 30)
+}
+
+// init mysql driver
+var DefaultDB *sql.DB = nil
+
+func InitMysqlDriver() {
+  var err error
+  DefaultDB, err = sql.Open("mysql", "root:123456@/mynode?charset=utf8")
+  checkErr(err)
+}
+
+// close the mysql driver when progress exited
+func CloseMysqlDriver() {
+  if DefaultDB != nil {
+    DefaultDB.Close()
+  }
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -79,8 +95,6 @@ func (this *MainController) Get() {
   //password    string
   //email       string
 
-  db, err := sql.Open("mysql", "root:123456@/mynode?charset=utf8")
-  //checkErr(err)
   // 插入数据
   //stmt, err := db.Prepare("INSERT alluser SET userid=?,name=?,password=?,email=?")
   //checkErr(err)
@@ -99,7 +113,7 @@ func (this *MainController) Get() {
   //fmt.Println(affect)
   // 查询数据
   //(userid VARCHAR(50) UNIQUE,name VARCHAR(50)  ,password VARCHAR(50),email VARCHAR(50) , PRIMARY KEY (`name`))",$con);
-  rows, err := db.Query("SELECT userid , name , email FROM alluser")
+  rows, err := DefaultDB.Query("SELECT userid, name, email FROM alluser")
   checkErr(err)
   for rows.Next() {
     var userid string
@@ -127,13 +141,12 @@ func (this *MainController) Get() {
   //affect, err = res.RowsAffected()
   //checkErr(err)
   //fmt.Println(affect)
-
-  db.Close()
 }
 
 type Nodeinfo struct {
   NodeID string
 }
+
 type Nodeinfoslice struct {
   Nodeinfos []Nodeinfo
 }
@@ -144,20 +157,19 @@ type NodeController struct {
 
 func (this *NodeController) Get() {
 
-  var node Nodeinfoslice
-  var name string
-  var userid string
-  var str string
+  var (
+    node   Nodeinfoslice
+    name   string
+    userid string
+    strSql string
+  )
+
   name = this.Ctx.Input.Param(":username")
-  str = "name is " + name
-  fmt.Println(str)
-  db, err := sql.Open("mysql", "root:123456@/mynode?charset=utf8")
-  //this.Ctx.WriteString("hello")
-  //return
-  checkErr(err)
-  str = "SELECT userid FROM alluser WHERE name=" + "'" + name + "'"
-  rows, err := db.Query(str)
-  fmt.Println(str)
+  strSql = "name is " + name
+  fmt.Println(strSql)
+  strSql = "SELECT userid FROM alluser WHERE name=" + "'" + name + "'"
+  rows, err := DefaultDB.Query(strSql)
+  fmt.Println(strSql)
   checkErr(err)
   for rows.Next() {
     err = rows.Scan(&userid)
@@ -166,9 +178,9 @@ func (this *NodeController) Get() {
     break
   }
   // 查询数据
-  str = "SELECT nodeid FROM node where userid =" + "'" + userid + "'"
-  fmt.Println(str)
-  rows, err = db.Query(str)
+  strSql = "SELECT nodeid FROM node where userid =" + "'" + userid + "'"
+  fmt.Println(strSql)
+  rows, err = DefaultDB.Query(strSql)
   checkErr(err)
   for rows.Next() {
     var nodeid string
@@ -181,7 +193,6 @@ func (this *NodeController) Get() {
     fmt.Println("json err:", err)
   }
   this.Ctx.WriteString(string(b))
-  db.Close()
 }
 func checkErr(err error) {
   if err != nil {
