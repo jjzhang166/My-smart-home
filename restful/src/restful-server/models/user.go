@@ -55,6 +55,8 @@ func checkErr(err error) {
 func GetAllUserInfo() (infos []Userinfo) {
   rows, err := DefaultDB.Query("SELECT `userid`,`name`,`email` FROM `alluser`")
   checkErr(err)
+  // close to free sql connection
+  defer rows.Close()
   for rows.Next() {
     var userid, name, email string
     err = rows.Scan(&userid, &name, &email)
@@ -85,6 +87,8 @@ func GetNodeInfo(userid string) (infos []Nodeinfo) {
   fmt.Println(strSql)
   rows, err := DefaultDB.Query(strSql)
   checkErr(err)
+  // close to free sql connection
+  defer rows.Close()
   for rows.Next() {
     var nodeid string
     err = rows.Scan(&nodeid)

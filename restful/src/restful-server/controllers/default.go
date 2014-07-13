@@ -4,6 +4,7 @@ package controllers
 import (
   "encoding/json"
   "fmt"
+  "net/http"
 
   "restful-server/models"
 
@@ -32,8 +33,9 @@ func (this *MainController) Post() {
   b, err := json.Marshal(s)
   if err != nil {
     fmt.Println("json err:", err)
+    this.Ctx.ResponseWriter.WriteHeader(http.StatusInternalServerError)
+    return
   }
-  b = b
   //this.Ctx.WriteString("lizi")
   this.Ctx.WriteString(string(b))
   return
@@ -76,6 +78,8 @@ func (this *MainController) Get() {
   b, err := json.Marshal(map[string][]models.Userinfo{"Userinfos": u})
   if err != nil {
     fmt.Println("json err:", err)
+    this.Ctx.ResponseWriter.WriteHeader(http.StatusInternalServerError)
+    return
   }
   this.Ctx.WriteString(string(b))
 
@@ -103,6 +107,8 @@ func (this *NodeController) Get() {
   b, err := json.Marshal(map[string][]models.Nodeinfo{"Nodeinfos": node})
   if err != nil {
     fmt.Println("json err:", err)
+    this.Ctx.ResponseWriter.WriteHeader(http.StatusInternalServerError)
+    return
   }
   this.Ctx.WriteString(string(b))
 }
