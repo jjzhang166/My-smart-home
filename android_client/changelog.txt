@@ -1,3 +1,5 @@
+android_client_1.0.7
+      ---  添加一个通用的公司主界面
 android_client_1.0.6
       ---  提示是否登录 on/off line
       ---  on  : 显示对应的userid

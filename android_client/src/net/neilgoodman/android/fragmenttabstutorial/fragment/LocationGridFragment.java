@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.mynode.*;
 
 import com.example.mynode.*;
+import com.example.mynode.company.CompanyMainActivity;
 import com.example.mynode.node.SpecialNodeLight;
 import com.example.mynode.onlineupdate.OnlineUpdate;
 import com.example.mynode.rssreader.RssReader;
@@ -103,6 +104,13 @@ public class LocationGridFragment extends Fragment {
     	{
     		intent = new Intent(activity,OnlineUpdate.class); 
     	}
+	    
+	    if(position==6)
+    	{
+    		intent = new Intent(activity,CompanyMainActivity.class); 
+    	}
+	    
+	    
 	    
 	    try
 	    {
