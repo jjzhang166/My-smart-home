@@ -34,6 +34,10 @@ andriod平台的客户端，使用eclipse打开即可。
 提供简单的restful api (get put post delete)，可通过http协议访问，返回json数据结果集。   
 
 
+#### tools 
+===
+提供些由于网络问题不好下的，软件包及调试工具
+
 #### iOS_client
 ===
 iOS平台的客户端，使用xcode5或以上打开即可。
