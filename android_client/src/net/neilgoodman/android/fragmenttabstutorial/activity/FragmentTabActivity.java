@@ -7,7 +7,8 @@ import android.support.v4.app.FragmentManager;
 import android.view.Window;
 import android.widget.Toast;
 
-import com.example.mynode.*;
+import com.mysmarthome.mynode.R;
+import com.mysmarthome.mynode.*;
 
 public class FragmentTabActivity extends FragmentActivity {
     

@@ -17,15 +17,17 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.Toast;
-import com.example.mynode.*;
 
-import com.example.mynode.*;
-import com.example.mynode.company.CompanyMainActivity;
-import com.example.mynode.node.SpecialNodeLight;
-import com.example.mynode.onlineupdate.OnlineUpdate;
-import com.example.mynode.rssreader.RssReader;
-import com.example.mynode.setting.MySetting;
-import com.example.mynode.setting.MySettingActivity;
+import com.mysmarthome.mynode.R;
+
+import com.mysmarthome.mynode.*;
+import com.mysmarthome.mynode.company.CompanyDeviceMainActivity;
+import com.mysmarthome.mynode.company.CompanyMainActivity;
+import com.mysmarthome.mynode.node.SpecialNodeLight;
+import com.mysmarthome.mynode.onlineupdate.OnlineUpdate;
+import com.mysmarthome.mynode.rssreader.RssReader;
+import com.mysmarthome.mynode.setting.MySetting;
+import com.mysmarthome.mynode.setting.MySettingActivity;
 
 public class LocationGridFragment extends Fragment {
     
@@ -98,6 +100,8 @@ public class LocationGridFragment extends Fragment {
 	     if(position==4)
     	{
     		intent = new Intent(activity,RssReader.class); 
+    		intent = new Intent(activity,CompanyDeviceMainActivity.class); 
+    		
     	}
 	     
 	    if(position==5)

@@ -12,7 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-import com.example.mynode.*;
+import com.mysmarthome.mynode.R;
+import com.mysmarthome.mynode.*;
 
 public class TabFragment extends Fragment {
 

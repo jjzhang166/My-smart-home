@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import com.example.mynode.*;
+
+import com.mysmarthome.mynode.R;
+import com.mysmarthome.mynode.*;
 
 public class LocationModelListAdapter extends BaseAdapter {
 

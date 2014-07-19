@@ -10,7 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.mynode.*;
+import com.mysmarthome.mynode.R;
+import com.mysmarthome.mynode.*;
 
 public class LocationModelGridAdapter extends BaseAdapter {
 

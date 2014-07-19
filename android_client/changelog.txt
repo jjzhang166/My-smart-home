@@ -1,3 +1,9 @@
+android_client_1.0.8
+      ---  change package name from com.example.mynode to com.mysmarthome.mynode
+      ---  登录的时候，没有输入用户名后者密码的话，实现左右抖动shake效果
+      ---  修复了部分网络问题（异常没有捕捉，跳出了死循环，导致线程结束）
+      ---  登录界面，添加圆角边框
+      ---  移植了卫星按钮 Satellite Menu
 android_client_1.0.7
       ---  添加一个通用的公司主界面
 android_client_1.0.6

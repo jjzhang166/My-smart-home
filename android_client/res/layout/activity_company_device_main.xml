@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="left"
+    tools:context=".CompanyDeviceMainActivity" >
+    
+         
+     <FrameLayout
+            android:layout_height="@dimen/fake_action_bar_height"
+            android:layout_width="match_parent"
+            android:id="@+id/company_device_fake_action_bar"
+            android:layout_alignParentBottom="true"
+            android:background="@color/actionbar_background_color">
+            <ImageButton
+                android:id="@+id/call_history_button"
+                android:layout_width="@dimen/fake_menu_button_min_width"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom|start"
+                android:background="@drawable/btn_call"
+                android:src="@drawable/ic_menu_history_lt"/>
+            <ImageButton
+                android:id="@+id/dialpad_button"
+                android:layout_width="@dimen/fake_menu_button_min_width"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom|center"
+                android:background="@drawable/btn_call"
+                android:src="@drawable/ic_menu_history_lt"/>
+            <ImageButton
+                 android:id="@+id/overflow_menu"
+                 android:layout_width="@dimen/fake_menu_button_min_width"
+                 android:layout_height="match_parent"
+                 android:layout_gravity="bottom|end"
+                 android:src="@drawable/ic_menu_history_lt"
+                 android:background="@drawable/btn_call"/>
+        </FrameLayout>
+        
+        <View
+                android:id="@+id/action_divider"
+                android:layout_height="3dp"
+                android:layout_width="match_parent"
+                android:layout_above="@id/company_device_fake_action_bar"
+                android:background="@color/orange" />
+        <android.view.ext.SatelliteMenu
+			        android:id="@+id/devicemenu"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_gravity="bottom|left" 
+			        android:layout_margin="8dp"
+			        android:layout_above="@id/action_divider"/>  
+
+
+</RelativeLayout>

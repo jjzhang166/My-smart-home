@@ -3,9 +3,10 @@ package net.neilgoodman.android.fragmenttabstutorial.application;
 
 import net.neilgoodman.android.fragmenttabstutorial.model.LocationModel;
 import android.app.Application;
-import com.example.mynode.*;
 
-import com.example.mynode.*;
+import com.mysmarthome.mynode.R;
+
+import com.mysmarthome.mynode.*;
 public class FragmentTabTutorialApplication extends Application {
     
     // This static field acts as the app's "fake" database of location data.

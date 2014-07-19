@@ -93,5 +93,6 @@
     <string name="onlineupdate_get_version">获取最新版本信息</string>
     <string name="onlineupdate_sure_to_update">确定升级</string>
     <string name="title_activity_company_main">CompanyMainActivity</string>
+    <string name="title_activity_company_device_main">CompanyDeviceMainActivity</string>
 
 </resources>

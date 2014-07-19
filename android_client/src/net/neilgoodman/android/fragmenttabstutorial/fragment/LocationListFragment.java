@@ -11,7 +11,8 @@ import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-import com.example.mynode.*;
+
+import com.mysmarthome.mynode.*;
 public class LocationListFragment extends ListFragment {
     
     // ListFragment is a very useful class that provides a simple ListView inside of a Fragment.
