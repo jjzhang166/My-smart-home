@@ -3,9 +3,12 @@
 package com.mysmarthome.mynode.onlineupdate;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -57,6 +60,8 @@ public class OnlineUpdate extends Activity implements OnClickListener{
 	private  static final int  state_down_apk=3;
 	public   static int  state_down=state_down_normal;
 	
+	StringBuilder sb_changelog = new StringBuilder("");
+	
 	// 参考 AndroidManifest.xml ， 还是避免解析xml
 	// verCode = context.getPackageManager().getPackageInfo("com.update.apk", 0).versionCode;
 	// verName = context.getPackageManager().getPackageInfo("com.update.apk", 0).versionName;
@@ -92,7 +97,7 @@ public class OnlineUpdate extends Activity implements OnClickListener{
 		currentVersion=MyConfig.CURRENT_VERSION;
 		
 		try {
-			currentVersion=String.format("%d",getPackageManager().getPackageInfo("com.example.mynode", 0).versionCode);
+			currentVersion=String.format("%d",getPackageManager().getPackageInfo("com.mysmarthome.mynode", 0).versionCode);
 		} catch (NameNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -129,7 +134,6 @@ public class OnlineUpdate extends Activity implements OnClickListener{
 		    	}
 		    	    
                 pBar.show();
-		    	
 		    	downFile(MyConfig.SERVER_FILE_APK,apkName);
 		    }
 
@@ -142,7 +146,7 @@ public class OnlineUpdate extends Activity implements OnClickListener{
 	            case MyConfig.MSG_ONLINEUPDATE_GET_VERSION:  
 	    			Toast.makeText(OnlineUpdate.this, "获取版本信息",
 	    					Toast.LENGTH_SHORT).show(); 
-	    			lastVersion=(String)msg.obj;
+	    			//lastVersion=(String)msg.obj;
 	    			last_version_textview.setText(lastVersion);
 	    			
 	    			state_down=state_down_changelog;
@@ -152,14 +156,43 @@ public class OnlineUpdate extends Activity implements OnClickListener{
 	            case MyConfig.MSG_ONLINEUPDATE_GET_CHANGELOG:  
 	    			Toast.makeText(OnlineUpdate.this, "获取版本更新细节",
 	    					Toast.LENGTH_SHORT).show(); 
-	    			changelog_textview.setText("修改记录：\r\n"+(String)msg.obj);
+	    			changelog_textview.setMaxHeight(200);
+	    			
+	    			String path = Environment.getExternalStorageDirectory()+ "/"+"changelog";  
+                    try {
+						FileInputStream  fis=new FileInputStream(path);  
+							//	openFileInput(path);
+						byte[] buff_detail = new byte[2048];
+						int hasRead=0;
+						if(sb_changelog.length()==0)
+						{
+							Log.e(TAG, "sb_changelog  is :"+sb_changelog.length()); 
+							while((hasRead=fis.read(buff_detail)) > 0)
+							{
+								Log.e(TAG, "hasRead is :"+hasRead); 
+								sb_changelog.append(new String(buff_detail,0,hasRead));
+							}
+							Log.e(TAG, "sb_changelog  is :"+sb_changelog.length()); 
+							changelog_textview.setText(sb_changelog.toString());
+						}
+
+						fis.close();
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+                            
+                    
 	    			state_down=state_down_normal;
 	    			
 	                break; 	   
 	                
 	            case MyConfig.MSG_ONLINEUPDATE_GET_APK:  
 	    			Toast.makeText(OnlineUpdate.this, "APK下载完成",
-	    					Toast.LENGTH_SHORT).show(); 
+	    					Toast.LENGTH_SHORT).show(); ;
 	    			state_down=state_down_normal;
 	    			pBar.cancel();
 	    			realUpdate();
@@ -176,7 +209,7 @@ public class OnlineUpdate extends Activity implements OnClickListener{
 	    //pBar.show();
 	    new Thread() {
 	        public void run() {
-	        	Log.e(TAG, "run"); 
+	        	//Log.e(TAG, "run"); 
 	        	HttpClient client = new DefaultHttpClient();
 	            HttpGet get = new HttpGet(url);
 	            HttpResponse response;
@@ -184,9 +217,10 @@ public class OnlineUpdate extends Activity implements OnClickListener{
 	                response = client.execute(get);
 	                HttpEntity entity = response.getEntity();
 	                long length = entity.getContentLength();
-	                Log.e(TAG, "length is :"+length); 
+	                //Log.e(TAG, "length is :"+length); 
 	                InputStream is = entity.getContent();
 	                FileOutputStream fileOutputStream = null;
+	                byte[] buf = new byte[4096];
 	                if (is != null) {
 	
 	                    File file = new File(
@@ -194,10 +228,11 @@ public class OnlineUpdate extends Activity implements OnClickListener{
 	                            fileName);
 	                    fileOutputStream = new FileOutputStream(file);
 	 
-	                    byte[] buf = new byte[1024];
+	                    
 	                    int ch = -1;
 	                    int count = 0;
-	                    while ((ch = is.read(buf)) != -1) {	                    	
+	                    while ((ch = is.read(buf)) != -1) {	   
+	                    	//Log.e(TAG, "ch is :"+ch); 
 	                        fileOutputStream.write(buf, 0, ch);
 	                        count += ch;
 	                        if (length > 0) {
@@ -206,18 +241,22 @@ public class OnlineUpdate extends Activity implements OnClickListener{
 	                    //added by yongming.li for show update details 
                     	if(state_down==state_down_version)
                     	{
-	                    	mHandler.obtainMessage(MyConfig.MSG_ONLINEUPDATE_GET_VERSION,new String(buf,"utf-8")).sendToTarget();
+                    		lastVersion=new String(buf,"utf-8");
+	                    	 mHandler.obtainMessage(MyConfig.MSG_ONLINEUPDATE_GET_VERSION,new String(buf,"utf-8")).sendToTarget();
                     	}
-                    	if(state_down==state_down_changelog)
-                    	{
-	                    	mHandler.obtainMessage(MyConfig.MSG_ONLINEUPDATE_GET_CHANGELOG,new String(buf,"utf-8")).sendToTarget();
-                    	}
+
 	 
 	                }
 	                fileOutputStream.flush();
 	                if (fileOutputStream != null) {
 	                    fileOutputStream.close();
 	                }
+	                
+                	if(state_down==state_down_changelog)
+                	{
+                    	mHandler.obtainMessage(MyConfig.MSG_ONLINEUPDATE_GET_CHANGELOG,new String(buf,"utf-8")).sendToTarget();
+                	}
+                	
                 	if(state_down==state_down_apk)
                 	{
                     	mHandler.obtainMessage(MyConfig.MSG_ONLINEUPDATE_GET_APK,"MyNode.apk").sendToTarget();

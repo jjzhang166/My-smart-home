@@ -44,9 +44,10 @@
             android:id="@+id/textview_onlineupdate_changelog"  
             android:layout_width="fill_parent"  
             android:layout_marginTop="10dp"  
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:scrollbars="vertical"     
-            android:maxLines="11"            
+            android:maxLines="15"   
+            android:maxHeight="200dp"         
             android:textColor="#667788" 
             android:text="修改记录"
             android:layout_below="@+id/textview_onlineupdate_last" />      

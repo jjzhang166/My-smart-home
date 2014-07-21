@@ -289,4 +289,7 @@
     <color name="black">#000000</color><!--黑色 -->
     
     <color name="actionbar_background_color">#ffffff</color>
+
+    <color name="WizaridTextColor">#FFFFFF</color>
+    <color name="WizardbgColor">#000000</color>
 </resources>

@@ -28,6 +28,7 @@ import com.mysmarthome.mynode.onlineupdate.OnlineUpdate;
 import com.mysmarthome.mynode.rssreader.RssReader;
 import com.mysmarthome.mynode.setting.MySetting;
 import com.mysmarthome.mynode.setting.MySettingActivity;
+import com.mysmarthome.mynode.wizard.MyWizard;
 
 public class LocationGridFragment extends Fragment {
     
@@ -112,6 +113,11 @@ public class LocationGridFragment extends Fragment {
 	    if(position==6)
     	{
     		intent = new Intent(activity,CompanyMainActivity.class); 
+    	}
+	    
+	    if(position==7)
+    	{
+    		intent = new Intent(activity,MyWizard.class); 
     	}
 	    
 	    

@@ -19,6 +19,8 @@ public class FragmentTabTutorialApplication extends Application {
         new LocationModel(4, "RSS阅读", R.drawable.main_free_message),
         new LocationModel(5, "在线升级", R.drawable.onlineupdate),
         new LocationModel(6, "公司主页", R.drawable.company_home),
+        new LocationModel(7, "使用向导", R.drawable.main_wizard),
+        
         //new LocationModel(5, "其它", R.drawable.main_other)
     };
 }

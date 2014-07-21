@@ -9,6 +9,7 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;  
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;  
 import android.view.View.OnClickListener;
@@ -77,7 +78,9 @@ public class LoginActivity extends Activity implements OnClickListener{
     	edittext_password.setText(password);
     	proressBar.setIndeterminate(false);
     	proressBar.setVisibility(View.INVISIBLE);  
+    	MyConfig.myClient.setHandle(mHandler);
     	connectServer();
+    	
     }  
     
     private void connectServer()
@@ -145,7 +148,9 @@ public class LoginActivity extends Activity implements OnClickListener{
     
     private Handler mHandler = new Handler() {  
         public void handleMessage (Message msg) {//此方法在ui线程运行  
+        	//Log.e("login","handleMessage");
             switch(msg.what) {  
+            
             case MyConfig.MSG_LOGIN_SUCCESS:  
     			Toast.makeText(LoginActivity.this, "登录成功",
     					Toast.LENGTH_SHORT).show(); 

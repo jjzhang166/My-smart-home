@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mysmarthome.mynode"
-    android:versionCode="108"
-    android:versionName="1.0.8" >
+    android:versionCode="109"
+    android:versionName="1.0.9" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -95,6 +95,11 @@
             android:name="com.mysmarthome.mynode.company.CompanyDeviceMainActivity"
             android:label="@string/title_activity_company_device_main" >
         </activity>
+        <activity
+            android:name="com.mysmarthome.mynode.wizard.MyWizard"
+            android:label="@string/title_activity_company_device_main" >
+        </activity>
+        
     </application>
 
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" >

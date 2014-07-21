@@ -47,14 +47,24 @@ public class CompanyMainActivity extends Activity {
     
     
 	public  static  ArrayList<String> informationList = new ArrayList<String>();
-	static final String[] informationArray = new String[] { "公司官网", "公司商场" }; 
-	static final String[] informationArrayDetail = new String[] { "http://www.******.com", 
+	static final String[] informationArray = new String[] { 
+		                                                    "公司代言人",
+		                                                    "公司官网", 
+		                                                    "公司商场" }; 
+	static final String[] informationArrayDetail = new String[] { 
+		                                                          "我为自己代言，节省广告费",
+		                                                          "http://www.******.com", 
 		                                                          "http://www.******.com" }; 
 	
-	static final String[] moreArray = new String[] { "添加设备", "帮助" ,"升级"}; 
+	static final String[] moreArray = new String[] { "添加设备",
+		                                             "帮助" ,
+		                                             "升级"}; 
 	static final String[] moreArrayDetail = new String[] { "", "",""}; 
 	
-	static final String[] deviceArray = new String[] { "设备 1", "设备 2" ,"设备 3"}; 
+	static final String[] deviceArray = new String[] { "灯", 
+		                                               "电视" ,
+		                                               "空调"}; 
+	
 	static final String[] deviceArrayDetail = new String[] { "", "",""}; 
 	
 	public  static  ArrayList<String> moreList = new ArrayList<String>();
@@ -72,7 +82,7 @@ public class CompanyMainActivity extends Activity {
     	informationList.add("公司商场");
 
     	moreList.add("添加设备");
-    	moreList.add("帮助");
+    	moreList.add("帮助向导");
     	moreList.add("更新");	
     	
     }

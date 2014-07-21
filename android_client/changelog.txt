@@ -1,3 +1,7 @@
+android_client_1.0.9
+      ---  add wizard (帮助/导航页面)(viewgroup)
+      ---  add todo.txt (把一些idea记录下来，后续实现) 
+      ---  修复了在线升级的小bug 
 android_client_1.0.8
       ---  change package name from com.example.mynode to com.mysmarthome.mynode
       ---  登录的时候，没有输入用户名后者密码的话，实现左右抖动shake效果
