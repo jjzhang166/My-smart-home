@@ -81,6 +81,8 @@ http服务器代码，简单的web控制，有任何问题,或者要添加测试
   <liyongming1982@163.com>    服务器 硬件 android client
 
   <ckrissun@gmail.com>        服务器 协议 硬件
+  
+  <david_lxh@aliyun.com>      特别感谢fireman,把web服务移植到树莓派 (并写下文档供后来者参考)
 
   <siz@sonwa.cn>              iphone client
   
