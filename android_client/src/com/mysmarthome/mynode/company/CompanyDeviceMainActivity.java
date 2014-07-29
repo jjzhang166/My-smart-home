@@ -16,74 +16,42 @@ import android.os.Message;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.ext.SatelliteMenu;
 import android.view.ext.SatelliteMenu.SateliteClickedListener;
 import android.view.ext.SatelliteMenuItem;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
-public class CompanyDeviceMainActivity extends Activity {
+public class CompanyDeviceMainActivity extends Activity implements OnClickListener{
 
 	private Thread mThread; 
 	public Calendar  c;
 	public DatePickerDialog datePicker;
 	public TimePickerDialog timePicker;
+	
+	public Button timerButton;
+	public Button lightnessButton;
+	public Button colorButton;
+	
+	public LinearLayout  lightnessLayout;
+	public LinearLayout  colorLayout;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_company_device_main);
-		
-		Log.e("device", "find");
-
-        SatelliteMenu menu = (SatelliteMenu) findViewById(R.id.devicemenu);
-
-       
-        
-		//  Set from XML, possible to programmatically set        
-        float distance = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 170, getResources().getDisplayMetrics());
-        menu.setSatelliteDistance((int) distance);
-        menu.setExpandDuration(500);
-        menu.setCloseItemsOnClick(true);
-        menu.setTotalSpacingDegree(90);
-        menu.setMainImage(R.drawable.sat_main);
-        //menu.setScaleY((float) 0.8);
-        //menu.setScaleX((float) 0.8);
-        
-        
-        Log.e("device", "setMainImage");
-        
-        List<SatelliteMenuItem> items = new ArrayList<SatelliteMenuItem>();
-        //items.add(new SatelliteMenuItem(0, R.drawable.sat_item));
-       // items.add(new SatelliteMenuItem(1, R.drawable.sat_item));
-       // items.add(new SatelliteMenuItem(2, R.drawable.sat_item));
-       // items.add(new SatelliteMenuItem(3, R.drawable.sat_item));
-       // items.add(new SatelliteMenuItem(4, R.drawable.sat_item));
-       // items.add(new SatelliteMenuItem(5, R.drawable.sat_item));
-        items.add(new SatelliteMenuItem(4, R.drawable.ic_3));
-        items.add(new SatelliteMenuItem(4, R.drawable.ic_4));
-        items.add(new SatelliteMenuItem(3, R.drawable.ic_5));
-        items.add(new SatelliteMenuItem(2, R.drawable.ic_6));
-        items.add(new SatelliteMenuItem(1, R.drawable.ic_2));
-        SatelliteMenuItem xxx = new SatelliteMenuItem(1, R.drawable.ic_2);
-        
-//        items.add(new SatelliteMenuItem(5, R.drawable.sat_item));
-        menu.addItems(items);  
-        
-        menu.setOnItemClickedListener(new SateliteClickedListener() {
-			
-			public void eventOccured(int id) {
-				Log.e("sat", "Clicked on " + id);
-			    //mThread = new Thread(runnable);  
-			    //mThread.start();
-				pickTime();
-			}
-		});	
-        
-        
+		          
 		 c = Calendar.getInstance();
 		 datePicker = new DatePickerDialog(CompanyDeviceMainActivity.this,
 				new DatePickerDialog.OnDateSetListener() {
@@ -91,44 +59,60 @@ public class CompanyDeviceMainActivity extends Activity {
 					@Override
 					public void onDateSet(DatePicker view, int year, int monthOfYear,
 							int dayOfMonth) {
-						// TODO Auto-generated method stub
-						
+						// TODO Auto-generated method stub						
 					}
 				}
 				             ,c.get(Calendar.YEAR),
 				              c.get(Calendar.MONTH),
 				              c.get(Calendar.DAY_OF_MONTH));
 		 
-		// timePicker = 
+		lightnessButton = (Button) findViewById(R.id.company_device_lightness_button);
+		lightnessButton.setOnClickListener(this);
+		
+	    colorButton = (Button) findViewById(R.id.company_device_color_button);
+	    colorButton.setOnClickListener(this);
+		
+		timerButton = (Button) findViewById(R.id.company_device_timer_button);
+		timerButton.setOnClickListener(this);
+		
+		colorLayout = (LinearLayout) findViewById(R.id.company_device_color_layout);
+		lightnessLayout = (LinearLayout) findViewById(R.id.company_device_lightness_layout);
+
+		
+		showIndex(0);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.company_device_main, menu);
-		return true;
-	}
-	public void  pickTime()
-	{
-		datePicker.show();
-	}
-	
-	Runnable runnable = new Runnable() {
-		public void run() {
-			pickTime();
+    public void showIndex(int index)
+    {
+		colorLayout.setVisibility(View.GONE);
+		lightnessLayout.setVisibility(View.GONE);
+		
+		if(index==0)
+		{
+			lightnessLayout.setVisibility(View.VISIBLE);
 		}
-	};
-	
-    private Handler mHandler = new Handler() {  
-        public void handleMessage (Message msg) {//此方法在ui线程运行  
-            switch(msg.what) {  
-            case MyConfig.MSG_LOGIN_USERID:  
-            	//textview_userid.setText((String)msg.obj);
-            	MyConfig.USERID=(String)msg.obj;
-                break; 
-           }  
-           // proressBar.setVisibility(View.INVISIBLE);
-         }  
-     }; 
+		if(index==1)
+		{
+			colorLayout.setVisibility(View.VISIBLE);
+		}
+		return;
+    }
+	@Override
+	public void onClick(View v) {
+				switch (v.getId()) {
+				case R.id.company_device_lightness_button:
+					showIndex(0);
+					break;
+				case R.id.company_device_color_button:	
+					showIndex(1);
+					break;
+				case R.id.company_device_timer_button:	
+					datePicker.show();
+					break;
+				default:
+					break;
+				}
+	}	
+} 
 
-}
+

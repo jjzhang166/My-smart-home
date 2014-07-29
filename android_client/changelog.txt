@@ -1,3 +1,7 @@
+android_client_1.1.0
+      ---  添加基础包utils（md5,StreamTools......）
+      ---  添加环形seekbar (thanks to Lars Werkman & Jesús Manzano) , 添加颜色的选择
+      ---  此版本号110比较特殊（大学寝室号为110），在此表达对 龙哥，空空，于老板的想念
 android_client_1.0.9
       ---  add wizard (帮助/导航页面)(viewgroup)
       ---  add todo.txt (把一些idea记录下来，后续实现) 
