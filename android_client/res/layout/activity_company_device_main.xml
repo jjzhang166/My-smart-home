@@ -76,8 +76,35 @@
         />
     	
   </LinearLayout>
-
   
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/company_device_lightness_other_layout"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_login_div"
+        
+        android:layout_marginTop="15dp"  
+        android:layout_below="@+id/company_device_top_layout"
+        android:orientation="vertical" >
+    
+        <TextView   
+            android:id="@+id/company_device_lightness_other_hint_textview"  
+            android:layout_width="wrap_content"  
+            android:layout_height="wrap_content"  
+            android:layout_marginLeft="10dp"  
+            android:text="亮度"
+            android:layout_marginTop="5dp"   />  
+            
+         <ru.clickwheel.ClickWheel
+				    android:id="@+id/wheel"
+				    android:layout_width="fill_parent"
+				    android:layout_height="wrap_content"
+				    android:layout_marginLeft="40dip" 
+				    android:layout_marginRight="40dip" 
+         />
+
+  </LinearLayout>
+
      <LinearLayout
         android:layout_width="match_parent"
         android:id="@+id/company_device_color_layout"
@@ -101,7 +128,7 @@
             android:layout_height="wrap_content"/>
       </LinearLayout>
            
-     <FrameLayout
+     <LinearLayout
             android:layout_height="@dimen/fake_action_bar_height"
             android:layout_width="match_parent"
             android:id="@+id/company_device_fake_action_bar"
@@ -109,37 +136,49 @@
             android:background="@color/actionbar_background_color">
             <Button
                 android:id="@+id/company_device_lightness_button"
-                android:layout_width="@dimen/fake_menu_button_min_width"
-                android:layout_height="match_parent"
-                android:layout_gravity="bottom|start"
+                android:layout_width="0dip"
+                 android:layout_height="match_parent"
+                 android:layout_weight="1"
+                
+ 
                 android:background="@drawable/wizard_button_bg"
                 android:text="亮度"
+                android:src="@drawable/ic_menu_history_lt"/>
+           <Button
+                android:id="@+id/company_device_lightness_other_button"
+                android:layout_width="0dip"
+                 android:layout_height="match_parent"
+                 android:layout_weight="1"
+                android:background="@drawable/wizard_button_bg"
+                android:text="亮度2"
                 android:src="@drawable/ic_menu_history_lt"/>
             
             <!-- android:background="@drawable/btn_call" -->
             <Button
                 android:id="@+id/company_device_color_button"
-                android:layout_width="@dimen/fake_menu_button_min_width"
-                android:layout_height="match_parent"
-                android:layout_gravity="bottom|center"
+                               android:layout_width="0dip"
+                 android:layout_height="match_parent"
+                 android:layout_weight="1"
+
                 android:text="颜色"
                 android:background="@drawable/wizard_button_bg"
                 android:src="@drawable/ic_menu_history_lt"/>
             <Button
                  android:id="@+id/company_device_timer_button"
-                 android:layout_width="@dimen/fake_menu_button_min_width"
+                                 android:layout_width="0dip"
                  android:layout_height="match_parent"
-                 android:layout_gravity="bottom|end"
+                 android:layout_weight="1"
+   
                  android:text="时间"
                  android:src="@drawable/ic_menu_history_lt"
                  android:background="@drawable/wizard_button_bg"
                  />
-        </FrameLayout>
+        </LinearLayout>
         
-        <View
+        <Button
                 android:id="@+id/company_device_action_divider"
                 android:layout_height="3dp"
-                android:layout_width="match_parent"
+                android:layout_width="80dp"
                 android:layout_above="@id/company_device_fake_action_bar"
                 android:background="@color/orange" />
         <!-- 

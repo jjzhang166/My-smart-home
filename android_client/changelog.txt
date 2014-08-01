@@ -1,3 +1,6 @@
+android_client_1.1.1
+      ---  添加GPS功能(实现进入房间，灯自动打开):实现困难，取消
+      ---  添加ipod风格clickwheel
 android_client_1.1.0
       ---  添加基础包utils（md5,StreamTools......）
       ---  添加环形seekbar (thanks to Lars Werkman & Jesús Manzano) , 添加颜色的选择

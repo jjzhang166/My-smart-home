@@ -23,8 +23,10 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.view.ext.SatelliteMenu;
 import android.view.ext.SatelliteMenu.SateliteClickedListener;
 import android.view.ext.SatelliteMenuItem;
@@ -42,10 +44,14 @@ public class CompanyDeviceMainActivity extends Activity implements OnClickListen
 	
 	public Button timerButton;
 	public Button lightnessButton;
+	public Button lightnessButtonOther;
 	public Button colorButton;
 	
 	public LinearLayout  lightnessLayout;
+	public LinearLayout  lightnessLayoutOther;
 	public LinearLayout  colorLayout;
+	public Button  indexButton;
+	public int lastIndex=0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +75,14 @@ public class CompanyDeviceMainActivity extends Activity implements OnClickListen
 		lightnessButton = (Button) findViewById(R.id.company_device_lightness_button);
 		lightnessButton.setOnClickListener(this);
 		
+		lightnessButtonOther = (Button) findViewById(R.id.company_device_lightness_other_button);
+		lightnessButtonOther.setOnClickListener(this);
+		
+		
+		indexButton =  (Button)findViewById(R.id.company_device_action_divider);
+
+			
+			
 	    colorButton = (Button) findViewById(R.id.company_device_color_button);
 	    colorButton.setOnClickListener(this);
 		
@@ -77,15 +91,19 @@ public class CompanyDeviceMainActivity extends Activity implements OnClickListen
 		
 		colorLayout = (LinearLayout) findViewById(R.id.company_device_color_layout);
 		lightnessLayout = (LinearLayout) findViewById(R.id.company_device_lightness_layout);
+		
+		lightnessLayoutOther= (LinearLayout) findViewById(R.id.company_device_lightness_other_layout);
 
 		
 		showIndex(0);
+
 	}
 
     public void showIndex(int index)
     {
 		colorLayout.setVisibility(View.GONE);
 		lightnessLayout.setVisibility(View.GONE);
+		lightnessLayoutOther.setVisibility(View.GONE);
 		
 		if(index==0)
 		{
@@ -93,8 +111,34 @@ public class CompanyDeviceMainActivity extends Activity implements OnClickListen
 		}
 		if(index==1)
 		{
+			lightnessLayoutOther.setVisibility(View.VISIBLE);
+		}
+		if(index==2)
+		{
 			colorLayout.setVisibility(View.VISIBLE);
 		}
+		if(lastIndex==index)
+		{
+			return;
+		}
+		int indexWidth=80+20;
+		int x=0;
+		TranslateAnimation  a=null;
+		if(index>lastIndex)
+		{
+		    x=lastIndex*indexWidth+(lastIndex)*30;
+			a = new TranslateAnimation(0+x,x+(index-lastIndex)*indexWidth+(index-lastIndex)*30,0,0); 
+		}
+		if(index<lastIndex)
+		{
+			x=lastIndex*indexWidth+(lastIndex)*30;
+			a = new TranslateAnimation(0+x,x+(index-lastIndex)*indexWidth+(index-lastIndex)*30,0,0); 
+		}
+
+		a.setDuration(1000);
+	    a.setFillAfter(true);
+		indexButton.setAnimation(a);
+		lastIndex=index;
 		return;
     }
 	@Override
@@ -103,8 +147,11 @@ public class CompanyDeviceMainActivity extends Activity implements OnClickListen
 				case R.id.company_device_lightness_button:
 					showIndex(0);
 					break;
-				case R.id.company_device_color_button:	
+				case R.id.company_device_lightness_other_button:
 					showIndex(1);
+					break;
+				case R.id.company_device_color_button:	
+					showIndex(2);
 					break;
 				case R.id.company_device_timer_button:	
 					datePicker.show();
