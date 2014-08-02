@@ -72,6 +72,8 @@ PS:http服务器方面在Web分支上开发，有问题请提交Issue，并指�
 ***
 
 > 更详细的说明，请移步 [WiKi](http://git.oschina.net/xmeter/My-smart-home/wikis/Home)
+> 联系方式：http://git.oschina.net/xmeter/My-smart-home/wikis/%E8%81%94%E7%B3%BB%E6%96%B9%E5%BC%8F
+> 希望有新的小伙伴加入！
 
 ## 感谢
 
@@ -79,24 +81,4 @@ PS:http服务器方面在Web分支上开发，有问题请提交Issue，并指�
    * 感谢我老婆这个月多给了我点零花钱
    * 感谢3D淘宝店老板便宜了50元钱 http://3dprinter-diy.taobao.com/?spm=2013.1.0.0.donECP
    * ......
-   
-
-## 联系方式
-
-  <liyongming1982@163.com> 服务器 硬件 Android Client  (管理员)
-
-  <ckrissun@gmail.com> 服务器 协议 硬件  (管理员)
-
-  <896640547@qq.com> HTTP方面（php）: 泷涯的加入让我们web实力大增，负责web 及api方面的开发 (管理员)
-
-  <siz@sonwa.cn> iPhone Client
-  
-  <david_lxh@aliyun.com> 特别感谢fireman,把web服务移植到树莓派 (并写下文档供后来者参考)
-  
-  <raythandong@gmail.com> 硬件
-  
-  <604217454@qq.com> iPhone Client
-  
-  <liduanjun@126.com> 硬件及web
-  
-  **希望有新的小伙伴加入！**
+ 
