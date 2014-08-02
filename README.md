@@ -47,7 +47,8 @@ iOS平台的客户端，使用xcode5或以上打开即可。
 #### debug_script
 ===
 mysql数据库初始化，测试用例的一些脚本
-! 所有脚本都是和服务器相关，所以脚本移动到 server/mytest ，这里的将不再更新维护。
+
+**所有脚本都是和服务器相关，所以脚本移动到server/mytest，这里的将不再更新维护**
 
 
 #### www
@@ -70,7 +71,7 @@ PS:http服务器方面在Web分支上开发，有问题请提交Issue，并指�
        
 ***
 
-更详细的说明，请移步 [WiKi](http://git.oschina.net/xmeter/My-smart-home/wikis/Home)
+> 更详细的说明，请移步 [WiKi](http://git.oschina.net/xmeter/My-smart-home/wikis/Home)
 
 ## 感谢
 
@@ -85,11 +86,10 @@ PS:http服务器方面在Web分支上开发，有问题请提交Issue，并指�
   <liyongming1982@163.com>    服务器 硬件 android client  (管理员)
 
   <ckrissun@gmail.com>        服务器 协议 硬件  (管理员)
-  
+
   <896640547@qq.com>          HTTP方面（php）: 泷涯的加入让我们web实力大增，负责web 及api方面的开发 (管理员)
 
-  
-  <david_lxh@aliyun.com>        特别感谢fireman,把web服务移植到树莓派 (并写下文档供后来者参考)
+  <david_lxh@aliyun.com>       特别感谢fireman,把web服务移植到树莓派 (并写下文档供后来者参考)
 
   <siz@sonwa.cn>              iphone client
   
@@ -99,4 +99,4 @@ PS:http服务器方面在Web分支上开发，有问题请提交Issue，并指�
   
   <liduanjun@126.com>         硬件及web
   
-  希望有新的小伙伴加入！
+  **希望有新的小伙伴加入！**
