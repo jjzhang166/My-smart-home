@@ -72,7 +72,9 @@ PS:http服务器方面在Web分支上开发，有问题请提交Issue，并指�
 ***
 
 > 更详细的说明，请移步 [WiKi](http://git.oschina.net/xmeter/My-smart-home/wikis/Home)
+
 > 联系方式：http://git.oschina.net/xmeter/My-smart-home/wikis/%E8%81%94%E7%B3%BB%E6%96%B9%E5%BC%8F
+
 > 希望有新的小伙伴加入！
 
 ## 感谢
