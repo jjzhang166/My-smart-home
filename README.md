@@ -92,3 +92,5 @@ PS:http服务器方面在Web分支上开发，有问题请提交Issue，并指�
   <604217454@qq.com>          iphone  client
   
   <liduanjun@126.com>         硬件及web
+  
+  <896640547@qq.com>         HTTP方面（php）s
