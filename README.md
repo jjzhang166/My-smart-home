@@ -55,6 +55,7 @@ http服务器代码，简单的web控制，有任何问题,或者要添加测试
 
 <liyongming1982@163.com>
 
+PS:http服务器方面在Web分支上开发，有问题请提交Issue，并指派给泷涯
 
 #### webhook
 代码自动部署，持续集成
