@@ -89,9 +89,9 @@ PS:http服务器方面在Web分支上开发，有问题请提交Issue，并指�
 
   <896640547@qq.com> HTTP方面（php）: 泷涯的加入让我们web实力大增，负责web 及api方面的开发 (管理员)
 
+  <siz@sonwa.cn> iPhone Client
+  
   <david_lxh@aliyun.com> 特别感谢fireman,把web服务移植到树莓派 (并写下文档供后来者参考)
-
-  <siz@sonwa.cn> iphone client
   
   <raythandong@gmail.com> 硬件
   
