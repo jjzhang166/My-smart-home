@@ -2,7 +2,7 @@
 
 ***
 
-#### server
+### server
 ===
 
 服务器端程序(主要在ubuntu10.10上测试, linux平台编译，运行都是没问题的)
@@ -25,45 +25,47 @@
     
 
 
-#### android_client  
+### android_client  
 ===
 andriod平台的客户端，使用eclipse打开即可。   
 假如没有android开发环境， 可直接下载最新apk安装即可 : http://git.oschina.net/xmeter/My-smart-home/blob/master/android_client/bin/MyNode.apk
 
-#### restful  
+### restful  
 ===
-提供简单的restful api (get put post delete)，可通过http协议访问，返回json数据结果集。   
+提供简单的restful api (get put post delete)，可通过http协议访问，返回json数据结果集
 
 
-#### tools 
+### tools 
 ===
 提供些由于网络问题不好下的，软件包及调试工具
 
-#### iOS_client
+PS：感觉放这里不怎么厚道，于是决定放网盘的说
+
+### iOS_client
 ===
 iOS平台的客户端，使用xcode5或以上打开即可。
 
 
-#### debug_script
+### debug_script
 ===
 mysql数据库初始化，测试用例的一些脚本
 
 **所有脚本都是和服务器相关，所以脚本移动到server/mytest，这里的将不再更新维护**
 
 
-#### www
+### www
 ===
 http服务器代码，简单的web控制，有任何问题,或者要添加测试用户等，随时联系:
 
 <liyongming1982@163.com>
 
-PS:http服务器方面在Web分支上开发，有问题请提交Issue，并指派给泷涯
+PS:http服务器方面在Web分支上开发，有问题和建议请提交Issue
 
-#### webhook
+### webhook
 代码自动部署，持续集成
      
 
-#### hardware
+### hardware
 ===
 硬件ardunio以及相关传感器的demo。(LM35，MQ2 MQ7 , W5100等)
      
@@ -83,4 +85,3 @@ PS:http服务器方面在Web分支上开发，有问题请提交Issue，并指�
    * 感谢我老婆这个月多给了我点零花钱
    * 感谢3D淘宝店老板便宜了50元钱 http://3dprinter-diy.taobao.com/?spm=2013.1.0.0.donECP
    * ......
- 
