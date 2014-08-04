@@ -57,7 +57,7 @@ mysql数据库初始化，测试用例的一些脚本
 ===
 http服务器代码，简单的web控制，有任何问题,或者要添加测试用户等，随时联系:
 
-<liyongming1982@163.com>
+<liyongming1982@163.com> <ckrissun@gmail.com>  <896640547@qq.com>
 
 PS:http服务器方面在Web分支上开发，有问题和建议请提交Issue
 
@@ -78,6 +78,56 @@ PS:http服务器方面在Web分支上开发，有问题和建议请提交Issue
 > 联系方式：http://git.oschina.net/xmeter/My-smart-home/wikis/%E8%81%94%E7%B3%BB%E6%96%B9%E5%BC%8F
 
 > 希望有新的小伙伴加入！
+
+> 你还可以看看[自我介绍](http://git.oschina.net/xmeter/My-smart-home/issues/24)
+
+***
+
+> liyongming1982@163.com _管理员_
+
+> 服务器 硬件 Android Client
+
+***
+
+> ckrissun@gmail.com _管理员_
+
+> 服务器 协议 硬件
+
+***
+
+> 896640547@qq.com _管理员_
+
+> 负责Web及API方面
+
+***
+
+> siz@sonwa.cn
+
+> iPhone Client
+
+***
+
+> david_lxh@aliyun.com
+
+> 特别感谢fireman,把Web服务移植到树莓派 (并写下文档供后来者参考)
+
+***
+
+> raythandong@gmail.com
+
+> 硬件
+
+***
+
+> 604217454@qq.com
+
+> iPhone Client
+
+***
+
+> liduanjun@126.com
+
+> 硬件及Web
 
 ## 感谢
 
