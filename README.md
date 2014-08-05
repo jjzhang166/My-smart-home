@@ -1,75 +1,51 @@
-##目录结构说明
-===
+# 分支说明
 
-#### server
-===
+***
 
-服务器端程序(主要在ubuntu10.10上测试, linux平台编译，运行都是没问题的)
+此分支基于master，用于服务器端开发
 
+包括webhook、www等内容
 
-`编译:`
+和master分支分离，防止误操作
+
+有问题请提交Issue
+
+# www相关
+
+***
+
+## 环境需求
+
+* php5.3及以上
+
+* PDO扩展和MySQLi扩展
+
+* MySQL
+
+## 安装方法
     
-    cd src
-    make distclean 
-    make && make install
-
+    cd www
+	cd install
+	php install.php
     
+## 升级方式
 
-`运行:`
-    
-    php mysql.php  (创建数据库和表格，及插入调试用户及数据，脚本在目录 debug_script)
-    ./redis-server --loglevel verbose (--loglevel verbose 表示带调试信息，默认端口为6379)
-    python fakeClient.py (模拟真实用户及智能数据节点，可根据实际情况修改)
-    
-    
+### 自动升级
 
+制作中
 
-#### android_client  
-===
-andriod平台的客户端，使用eclipse打开即可。   
-假如没有android开发环境， 可直接下载最新apk安装即可 : http://git.oschina.net/xmeter/My-smart-home/blob/master/android_client/bin/MyNode.apk
+### 手动升级
 
-#### iOS_client
-===
-iOS平台的客户端，使用xcode5或以上打开即可。
+如果没有大的改动（涉及到数据库等），直接上传新文件覆盖原来的文件即可
 
+如果有，请先上传新文件覆盖原来的文件，之后到www/update目录下寻找名称为：
+**update_更新日期.php**
+的文件，上传到自己的服务器上面后以cli方式运行即可
 
-#### debug_script
-===
-mysql数据库初始化，测试用例的一些脚本
-所有脚本都是和服务器相关，所以脚本移动到 server/mytest ，这里的将不再更新维护。
+**注意：升级完成请及时删除升级文件**
 
+## 可能涉及到的目录
 
-#### www
-===
-http服务器代码，简单的web控制，有任何问题,或者要添加测试用户等，随时联系:
+* www
 
-<liyongming1982@163.com>
-
-
-#### webhook
-代码自动部署，持续集成
-     
-
-#### hardware
-===
-硬件ardunio以及相关传感器的demo。(LM35，MQ2 MQ7 , W5100等)
-     
-* [硬件介绍](http://git.oschina.net/xmeter/My-smart-home/wikis/%E7%A1%AC%E4%BB%B6%E9%83%A8%E5%88%86%E4%BB%8B%E7%BB%8D)
-       
-===
-更详细的说明，麻烦移步 [WiKi](http://git.oschina.net/xmeter/My-smart-home/wikis/pages)
-
-希望有新的小伙伴加入， `随时联系:`
-===
-  <liyongming1982@163.com>    服务器 硬件 android client
-
-  <ckrissun@gmail.com>        服务器 协议 硬件
-
-  <siz@sonwa.cn>              iphone client
-  
-  <raythandong@gmail.com>     硬件
-  
-  <604217454@qq.com>          iphone  client
-  
-  <liduanjun@126.com>         硬件及web
+* server/mytest （注：本目录的mysql.php不再维护，而是转至www/install/install.php）
