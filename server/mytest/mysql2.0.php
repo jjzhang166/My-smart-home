@@ -24,9 +24,9 @@ else
 }
 mysql_select_db("mynode", $con);
 echo "drop and create \r\n" ;
-//mysql_query("DROP TABLE node",$con);
-//mysql_query("DROP TABLE alluser",$con);
-//mysql_query("DROP TABLE emailmd5",$con);
+mysql_query("DROP TABLE node",$con);
+mysql_query("DROP TABLE alluser",$con);
+mysql_query("DROP TABLE emailmd5",$con);
 
 mysql_query("CREATE  TABLE emailmd5  (email  VARCHAR(50) UNIQUE,saltmd5 VARCHAR(50))",$con);
 mysql_query("CREATE  TABLE node  (userid VARCHAR(50) ,nodeid VARCHAR(50),command VARCHAR(50) , value VARCHAR(50))",$con);
