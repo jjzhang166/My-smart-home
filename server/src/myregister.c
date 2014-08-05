@@ -28,7 +28,7 @@ static char *okRegister = "register ok\r\n";
 
 extern   int  mymd5(  char * buf , char *  str );
 
-//  register  getuserid  email   n  n  n (n means no care , reserver)
+//  register  getuserid  email   r  r  r (n means no care , reserver)
 //  register  adduser   name password  userid  email
 
 void   registerCommand(redisClient *c) 
@@ -109,7 +109,7 @@ void   registerCommand(redisClient *c)
          addReplyString(c,okRegister,strlen(okRegister));
 
          // also added it to memory , avoid to reset the sever
-         insertUserInfo(userid , username);
+         //insertUserInfo(userid , username);
          
          
      	    return;

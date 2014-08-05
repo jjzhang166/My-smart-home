@@ -1,0 +1,166 @@
+[3441] 05 Aug 11:07:44.299 # Creating Server TCP listening socket *:6379: bind: Address already in use
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 2.8.6 (0a41d852/1) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in stand alone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 3453
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+[3453] 05 Aug 11:08:09.244 # Server started, Redis version 2.8.6
+[3453] 05 Aug 11:08:09.244 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+[3453] 05 Aug 11:08:09.244 # Unknown command 'SELECT' reading the append only file
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 2.8.6 (0a41d852/1) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in stand alone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 3476
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+[3476] 05 Aug 11:09:03.765 # Server started, Redis version 2.8.6
+[3476] 05 Aug 11:09:03.765 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+[3476] 05 Aug 11:09:03.765 # Unknown command 'SELECT' reading the append only file
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 2.8.6 (0a41d852/1) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in stand alone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 3495
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+[3495] 05 Aug 11:11:12.749 # Server started, Redis version 2.8.6
+[3495] 05 Aug 11:11:12.749 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+[3495] 05 Aug 11:11:12.749 * The server is now ready to accept connections on port 6379
+[3495] 05 Aug 11:11:12.751 - Connected........
+[3495] 05 Aug 11:11:12.751 - main query is select  userid,name,password  from alluser  where host='true'; 
+
+[3495] 05 Aug 11:11:12.751 - userid  is  2745dd5ef44dd3f7a9a19e6d1491f18f and hostname is yongming 
+
+[3495] 05 Aug 11:11:12.751 - insert hostname is yongming and username is  yongming 
+
+[3495] 05 Aug 11:11:12.752 - family query is select  name  from alluser where hostname='yongming'  and  host='false'; 
+
+[3495] 05 Aug 11:11:12.752 - insert hostname is yongming and username is  yongming 
+
+[3495] 05 Aug 11:11:12.752 - insertUserInfo  is not host 
+
+[3495] 05 Aug 11:11:12.752 - insertUserInfo  added to list 
+
+[3495] 05 Aug 11:11:12.752 - insert hostname is yongming and username is  yongming 
+
+[3495] 05 Aug 11:11:12.752 - insertUserInfo  is not host 
+
+[3495] 05 Aug 11:11:12.752 - insertUserInfo  added to list 
+
+[3495] 05 Aug 11:11:12.752 - userid  is  4d9188eb8a46e71ce44275dcb62df062 and hostname is rex 
+
+[3495] 05 Aug 11:11:12.752 - insert hostname is rex and username is  rex 
+
+[3495] 05 Aug 11:11:12.752 - family query is select  name  from alluser where hostname='rex'  and  host='false'; 
+
+[3495] 05 Aug 11:11:12.752 - insert hostname is rex and username is  rex 
+
+[3495] 05 Aug 11:11:12.752 - insertUserInfo  is not host 
+
+[3495] 05 Aug 11:11:12.752 - insertUserInfo  added to list 
+
+[3495] 05 Aug 11:11:12.752 - insert hostname is rex and username is  rex 
+
+[3495] 05 Aug 11:11:12.752 - insertUserInfo  is not host 
+
+[3495] 05 Aug 11:11:12.752 - insertUserInfo  added to list 
+
+[3495] 05 Aug 11:11:12.752 - userid  is  c2525a7f58ae3776070e44c106c48e15 and hostname is root 
+
+[3495] 05 Aug 11:11:12.752 - insert hostname is root and username is  root 
+
+[3495] 05 Aug 11:11:12.753 - family query is select  name  from alluser where hostname='root'  and  host='false'; 
+
+[3495] 05 Aug 11:11:12.753 - insert hostname is root and username is  root 
+
+[3495] 05 Aug 11:11:12.753 - insertUserInfo  is not host 
+
+[3495] 05 Aug 11:11:12.753 - insertUserInfo  added to list 
+
+[3495] 05 Aug 11:11:12.753 - insert hostname is root and username is  root 
+
+[3495] 05 Aug 11:11:12.753 - insertUserInfo  is not host 
+
+[3495] 05 Aug 11:11:12.753 - insertUserInfo  added to list 
+
+[3495] 05 Aug 11:11:13.754 - 0 clients connected (0 slaves), 291784 bytes in use
+[3495] 05 Aug 11:11:18.995 - 0 clients connected (0 slaves), 291784 bytes in use
+[3495] 05 Aug 11:11:23.995 - 0 clients connected (0 slaves), 291784 bytes in use
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 2.8.6 (0a41d852/1) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in stand alone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 3501
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+[3501] 05 Aug 11:11:35.236 # Server started, Redis version 2.8.6
+[3501] 05 Aug 11:11:35.236 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+[3501] 05 Aug 11:11:35.236 # Unknown command 'SELECT' reading the append only file
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 2.8.6 (0a41d852/1) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in stand alone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 3506
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+[3506] 05 Aug 11:12:04.412 # Server started, Redis version 2.8.6
+[3506] 05 Aug 11:12:04.412 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+[3506] 05 Aug 11:12:04.412 # Unknown command 'SELECT' reading the append only file

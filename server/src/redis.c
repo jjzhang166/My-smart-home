@@ -122,14 +122,15 @@ struct redisCommand *commandTable;
 dict * myuserdict;
 struct redisCommand redisCommandTable[] = {
      //yongming for chat
-    {"chat",chatCommand,4,"wm",0,NULL,1,1,1,0,0},
-    {"node",nodeCommand,4,"wm",0,NULL,1,1,1,0,0},
+    {"user",chatCommand,6,"wm",0,NULL,1,1,1,0,0},
+    {"node",nodeCommand,6,"wm",0,NULL,1,1,1,0,0},
     {"register",registerCommand,6,"wm",0,NULL,1,1,1,0,0},
     {"r",registerCommand,6,"wm",0,NULL,1,1,1,0,0},
     ///////////////////////////////////////////////
+
+    //{"get",getCommand,2,"r",0,NULL,1,1,1,0,0},
+    //{"set",setCommand,-3,"wm",0,noPreloadGetKeys,1,1,1,0,0},
     #if 0
-    {"get",getCommand,2,"r",0,NULL,1,1,1,0,0},
-    {"set",setCommand,-3,"wm",0,noPreloadGetKeys,1,1,1,0,0},
     {"setnx",setnxCommand,3,"wm",0,noPreloadGetKeys,1,1,1,0,0},
     {"setex",setexCommand,4,"wm",0,noPreloadGetKeys,1,1,1,0,0},
     {"psetex",psetexCommand,4,"wm",0,noPreloadGetKeys,1,1,1,0,0},

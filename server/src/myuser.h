@@ -11,12 +11,15 @@
 
 extern void myuser_init();
 
-extern void   insertUserInfo(char * userid , char * name);
+extern    void   insertUserInfo(char * userid , char * username ,char * hostname ,  unsigned char isHost);
+
 extern int    insertNodeToUserInfo(char * username , char * nodename);
 extern int    getUserNodeSize(char * username );
 extern void   chatUserInfo(redisClient *c);
 extern void   getAllNodeInfo(redisClient *c );
 extern char *   getUseridByName(redisClient *c);
+extern  char *   getHostNameByName(redisClient *c);
+
 extern char *   getNameByUserid(char * userid);
 extern void   chatUpdateUserInfo(char * username,char * state);
 extern void   chatUpdateNodeInfo(char * username,char * nodename,char * state);
@@ -34,11 +37,13 @@ typedef struct _MyNodeInfo {
 } MyNodeInfo;
 
 typedef struct _MyNodeUserInfo {
+	  char   hostname[MY_NAME_LENGTH]; 
     char   name[MY_NAME_LENGTH]; 
     char   userid[MY_NAME_LENGTH]; 
     char   line[MY_NAME_LENGTH]; 
     MyNodeInfo nodes[MYNODE_MAX_NODES];
     unsigned int index;
+    struct _MyNodeUserInfo * nextfamily;
     struct  _MyNodeUserInfo * next;
 } MyNodeUserInfo;
 

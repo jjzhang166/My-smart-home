@@ -74,7 +74,7 @@
 #define REDIS_MAX_HZ            500 
 #define REDIS_SERVERPORT        6379    /* TCP port */
 #define REDIS_TCP_BACKLOG       511     /* TCP listen backlog */
-#define REDIS_MAXIDLETIME       120     /* default client timeout: infinite */
+#define REDIS_MAXIDLETIME       1200     /* default client timeout: infinite */
 #define REDIS_DEFAULT_DBNUM     16
 #define REDIS_CONFIGLINE_MAX    1024
 #define REDIS_DBCRON_DBS_PER_CALL 16
@@ -497,6 +497,7 @@ typedef struct redisClient {
     char username[MY_NAME_LENGTH];
     char nodename[MY_NAME_LENGTH];
     char password[MY_NAME_LENGTH];
+    char hostname[MY_NAME_LENGTH];
     unsigned char  isvaliduser;  
     unsigned char  isvalidnode;  
     unsigned char  mynode_type;  

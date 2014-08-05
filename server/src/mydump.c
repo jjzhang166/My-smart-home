@@ -30,14 +30,14 @@ int insert_all_node(char * userid,char * username)
      MYSQL mysql;
      MYSQL_RES *res;
      MYSQL_ROW row;
-     int t,r;
+     int t;
 
      char query[256] ={0x00} ;
      char buf[256]={0x00};
      
      //mysql_query("CREATE  TABLE node  (userid VARCHAR(50) ,nodeid VARCHAR(50),command VARCHAR(50) , value VARCHAR(50))",$con);
      sprintf(query,"select  nodeid  from node where userid='%s' ;",userid);
-     redisLog(REDIS_VERBOSE,"query is %s \r\n",query);
+     //redisLog(REDIS_VERBOSE,"query is %s \r\n",query);
 
      
      mysql_init(&mysql);
@@ -69,15 +69,63 @@ int insert_all_node(char * userid,char * username)
 
 }
 
+int insert_all_family(char * userid,char * hostname)
+{
+     MYSQL mysql;
+     MYSQL_RES *res;
+     MYSQL_ROW row;
+     int t;
+
+     char query[256] ={0x00} ;
+     char buf[256]={0x00};
+     
+     sprintf(query,"select  name  from alluser where hostname='%s'  and  host='false';",hostname);
+     redisLog(REDIS_VERBOSE,"family query is %s \r\n",query);
+
+     
+     mysql_init(&mysql);
+     if(!mysql_real_connect(&mysql,"localhost","root",
+                     "123456","mynode",0,NULL,0))
+     {
+         redisLog(REDIS_VERBOSE,"Error connecting to database:%s\n",mysql_error(&mysql));
+         return -1;
+     }
+      t=mysql_query(&mysql,query);
+     if(t)
+     {
+         redisLog(REDIS_VERBOSE,"Error making query:%s\n",mysql_error(&mysql));
+     }
+     else
+     {
+         res = mysql_use_result(&mysql);
+         while (row = mysql_fetch_row(res)) 
+         { 
+              
+                sprintf(buf,"%s",row[0]);
+                //redisLog(REDIS_VERBOSE,"family query name is  %s \r\n",buf);
+                insertUserInfo(userid,row[0],hostname,0);
+         }  
+     
+         mysql_free_result(res);
+     }
+     mysql_close(&mysql);
+
+}
+
 int do_mysql_dump_redis(void *arg)
 {
     
      MYSQL_RES *res;
      MYSQL_ROW row;
      MYSQL mysql;
-     char *query = "select *  from alluser;";
      int t,r;
      int i=0;
+     char query[256] ={0x00} ;
+     char hostname[256]={0x00};
+     char userid[256]={0x00};
+     
+     
+
 
      mysql_init(&mysql);
      if(!mysql_real_connect(&mysql,"localhost","root",
@@ -88,7 +136,13 @@ int do_mysql_dump_redis(void *arg)
      else
          redisLog(REDIS_VERBOSE,"Connected........");
 
-     t=mysql_query(&mysql,"select  userid,name,password  from alluser;");
+    // modiefid by yongming.li for family
+     //t=mysql_query(&mysql,"select  userid,name,password  from alluser  where host='true';");
+     //t=mysql_query(&mysql,"select  userid,name,password  from alluser ;");
+
+     sprintf(query,"select  userid,name,password  from alluser  where host='true';");
+     redisLog(REDIS_VERBOSE,"main query is %s \r\n",query);
+     t=mysql_query(&mysql,query);
      if(t)
      {
          redisLog(REDIS_VERBOSE,"Error making query:%s\n",mysql_error(&mysql));
@@ -99,8 +153,16 @@ int do_mysql_dump_redis(void *arg)
          
          while (row = mysql_fetch_row(res)) 
          { 
-               insertUserInfo(row[0],row[1]);
-               insert_all_node(row[0],row[1]);
+               // this is host
+               sprintf(hostname,"%s",row[1]);
+               sprintf(userid,"%s",row[0]);
+
+               redisLog(REDIS_VERBOSE,"userid  is  %s and hostname is %s \r\n",userid,hostname);
+               
+               insertUserInfo(userid,hostname,hostname,1);
+               insert_all_node(userid,hostname);
+               // this is family members
+               insert_all_family(userid,hostname);
                i++;
          }  
          mysql_free_result(res);
@@ -124,7 +186,7 @@ int is_valid_user(char * name ,char * password)
      MYSQL mysql;
      MYSQL_RES *res;
      MYSQL_ROW row;
-     int t,r;
+     int t;
 
      char query[256] = {0x00};
 

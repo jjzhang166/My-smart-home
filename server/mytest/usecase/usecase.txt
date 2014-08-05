@@ -1,0 +1,24 @@
+* 三个用户 (yongming , son ,wife)
+* 一个节点 (light)
+0
+===
+  * yongming   --> say  hello  --->    yongmingson
+  * yongming   <-- say  world  <---    yongmingson
+1
+===
+  * yongming   --> say  love  --->    yongmingwife
+  * yongming   <-- say  you  <---     yongmingwife
+2
+===
+  * yongming   -->node  say  light state=close request    --->   light
+  * yongming   <--node  say  light state=close response   <---   light 
+
+                                      /  son
+  * light --> send state to all family --   yongming   ==  all receive the light state
+                                      \  wife 
+3
+=== 
+  
+
+
+

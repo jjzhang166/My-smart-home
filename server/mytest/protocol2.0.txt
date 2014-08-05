@@ -1,0 +1,66 @@
+#### 背景
+===
+    * r   reserver 保留扩展之用
+    * user  代表用户
+    * node 代表一个只能控制节点
+    * node 只能属于一个家庭
+    * 一个家庭只能有一个户主
+    * 只能家庭成员之间可以聊天（客户段之后显示家庭成员）
+    * node 发送的消息会发送给所有的家庭成员
+    * 节点接收到指令，改变状态或者打开什么东西，需要及时把状态发送给family成员
+   
+#### 登录
+===
+  *1.1  用户登录 （在rex的建议下chat 修改为 user ，更加适合）
+      user login username password r r
+      e : user login yongming yongming r r
+  *1.2 节点登录
+      node login userid  nodename r r
+      e : node login 3ee50503b2cd6e8ac0ebfc486054f8ee tv r r
+
+#### 对话或者发送消息
+===
+  *2.1  节点发送给服务器的数据(节点给 yongming 用户发送数据)
+      node say yongming  name=light,state=close messageid  qos （yongming 替换为family的时候，会向家庭内的所有用户广播节点当前的状态）
+  *2.2 服务器转发给用户(消息会发送给此节点的所有家庭成员)
+      node ok  light  name=light,state=close messageid  qos  (light 节点名字，在节点登录的时候就确定了)
+  *2.3  用户回复节点
+      node say light  response   messageid  qos 
+  *2.4 节点收到的确认信息
+      node ok light response   messageid  qos 
+
+  *3.1 用户发给服务器的数据 (假如此用户名为:yongming)
+     node  say  light   state=close  messageid   qos
+  *3.2 服务器转发给节点
+     node  ok  yongming   state=close  messageid   qos
+  *3.3 节点真实接收到的数据
+     node  ok  yongming   state=close  messageid   qos
+
+  * qos 说明 （参考mqtt）
+       qos=0 不需要回复 ， qos=1 需要回复   qos=2（服务器端也要参与，暂时不考虑） 
+
+//user say root shit r r 
+//user ok rootwife shit r r
+#### 心跳机制
+===
+  *3.1  用户发给服务器
+      user heartbeat r r r r 
+  *3.2 节点发给服务器
+      node heartbeat r r r r
+  *3.3 服务器发送给用户或者节点
+      server heartbeat r r r r
+#### 注册用户
+===
+    register  getuserid  email   r  r  r (r means no care , reserver)
+    register  adduser   name password  userid  email
+#### 调试工具
+=== 
+   telnel  localhost/127.0.0.1 6379
+#### 数据库更改
+===   
+#### 加密解密
+===
+
+
+
+

@@ -6,6 +6,7 @@ default: all
 	cd src && $(MAKE) $@
 
 install:
+	echo  $(CURDIR)
 	cd src && $(MAKE) PREFIX=$(CURDIR) $@
 
 .PHONY: install

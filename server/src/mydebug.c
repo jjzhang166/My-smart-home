@@ -53,14 +53,25 @@ int dumpAlluser(redisClient *c) {
     
     while((de = dictNext(di)) != NULL) {
         MyNodeUserInfo * nodeuseinfo  = dictGetVal(de);
-        sprintf(buf,"username : %-25s and userid : %-25s\r\n ",nodeuseinfo->name,nodeuseinfo->userid);
-        //redisLog(REDIS_NOTICE,"name : %-25s\r\n",nodeuseinfo->name);
+        sprintf(buf,"username : %-25s and userid : %-25s  and   line :%-5s\r\n ",nodeuseinfo->name,nodeuseinfo->userid,nodeuseinfo->line);
+        if(nodeuseinfo->index==0)
+        	{
+        	     continue;
+        	}
         addReplyString(c,buf,strlen(buf));
+
+        MyNodeUserInfo * nodeuseinfoTemp=nodeuseinfo->nextfamily;
+         while(nodeuseinfoTemp)
+        	{
+        	    sprintf(buf," -----username : %-25s and userid : %-25s  and   line :%-5s\r\n  ",nodeuseinfoTemp->name,nodeuseinfoTemp->userid,nodeuseinfoTemp->line);
+        	    addReplyString(c,buf,strlen(buf));
+        	    nodeuseinfoTemp=nodeuseinfoTemp->nextfamily;
+        	}
 
         int nodeIndex =nodeuseinfo->index;
         for(int j=0;j<nodeIndex;j++)
         {
-              sprintf(buf,"-----nodename : %-20s  line :%-5s\r\n",nodeuseinfo->nodes[j].name,nodeuseinfo->nodes[j].line);
+              sprintf(buf,"----------nodename : %-20s  line :%-5s\r\n",nodeuseinfo->nodes[j].name,nodeuseinfo->nodes[j].line);
               //redisLog(REDIS_NOTICE,buf);
               addReplyString(c,buf,strlen(buf));
               
@@ -75,7 +86,7 @@ void  myDebugEntry(redisClient *c)
       {
       	     return;
       }
-      dumpClients(c);
+      //dumpClients(c);
       dumpAlluser(c);
       return;
 }
@@ -87,7 +98,7 @@ void  myAddUser(redisClient *c)
       	     return;
       }
       //insertUserInfo(char * userid , char * username)
-      insertUserInfo(c->argv[2]->ptr , c->argv[3]->ptr);
+      //insertUserInfo(c->argv[2]->ptr , c->argv[3]->ptr);
       return;
 }
 

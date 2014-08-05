@@ -1,3 +1,6 @@
+mynode3.5_redis-2.8.6
+-------   支持协议2.0
+
 mynode3.4_redis-2.8.6
 -------   removed unused redis-related utils
 

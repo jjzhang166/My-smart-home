@@ -1,0 +1,63 @@
+telnel  localhost/127.0.0.1 6379
+
+json:
+{name:"Peggy",email:"peggy@gmail.com",homepage:"http://www.peggy.com"}
+{ 属性 : 值 , 属性 : 值 , 属性 : 值 }
+2,数组是有顺序的值的集合。一个数组开始于"["，结束于"]"，值之间用","分隔。
+[
+{name:"Peggy",email:"peggy@gmail.com",homepage:"http://www.peggy.com"},
+{name:"Peggy",email:"peggy@gmail.com",homepage:"http://www.peggy.com"},
+{name:"Peggy",email:"peggy@gmail.com",homepage:"http://www.peggy.com"}
+]
+
+text:
+//  node login 3ee50503b2cd6e8ac0ebfc486054f8ee tv  (tv means channel , you can send other data)
+//  node say   self  message
+//  node say   tv  message
+//  chat   login  name userword
+//  chat   say   otherbodyname  messagebody
+node say master(no matter what is)  name:brightness:0,state=close,alias="bedroom light";
+
+// Saturation 饱和度
+node say light  name=light,state=open,brightness:255,color=red,Saturation=255,currenttime=2014-05-04T22:25:48,triggertime=2014-05-04T23:25:48 \r\n
+node say light  name=light,state=close,brightness:0;name=tv,state=true,channel=cctv5 \r\n
+
+// measurement 计量单位
+node say temperature  name=temperature,value=28,measurement=C\r\n
+
+Time when the scheduled event will occur in ISO 8601:2004 format.
+measures time in UTC and only accepts extended format, non-recurring, local time (YYYY-MM-DDThh:mm:ss). 
+//  userinfo 
+sprintf(buf,"userinfo ok %s %s\r\n",nodeuseinfo->name,nodeuseinfo->line);
+//  login (ok / fail)
+ sprintf(buf,"login ok %s\r\n",getUseridByName(c));
+
+//////////////////////////////////////////////////////////////////////////////////////
+//  实际的调试数据
+chat login yongming yongming
+userinfo ok yongming on
+login ok 2745dd5ef44dd3f7a9a19e6d1491f18f
+nodeinfo ok tv off
+nodeinfo ok light on
+nodeinfo ok temperature on
+
+userinfo ok shaohui off
+userinfo ok yongming on
+
+chat ok test 24
+node ok temperature name=temperature,value=24,measurement=C
+node ok light name=light,state=open,brightness:255;name=tv,state=close,channel=cctv5
+
+/////////////////////////////////////////////////////////////////////////////////////
+// should have messageid
+参考mqtt 的 qos , request / reponse
+//  r 代表保留，后续扩展
+chat login username password r
+
+
+
+
+
+
+
+

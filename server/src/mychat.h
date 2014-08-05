@@ -3,7 +3,8 @@
 
 extern void chatCommand(redisClient *c);
 extern void addHashFieldToReply(redisClient *c, robj *o, robj *field) ;
-extern void insertUserInfo(char * userid , char * name);
+extern void   insertUserInfo(char * userid , char * username ,char * hostname ,  unsigned char isHost);
+
 
 #define  MYNODE_TYPE_USER   0
 #define  MYNODE_TYPE_NODE   1

@@ -79,6 +79,8 @@ redisClient *createClient(int fd) {
     memset(c->username,0x00,MY_NAME_LENGTH);
     memset(c->password,0x00,MY_NAME_LENGTH);
     memset(c->nodename,0x00,MY_NAME_LENGTH);
+    memset(c->hostname,0x00,MY_NAME_LENGTH);
+    
     c->isvalidnode=0;
     c->isvaliduser=0;
 	
@@ -644,6 +646,7 @@ void freeClient(redisClient *c) {
     chatNotifyUserInfo(c);
     memset(c->userid,0x00,MY_NAME_LENGTH);
     memset(c->nodeid,0x00,MY_NAME_LENGTH);
+    memset(c->hostname,0x00,MY_NAME_LENGTH);
     memset(c->username,0x00,MY_NAME_LENGTH);
     memset(c->password,0x00,MY_NAME_LENGTH);
     memset(c->nodename,0x00,MY_NAME_LENGTH);
