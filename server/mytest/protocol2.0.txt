@@ -5,7 +5,7 @@
     * node 代表一个只能控制节点
     * node 只能属于一个家庭
     * 一个家庭只能有一个户主
-    * 只能家庭成员之间可以聊天（客户段之后显示家庭成员）
+    * 只能家庭成员之间可以聊天（客户端只显示家庭成员）
     * node 发送的消息会发送给所有的家庭成员
     * 节点接收到指令，改变状态或者打开什么东西，需要及时把状态发送给family成员
    
@@ -20,6 +20,9 @@
 
 #### 对话或者发送消息
 ===
+  * qos 说明 （参考mqtt）
+       qos=0 不需要回复 ， qos=1 需要回复   qos=2（服务器端也要参与，暂时不支持） 
+  * 
   *2.1  节点发送给服务器的数据(节点给 yongming 用户发送数据)
       node say yongming  name=light,state=close messageid  qos （yongming 替换为family的时候，会向家庭内的所有用户广播节点当前的状态）
   *2.2 服务器转发给用户(消息会发送给此节点的所有家庭成员)
@@ -29,25 +32,28 @@
   *2.4 节点收到的确认信息
       node ok light response   messageid  qos 
 
-  *3.1 用户发给服务器的数据 (假如此用户名为:yongming)
+  *3.1 用户发给服务器的数据 
      node  say  light   state=close  messageid   qos
   *3.2 服务器转发给节点
      node  ok  yongming   state=close  messageid   qos
   *3.3 节点真实接收到的数据
      node  ok  yongming   state=close  messageid   qos
 
-  * qos 说明 （参考mqtt）
-       qos=0 不需要回复 ， qos=1 需要回复   qos=2（服务器端也要参与，暂时不考虑） 
-
-//user say root shit r r 
-//user ok rootwife shit r r
+   用户与用户之间数据流：
+  *3.1 用户A发给服务器的数据 
+     user  say   yongmingson   hello   messageid   qos
+  *3.2 服务器转发给用户B
+     user  ok   yongming   hello  messageid   qos
+  *3.3 用户B发送确认信息 （qos == 1）
+     user  ok  yongming   response  messageid   qos
+   
 #### 心跳机制
 ===
-  *3.1  用户发给服务器
+  *5.1  用户发给服务器
       user heartbeat r r r r 
-  *3.2 节点发给服务器
+  *5.2 节点发给服务器
       node heartbeat r r r r
-  *3.3 服务器发送给用户或者节点
+  *5.3 服务器发送给用户或者节点
       server heartbeat r r r r
 #### 注册用户
 ===
@@ -60,6 +66,9 @@
 ===   
 #### 加密解密
 ===
+
+ref : 
+node ok light name=light,state=open,brightness:255;name=tv,state=close,channel=cctv5
 
 
 

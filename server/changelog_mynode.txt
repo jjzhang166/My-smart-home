@@ -1,3 +1,6 @@
+mynode3.6_redis-2.8.6
+-------   修改表名alluser -> user 
+-------   fix 部分脚本错误
 mynode3.5_redis-2.8.6
 -------   支持协议2.0
 

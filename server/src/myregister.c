@@ -51,7 +51,7 @@ void   registerCommand(redisClient *c)
         	    addReplyString(c,errRegisterInvalidEmail,strlen(errRegisterInvalidEmail));
         	    return;
         }
-        sprintf(cmd,"select  *  from alluser where email='%s';",email);
+        sprintf(cmd,"select  *  from user where email='%s';",email);
         if(mysql_is_exist(cmd))
         	{
         	    addReplyString(c,errRegisterEmailIsExist,strlen(errRegisterEmailIsExist));
@@ -97,14 +97,13 @@ void   registerCommand(redisClient *c)
         	    return;
         	}
 
-        sprintf(cmd,"select  *  from alluser where name='%s';",username);
+        sprintf(cmd,"select  *  from user where name='%s';",username);
         if(mysql_is_exist(cmd))
         	{
         	    addReplyString(c,errRegisterUsernameIsExist,strlen(errRegisterUsernameIsExist));
         	    return;
         	}
-         //mysql_query(sprintf("insert into alluser values('%s', '%s','%s','%s')",md5($email),$name,$name,$email),$con);
-         sprintf(cmd,"insert into alluser values('%s', '%s',  '%s','%s');",userid,username,password,email);
+         sprintf(cmd,"insert into user values('%s', '%s',  '%s','%s');",userid,username,password,email);
          mysqlRunCommand(cmd);
          addReplyString(c,okRegister,strlen(okRegister));
 

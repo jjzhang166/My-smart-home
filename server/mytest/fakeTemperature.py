@@ -66,6 +66,7 @@ while True:
     if temperature > 35:
         temperature=30
     c.send(('node say family  value=%s  778899  0 \r\n')%(temperature))
+    c.send(('node say yongming  to=yongming,value=%s  778899  0 \r\n')%(temperature))
     temperature= temperature+1
  
 c.close()

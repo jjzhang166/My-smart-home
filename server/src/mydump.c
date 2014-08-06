@@ -79,7 +79,7 @@ int insert_all_family(char * userid,char * hostname)
      char query[256] ={0x00} ;
      char buf[256]={0x00};
      
-     sprintf(query,"select  name  from alluser where hostname='%s'  and  host='false';",hostname);
+     sprintf(query,"select  name  from user where hostname='%s'  and  host='false';",hostname);
      redisLog(REDIS_VERBOSE,"family query is %s \r\n",query);
 
      
@@ -137,10 +137,8 @@ int do_mysql_dump_redis(void *arg)
          redisLog(REDIS_VERBOSE,"Connected........");
 
     // modiefid by yongming.li for family
-     //t=mysql_query(&mysql,"select  userid,name,password  from alluser  where host='true';");
-     //t=mysql_query(&mysql,"select  userid,name,password  from alluser ;");
 
-     sprintf(query,"select  userid,name,password  from alluser  where host='true';");
+     sprintf(query,"select  userid,name,password  from user  where host='true';");
      redisLog(REDIS_VERBOSE,"main query is %s \r\n",query);
      t=mysql_query(&mysql,query);
      if(t)
@@ -190,7 +188,7 @@ int is_valid_user(char * name ,char * password)
 
      char query[256] = {0x00};
 
-     sprintf(query,"select  *  from alluser where name='%s' and password='%s' ;",name,password);
+     sprintf(query,"select  *  from user where name='%s' and password='%s' ;",name,password);
      redisLog(REDIS_VERBOSE,"query is %s \r\n",query);
 
      mysql_init(&mysql);

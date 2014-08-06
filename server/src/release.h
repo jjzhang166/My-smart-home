@@ -1,3 +1,3 @@
 #define REDIS_GIT_SHA1 "0a41d852"
-#define REDIS_GIT_DIRTY "1477"
-#define REDIS_BUILD_ID "aclgcl-ubnt22-1407224025"
+#define REDIS_GIT_DIRTY "1515"
+#define REDIS_BUILD_ID "aclgcl-ubnt22-1407317038"
