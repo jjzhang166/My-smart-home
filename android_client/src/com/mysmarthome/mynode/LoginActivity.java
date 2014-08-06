@@ -134,7 +134,7 @@ public class LoginActivity extends Activity implements OnClickListener{
 			proressBar.setIndeterminate(true);
 			
     		MyConfig.myClient.setHandle(mHandler);
-    		String str = String.format("chat login  %s  %s",
+    		String str = String.format("user login  %s  %s r r",
     				     name,password);
     		
     		MyConfig.myClient.runCmd(str);

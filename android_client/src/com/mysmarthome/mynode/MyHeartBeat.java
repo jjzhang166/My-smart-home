@@ -12,7 +12,7 @@ public class MyHeartBeat {
 		{
 			try {
 				Log.e(TAG, "send heartbeat again"); 
-				MyConfig.myClient.runCmd("chat heartbeat 0 0");
+				MyConfig.myClient.runCmd("user heartbeat r r r r");
 				Thread.sleep(45*1000);
 			} catch (Exception e) {
 				Log.e(TAG, "start  : "+e.toString());  

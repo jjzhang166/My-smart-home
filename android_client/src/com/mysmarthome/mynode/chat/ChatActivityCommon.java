@@ -219,11 +219,11 @@ public class ChatActivityCommon extends Activity {
 
          		String name = getFromwho();
          		String parentname = MyParseCommon.getParentNameByName(userNodeList,name);
-         		String str = String.format("chat say %s %s ",parentname,sendMessage);
+         		String str = String.format("user say %s %s NULL  0",parentname,sendMessage);
          		
                  if(chatmode.equalsIgnoreCase("node"))
                  {
-                 	str = String.format("node say %s name=%s,%s ",parentname,name,sendMessage);
+                 	str = String.format("node say %s  name=%s,value=%s NULL  0",parentname,name,sendMessage);
                  }
          		Log.e(TAG, str); 	
          		MyConfig.myClient.runCmd(str);
