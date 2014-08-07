@@ -54,10 +54,18 @@ int dumpAlluser(redisClient *c) {
     while((de = dictNext(di)) != NULL) {
         MyNodeUserInfo * nodeuseinfo  = dictGetVal(de);
         sprintf(buf,"username : %-25s and userid : %-25s  and   line :%-5s\r\n ",nodeuseinfo->name,nodeuseinfo->userid,nodeuseinfo->line);
+        #if 0
         if(nodeuseinfo->index==0)
         	{
         	     continue;
         	}
+        #endif
+        
+        if(strcmp(nodeuseinfo->name,nodeuseinfo->hostname))
+        	{
+        	      continue;
+        	}
+        
         addReplyString(c,buf,strlen(buf));
 
         MyNodeUserInfo * nodeuseinfoTemp=nodeuseinfo->nextfamily;
@@ -91,14 +99,25 @@ void  myDebugEntry(redisClient *c)
       return;
 }
 
+//  user  login root root  r  r 
+//  user  adduser    userid  username  hostname  isHost
+//  e:  user adduser  45454545effdf   yongming  yongming       yes
+//  e:  user adduser  45454545effdf   yongming  yongmingson  no
 void  myAddUser(redisClient *c)
 {
       if(strcmp(c->username,MY_REDIS_ROOT_NAME))
       {
+            addReplyString(c, "not_root", strlen("not_root"));
       	     return;
       }
-      //insertUserInfo(char * userid , char * username)
-      //insertUserInfo(c->argv[2]->ptr , c->argv[3]->ptr);
+      unsigned char isHost =0;
+      if (!strcmp(c->argv[5]->ptr,"yes"))
+      {
+      	     isHost=1;
+      }
+      //void   insertUserInfo(char * userid , char * username ,char * hostname ,  unsigned char isHost);
+      insertUserInfo(c->argv[2]->ptr , c->argv[3]->ptr,c->argv[4]->ptr,isHost);
+      addReplyString(c, "user adduser ok", strlen("user adduser ok"));
       return;
 }
 

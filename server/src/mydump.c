@@ -166,6 +166,17 @@ int do_mysql_dump_redis(void *arg)
          mysql_free_result(res);
      }
       mysql_close(&mysql);
+      
+      #if 0
+      char temp_id[256]="454545454545";
+      char temp_name[256]="fuck";
+      char temp_name_family[256]="fuckson";
+      char temp_name_node[256]="fdsjklj";
+      insertUserInfo(temp_id , temp_name,temp_name,1);
+      insertNodeToUserInfo(temp_name,temp_name_node);
+      insertUserInfo(temp_id, temp_name_family,temp_name,0);
+      #endif
+      
      return 0;
  }
 
@@ -188,8 +199,9 @@ int is_valid_user(char * name ,char * password)
 
      char query[256] = {0x00};
 
-     sprintf(query,"select  *  from user where name='%s' and password='%s' ;",name,password);
+     sprintf(query,"select  name  from user where name='%s' and password='%s' ;",name,password);
      redisLog(REDIS_VERBOSE,"query is %s \r\n",query);
+
 
      mysql_init(&mysql);
      mysql_real_connect(&mysql,"localhost","root","123456","mynode",0,NULL,0);

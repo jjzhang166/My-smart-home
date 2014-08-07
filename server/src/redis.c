@@ -122,7 +122,7 @@ struct redisCommand *commandTable;
 dict * myuserdict;
 struct redisCommand redisCommandTable[] = {
      //yongming for chat
-    {"user",chatCommand,6,"wm",0,NULL,1,1,1,0,0},
+    {"user",userCommand,6,"wm",0,NULL,1,1,1,0,0},
     {"node",nodeCommand,6,"wm",0,NULL,1,1,1,0,0},
     {"register",registerCommand,6,"wm",0,NULL,1,1,1,0,0},
     {"r",registerCommand,6,"wm",0,NULL,1,1,1,0,0},
@@ -1075,7 +1075,7 @@ int serverCron(struct aeEventLoop *eventLoop, long long id, void *clientData) {
     if (!server.sentinel_mode) {
         run_with_period(5000) {
         	   // commented by yongming for debug , too many informations
-        	   #if 1
+        	   #if 0
             redisLog(REDIS_VERBOSE,
                 "%lu clients connected (%lu slaves), %zu bytes in use",
                 listLength(server.clients)-listLength(server.slaves),
@@ -3138,6 +3138,8 @@ int main(int argc, char **argv) {
     myuserdict = dictCreate(&commandTableDictType,NULL);
     myuser_init();
     mysql_dump_to_memory();
+
+
     
     //////////////////////////////////////
     aeSetBeforeSleepProc(server.el,beforeSleep);

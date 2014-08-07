@@ -24,12 +24,13 @@
 /*
  * wrong definitions
  */
-static char *errChatInvalidUser = "chat fail invalidUser\r\n";
-static char *errChatTooBigMsg   = "chat fail tooBigMessage\r\n";
+static char *errChatInvalidUser = "user fail invalidUser\r\n";
+static char *errChatTooBigMsg   = "user fail tooBigMessage\r\n";
 static char *errWrongNameOrPwd  = "login fail wrongNameOrPasswd\r\n";
 static char *errAlreadyLogin    = "login fail alreadyLogin\r\n";
 static char *errTooManyNodes    = "login fail tooManyNode\r\n";
 static char *errNodeNoLogin     = "node fail nologin\r\n";
+static char *errUserNoLogin     = "user fail nologin\r\n";
 
 // added by yongming.li for server heartbeat
 static char * responseHeartBeat    = "server heartbeat r r r r\r\n";
@@ -292,7 +293,8 @@ void nodeLogin(redisClient *c)
         c->isvalidnode=0;
         return;
     } else if(retInsertNode==1) {
-        sprintf(cmd,"insert into node values('%s', '%s',  '0','0');",userid,nodename);
+        // modified by yongming.li for mysql table change
+        sprintf(cmd,"insert into node (userid,nodeid,command,value)values('%s', '%s',  '0','0');",userid,nodename);
         mysqlRunCommand(cmd);
     }
 
@@ -362,7 +364,7 @@ void nodeCommand(redisClient *c)
     return;
 }
 
-void chatCommand(redisClient *c)
+void userCommand(redisClient *c)
 {
     if(!strcmp(c->argv[CHAT_LOGIN_CMD]->ptr,"login")) {
         chatLogin(c);
@@ -370,7 +372,7 @@ void chatCommand(redisClient *c)
     } 
 
      if(!(c->isvaliduser)) {
-        addReplyString(c, errNodeNoLogin, strlen(errNodeNoLogin));
+        addReplyString(c, errUserNoLogin, strlen(errUserNoLogin));
         return;
     }
 	

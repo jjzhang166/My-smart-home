@@ -58,12 +58,14 @@ void   insertUserInfo(char * userid , char * username ,char * hostname ,  unsign
 {
     MyNodeUserInfo * nodeuseinfo = NULL;
     sds nameTemp = sdsnew(username);
+    redisLog(REDIS_VERBOSE,"insert hostname is %s and username is  %s \r\n",hostname,username);
     nodeuseinfo = dictFetchValue(myuserdict, nameTemp);
     sdsfree(nameTemp);
     if(nodeuseinfo!=NULL)
     {
           if(isHost)
           	{
+          	  redisLog(REDIS_VERBOSE,"isHost and already exit dict \r\n");
           	   return ;
           	}
     	     

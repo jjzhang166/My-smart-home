@@ -1,3 +1,8 @@
+mynode3.7_redis-2.8.6
+-------   添加web adduser 接口
+-------   user  login root root  r  r 
+-------   user  adduser    userid  username  hostname  isHost
+-------   修改数据库表结构(增加主键，索引)
 mynode3.6_redis-2.8.6
 -------   修改表名alluser -> user 
 -------   fix 部分脚本错误

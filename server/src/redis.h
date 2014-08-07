@@ -1329,7 +1329,7 @@ void zrankCommand(redisClient *c);
 void zrevrankCommand(redisClient *c);
 void hsetCommand(redisClient *c);
 // added by yongming.li for chat
-void chatCommand(redisClient *c);
+void userCommand(redisClient *c);
 void nodeCommand(redisClient *c);
 void  registerCommand(redisClient *c) ;
 /////////////////////////////////////////////

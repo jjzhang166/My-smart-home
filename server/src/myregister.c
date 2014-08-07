@@ -109,8 +109,6 @@ void   registerCommand(redisClient *c)
 
          // also added it to memory , avoid to reset the sever
          //insertUserInfo(userid , username);
-         
-         
      	    return;
      }
 }

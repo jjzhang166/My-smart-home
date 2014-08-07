@@ -1,7 +1,7 @@
 #ifndef __MY_CHAT_H
 #define __MY_CHAT_H
 
-extern void chatCommand(redisClient *c);
+extern void userCommand(redisClient *c);
 extern void addHashFieldToReply(redisClient *c, robj *o, robj *field) ;
 extern void   insertUserInfo(char * userid , char * username ,char * hostname ,  unsigned char isHost);
 
@@ -11,8 +11,8 @@ extern void   insertUserInfo(char * userid , char * username ,char * hostname , 
 
 #define  MYCHAT_MAX_MESSAGE 70
 
-#define  MYNODE_MAX_USERS   100
-#define  MYNODE_MAX_NODES   6
+#define  MYNODE_MAX_USERS   1000
+#define  MYNODE_MAX_NODES   8
 
 #define  OPERATION_GET_INFO  0
 #define  OPERATION_SET_INFO  1
