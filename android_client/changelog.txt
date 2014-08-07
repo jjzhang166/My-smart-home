@@ -1,4 +1,6 @@
 android_client_1.1.2
+      ---  少量修改，适应新协议(change chat to user)
+android_client_1.1.2
       ---  修改部分协议(感谢rex的建议)
       ---  chat login  ---> user login .. 
 android_client_1.1.1

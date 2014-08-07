@@ -155,13 +155,12 @@ public class MyParse  {
 				onlyUpdateNodeState(nodeList,parentname,name,message);
 				return 0;
 			}
-			if (line.startsWith("chat")) {
+			if (line.startsWith("user")) {
 
 				chatparse(userList,parentname,name,message);
 				return 0;
 			}
-					
-			
+								
 			String tpyeArray[] = messages.split(";");
 			
 			for(int i=0 ; i< tpyeArray.length;i++)
