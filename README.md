@@ -47,5 +47,3 @@
 ## 可能涉及到的目录
 
 * www
-
-* server/mytest （注：本目录的mysql.php不再维护，而是转至www/install/install.php）

@@ -15,7 +15,7 @@
 			<thead><th>ID</th><th><?php echo lang('common','value'); ?></th><th><?php echo lang('common','action'); ?></th></thead>
 			<tbody>
 				<?php
-				$this->view->showall('node','<tr><td>{$nodeid}</td><td>{$value}</td><td style="width:255px"><form action="index.php?m=node&a=command" method="post"><input  name="command" type="text" class="form-control"/><input name="nodeid"  type="hidden" value="{$nodeid}" /><input type="submit" value="'.lang('node','command').'" class="btn btn-primary"/></form></td></tr>');
+				$this->view->showall('node','<tr><td>{$id}</td><td>{$value}</td><td style="width:255px"><form action="index.php?m=node&a=command" method="post"><input  name="command" type="text" class="form-control"/><input name="nodeid"  type="hidden" value="{$id}" /><input type="submit" value="'.lang('node','command').'" class="btn btn-primary"/></form></td></tr>');
 				?>
 			</tbody>
 		</table>

@@ -26,7 +26,8 @@ $lang=array(
 		'js_sure'=>'确认执行此操作？此操作不可恢复！',
 		'redirect_title'=>'提示',
 		'redirect_click'=>'如果您的浏览器没有自动跳转，请点击这里',
-		'go_login'=>'请先登录'
+		'go_login'=>'请先登录',
+		'ban'=>'操作被禁止'
 	)
 );
 ?>

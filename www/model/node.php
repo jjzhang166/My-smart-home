@@ -22,9 +22,12 @@ class node extends base {
 	}
 	//控制节点
 	public function oncommand () {
-		$nodeid=getgpc('nodeid','P');
+		global $smartid;
+		$id=intval(getgpc('id','P'));
 		$command=getgpc('command','P');
-		if (empty($nodeid) || empty($command)) redirect(lang('node','command_inputerror'),'-1');
+		if (empty($id) || empty($command)) redirect(lang('node','command_inputerror'),'-1');
+		$one=$this->sql->GetOne('select','node',array('row'=>'*','where'=>array(array('name'=>'id','type'=>'eq','val'=>$id))));
+		if ($one['userid']!=$smartid) redirect(lang('common','ban'),'-1'); //节点非当前登录用户名下
 		// $this->sql->query('command','update','node',array('update'=>array('')));
 		// $credis_string=sprintf('exec/credis-php hset %s command %s',$nodeid,$command);
 		// exec($credis_string);

@@ -39,6 +39,7 @@ if (!isset($_COOKIE['smartid'])) {
 		redirect(lang('common','go_login'),'index.php?m=member&a=login');
 	}
 }
+$smartid=$_COOKIE['smartid'];
 if (in_array($m,array('index','member','node'),TRUE)) {
 	if(is_file('model/'.$m.'.php')) {
 		require('model/'.$m.'.php');
