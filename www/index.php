@@ -35,7 +35,7 @@ if (!isset($_COOKIE['smartid'])) {
 	if ($m!='member') {
 		redirect(lang('common','go_login'),'index.php?m=member&a=login');
 	}
-	if ($m=='member' && !in_array($a,array('login','check','loginout'),TRUE)) { //转到登录页面
+	if ($m=='member' && !in_array($a,array('login','check','loginout','register'),TRUE)) { //转到登录页面
 		redirect(lang('common','go_login'),'index.php?m=member&a=login');
 	}
 }
