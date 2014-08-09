@@ -32,7 +32,7 @@
 
 ## 请求示例
 
-	curl -X POST http://server.smarthome.sylingd.com/api/member/login -d 'user=admin&password=123456'
+	curl -X POST http://server.smarthome.sylingd.com/api/member/login.json -d 'user=admin&password=123456'
 
 如果成功，返回信息如下：
 

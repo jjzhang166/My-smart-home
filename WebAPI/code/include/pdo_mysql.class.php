@@ -39,7 +39,7 @@ class pdosysql {
 		$this->dbPwd=SQLPWD;
 		$this->dbName=SQLNAME;
 		$this->dbPrefix=DBPREFIX;
-		$dsn='mysql:host='.$dbhost.':'.$dbport.';dbname='.$this->dbName.';charset=utf8';
+		$dsn='mysql:host='.SQLHOST.';dbname='.$this->dbName.';charset=utf8';
 		try {
 			$this->linkID=new PDO($dsn,$this->dbUser,$this->dbPwd); //初始化PDO
 		} catch (PDOException $e) {
