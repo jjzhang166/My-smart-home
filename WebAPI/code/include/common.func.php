@@ -4,17 +4,6 @@ if (!function_exists('get_magic_quotes_gpc')) {
 		return FALSE;
 	}
 }
-function redirect ($info,$url='') { //跳转
-	if (empty($url)) $url='index.php';
-	if ($url=='-1') {
-		$url='javascript:history.back();';
-		$js='history.back();';
-	} else {
-		$js='window.location.href="'.$url.'";';
-	}
-	include(TPL.'redirect.html');
-	exit;
-}
 function nowurl () {
 	static $nowurl='';
 	if (!empty($nowurl)) return $nowurl;
@@ -58,6 +47,7 @@ function randstr ($num,$rmyc=FALSE) { //随机字符串
 	} while (strlen($fullstr)<$num);
 	return substr(str_shuffle($fullstr),0,$num);
 }
+
 function getgpc ($k,$t='R') {
 	switch ($t) {
 		case 'P':$var=$_POST;break;
