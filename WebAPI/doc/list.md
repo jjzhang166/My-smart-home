@@ -6,4 +6,4 @@
 
 * µÇÂ¼£º[login](http://git.oschina.net/xmeter/My-smart-home/blob/server/WebAPI/doc/member/login.md)
 
-* ×¢²á£º[register](http://git.oschina.net/xmeter/My-smart-home/blob/server/WebAPI/doc/member/register.md)
+* ×¢²á£¨¿ª·¢ÖÐ£©£º[register](http://git.oschina.net/xmeter/My-smart-home/blob/server/WebAPI/doc/member/register.md)
