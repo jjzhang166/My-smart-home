@@ -1,5 +1,5 @@
 <?php
-// define('ENKEY','Wfmj9wYxgc');
+define('ENKEY','Wfmj9wYxgc');
 define('SQLHOST','localhost:3306');
 define('SQLUSER','root');
 define('SQLPWD','123456');

@@ -15,9 +15,6 @@ define('TPL',DATA.'template/');
 define('EXEC',DATA.'exec/');
 require(DATA.'db.inc.php');
 require(DATA.'config.inc.php');
-if (!isset($_COOKIE['smartlang'])) define('LANG',$cfg_lang);
-else define('LANG',$_COOKIE['smartlang']);
-require(INC.'lang.inc.php');
 require(INC.'common.func.php');
 require(INC.'pdo_mysql.class.php');
 require(INC.'base.php');
@@ -31,15 +28,7 @@ $m=getgpc('m');
 $a=getgpc('a');
 $m=empty($m)?'index':$m;
 $a=empty($a)?'body':$a;
-if (!isset($_COOKIE['smartid'])) {
-	if ($m!='member') {
-		redirect(lang('common','go_login'),'index.php?m=member&a=login');
-	}
-	if ($m=='member' && !in_array($a,array('login','check','loginout','register'),TRUE)) { //转到登录页面
-		redirect(lang('common','go_login'),'index.php?m=member&a=login');
-	}
-}
-$smartid=$_COOKIE['smartid'];
+$auth=getgpc('auth','R');;
 if (in_array($m,array('index','member','node'),TRUE)) {
 	if(is_file('model/'.$m.'.php')) {
 		require('model/'.$m.'.php');

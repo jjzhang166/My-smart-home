@@ -63,7 +63,7 @@ do {
 } while ($pwd1!=$pwd2);
 $pwd=$pwd1;
 echo '初始化管理员数据，请稍候',"\n";
-mysqli_query($link,"INSERT INTO `".DBPREFIX."user` (`name`,`password`,`email`,`type`) VALUES ('$user','".pwdencode($pwd)."','$email','1')");
+mysqli_query($link,"INSERT INTO `".DBPREFIX."user` (`name`,`password`,`email`,`type`) VALUES ('$user','".pwdcode($pwd)."','$email','1')");
 echo '---------------------------',"\n";
 echo '初始化管理员数据成功',"\n";
 echo '---------------------------',"\n";
