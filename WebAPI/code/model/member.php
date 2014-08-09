@@ -18,7 +18,7 @@ class member extends base {
 		$user=getgpc('user','P');
 		$pwd=getgpc('password','P');
 		// $pwd=pencode($pwd); 对密码进行加密运算，暂未使用
-		if (empty($user) || empty($pwd)) redirect(lang('member','userpwd_empty'),'-1');
+		if (empty($user) || empty($pwd)) exit(json_encode(array('success'=>1,'errcode'=>1,'errmsg'=>'Parameter error ')));
 		$one=$this->sql->GetOne('select','user',array(row=>'*','where'=>array(array('name'=>'user','type'=>'eq','val'=>$user))));
 		if ($one===FALSE) exit(json_encode(array('success'=>0,'errcode'=>1,'errmsg'=>'User not exists')));
 		if ($one['password']==$pwd) { //登录成功
