@@ -1,12 +1,12 @@
 [<<返回API列表](http://git.oschina.net/xmeter/My-smart-home/blob/server/WebAPI/doc/list.md)
 
-# WebAPI：登录
+# WebAPI：注册
 
 ***
 
 ## 基本信息
 
-* 地址：`api/member/login.json`
+* 地址：`api/member/register.json`
 
 * 请求方式：POST
 
