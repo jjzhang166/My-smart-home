@@ -39,8 +39,6 @@ class pdosysql {
 		$this->dbPwd=SQLPWD;
 		$this->dbName=SQLNAME;
 		$this->dbPrefix=DBPREFIX;
-		@list($dbhost,$dbport)=explode(':',$this->dbHost);
-		!$dbport && $dbport=3306;
 		$dsn='mysql:host='.$dbhost.':'.$dbport.';dbname='.$this->dbName.';charset=utf8';
 		try {
 			$this->linkID=new PDO($dsn,$this->dbUser,$this->dbPwd); //初始化PDO
@@ -162,7 +160,7 @@ class pdosysql {
 		// var_dump($sql);
 		// exit;
 		$st=$this->linkID->prepare($sql);
-		foreach ($where['bind'] as $keyid=>$val) $st->bindParam($keyid+1,$val);
+		foreach ($where['bind'] as $keyid=>$val) $st->bindValue($keyid+1,$val);
 		try {
 			$r=$st->execute(); //执行
 			if (!$r) $this->DisplayError('SQL error',$sql,$st);
@@ -220,8 +218,7 @@ class pdosysql {
 	*/
 	private function parseMkWhere ($where) {
 		if (!isset($this->comparison[$where['type']])) return '';
-		if ($where['type']=='between') return array('sql'=>$where['name'].'BETWEEN ?,?','bind'=>array($where['val'],$where['val2']));
-		elseif (in_array($where['type'],array('eq','neq','gt','egt','lt','elt'),TRUE)) return array('sql'=>$where['name'].$this->comparison[$where['type']].'?','bind'=>$where['val']);
+		if ($where['type']=='between') return array('sql'=>$where['name'].' BETWEEN ? AND ?','bind'=>array($where['val'],$where['val2']));
 		else return array('sql'=>$where['name'].' '.$this->comparison[$where['type']].' ?','bind'=>$where['val']);
 	}
 	/*
@@ -303,7 +300,7 @@ class pdosysql {
 	 * @return NULL
 	*/
 	private function DisplayError ($info,$sql,$error) {
-		echo '<div id="sysqlerror"><h1 style="color:red">SmartHome SQL Error!</h1><p style="color:#FF7A00">Error info:',$info,'</p><p style="color:green">Error SQL:',$sql,'</p><p style="color:blue">System info:';
+		echo '<div id="sysqlerror"><h1 style="color:red">SYHM SQL Error!</h1><p style="color:#FF7A00">Error info:',$info,'</p><p style="color:green">Error SQL:',$sql,'</p><p style="color:blue">System info:';
 		$errinfo=$error->errorInfo();
 		echo $errinfo[2],'</p>';
 		exit;
