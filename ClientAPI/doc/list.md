@@ -4,7 +4,7 @@
 
 ## 总则
 
-* 使用JavaScript调用API时，为了防止浏览器缓存，可以加上随机参数，定为r，例如api/member/login.json?r=12345821，此参数不会被任何API使用
+* 使用JavaScript调用API时，为了防止缓存，可加上随机参数，此处定为r，例如`api/member/login.json?r=12345821`，此参数不会被使用
 
 ## 用户相关
 
