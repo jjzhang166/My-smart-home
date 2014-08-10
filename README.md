@@ -19,16 +19,24 @@
 * MySQL
 
 ## 安装方法
-    
-    cd WebClient
+
+Client：
+
+	cd ClientWeb
+	cd install
+	php install.php
+
+Server：
+
+	cd ServerWeb
 	cd install
 	php install.php
 
 ## 涉及目录
 
-* WebServer 服务器端网页
+* ServerWeb 服务器端网页
 
-* WebClient 客户端网页
+* ClientWeb 客户端网页
 
 # API相关
 
@@ -44,7 +52,7 @@
 
 ## 安装方法
     
-    安装WebClient/WebServer即可
+    安装相应的ClientWeb/ServerWeb即可
 
 ## 涉及目录
 
@@ -55,3 +63,5 @@
 ## 文档
 
 * [ClientAPI文档](ClientAPI/doc/list.md)
+
+* [ServerAPI文档（未开发）](ServerAPI/doc/list.md)
