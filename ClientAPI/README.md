@@ -8,4 +8,4 @@
 
 ***
 
-[查看文档](http://git.oschina.net/xmeter/My-smart-home/blob/server/WebAPI/doc/list.md)
+[查看文档](doc/list.md)
