@@ -6,4 +6,4 @@
 
 * µÇÂ¼£º[login](member/login.md)
 
-* ×¢²á£¨¿ª·¢ÖÐ£©£º[register](member/register.md)
+* ×¢²á£º[register](member/register.md)

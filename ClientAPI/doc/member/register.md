@@ -18,27 +18,27 @@
 
 | 名称 | 类型 | 描述 | 示例 |
 | --- | --- | --- | --- |
-| user | 字符串 | 用户名 | admin |
-| password | 字符串 | 密码，暂时明文传输，后期可能会加密 | 123456
+| user | 字符串 | 用户名，仅允许数字、字母、下划线 | admin |
+| familyname | 字符串 | 昵称 | Jack |
+| email | 字符串 | 邮箱 | example@example.com |
+| password | 字符串 | 密码，暂时明文传输，后期可能会加密 | 123456 |
 
 ## 返回参数
 
 | 名称 | 类型 | 描述 | 示例 |
 | --- | --- | --- | --- |
 | success | 数字 | 是否成功，0为失败 | 1 |
-| auth | 字符串 | 授权字符串，请求大部分API时需要带上，统一为小写，仅成功时返回 | 21232f297a57a5a743894a0e4a801fc3 |
-| errcode | 数字 | 错误码，参见附表 | 0 |
-| errmsg | 字符串 | 错误提示，为英文，可直接输出 | Wrong password |
+| errcode | 数字 | 错误码，仅失败时存在。参见附表 | 0 |
+| errmsg | 字符串 | 错误提示，仅失败时存在，为英文，可直接输出 | Format of user is incorrect |
 
 ## 请求示例
 
-	curl -X POST http://server.smarthome.sylingd.com/api/member/login -d 'user=admin&password=123456'
+	curl -X POST http://server.smarthome.sylingd.com/api/member/register.json -d 'user=admin&familyname=Jack&email=example@example.com&password=123456'
 
 如果成功，返回信息如下：
 
 	{
-		"success": 1,
-		"auth": "21232f297a57a5a743894a0e4a801fc3"
+		"success": 1
 	}
 
 如果失败，返回信息如下：
@@ -46,7 +46,7 @@
 	{
 		"success": 0,
 		"errcode": 0,
-		"errmsg": "Wrong password"
+		"errmsg": "Format of user is incorrect"
 	}
 
 ## 注意事项
@@ -57,6 +57,8 @@
 
 | 错误码 | 描述 |
 | --- | --- |
-| 0 | 密码错误 |
-| 1 | 用户不存在 |
-| 2 | 用户被禁止登录 |
+| 0 | 请求参数错误 |
+| 1 | 用户名格式错误 |
+| 2 | EMail格式错误 |
+| 3 | 用户名已存在 |
+| 4 | EMail已存在 |
