@@ -1,4 +1,4 @@
-[<<返回API列表](http://git.oschina.net/xmeter/My-smart-home/blob/server/WebAPI/doc/list.md)
+[<<返回API列表](../list.md)
 
 # WebAPI：登录
 

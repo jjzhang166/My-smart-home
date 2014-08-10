@@ -4,6 +4,6 @@
 
 ## 用户相关
 
-* 登录：[login](http://git.oschina.net/xmeter/My-smart-home/blob/server/WebAPI/doc/member/login.md)
+* 登录：[login](member/login.md)
 
-* 注册（开发中）：[register](http://git.oschina.net/xmeter/My-smart-home/blob/server/WebAPI/doc/member/register.md)
+* 注册（开发中）：[register](member/register.md)
