@@ -26,23 +26,22 @@ $_ENV=array();
 unset($HTTP_GET_VARS,$HTTP_POST_VARS,$HTTP_COOKIE_VARS,$HTTP_SERVER_VARS,$HTTP_ENV_VARS);
 $m=getgpc('m');
 $a=getgpc('a');
-$m=empty($m)?'index':$m;
-$a=empty($a)?'body':$a;
 $auth=getgpc('auth','R');;
 if (in_array($m,array('index','member','node'),TRUE)) {
 	if(is_file('model/'.$m.'.php')) {
 		require('model/'.$m.'.php');
 	} else {
-		exit('Model not found!');
+		exit(json_encode(array('success'=>0,'errcode'=>104,'errmsg'=>'API Not Found')));
 	}
 	$_ENV['_model']=$m::getInstance();
 	$method='on'.$a;
 	if(method_exists($_ENV['_model'],$method) && $a{0}!='_') {
-		$_ENV['_model']->$method();
+		$result=$_ENV['_model']->$method();
+		echo json_encode($result);
 	} else {
-		exit('Action not found!');
+		exit(json_encode(array('success'=>0,'errcode'=>104,'errmsg'=>'API Not Found')));
 	}
 } else {
-	exit('Model not found!');
+	exit(json_encode(array('success'=>0,'errcode'=>104,'errmsg'=>'API Not Found')));
 }
 ?>
