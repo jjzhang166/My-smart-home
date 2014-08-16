@@ -37,7 +37,7 @@ class member extends base {
 		$user=$this->sql->GetOne('select','user',array('row'=>'*','where'=>array(array('name'=>'id','type'=>'eq','val'=>$uid))));
 		$usertype=$user['type'];
 		$usergroup=$this->sql->GetOne('select','usergroup',array('row'=>'*','where'=>array(array('name'=>'id','type'=>'eq','val'=>$usertype))));
-		return array('success'=>1,'name'=>$user['name'],'group'=>$usertype,'isAdmin'=>intval($user['isAdmin']),'view'=>explode('|',$usergroup['view']),'control'=>explode('|',$usergroup['control']));
+		return array('success'=>1,'name'=>$user['name'],'group'=>$usertype,'isAdmin'=>intval($user['isAdmin']),'view'=>explode('|',trim($usergroup['view'],'|')),'control'=>explode('|',trim($usergroup['control'],'|')));
 	}
 }
 ?>
