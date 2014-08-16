@@ -17,6 +17,7 @@ require(DATA.'db.inc.php');
 require(DATA.'config.inc.php');
 require(INC.'common.func.php');
 require(INC.'pdo_mysql.class.php');
+require(INC.'ssdb.class.php');
 require(INC.'base.php');
 /*****************************************/
 /*				 初始变量				 */

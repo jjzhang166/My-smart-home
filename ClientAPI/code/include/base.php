@@ -48,7 +48,7 @@ class base {
 		global $view,$sql,$nosql;
 		$this->view=$view;
 		$this->sql=$sql;
-		$this->nosql=$nosql;
+		if (class_exists('SimpleSSDB')) $this->nosql=new SimpleSSDB(NOSQLHOST,NOSQLPORT);
 	}
 	public function getClass ($name) {
 		return getClass($name);

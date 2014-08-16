@@ -15,7 +15,7 @@ class node extends base {
 	}
 	//显示所有节点
 	public function onshow () {
-		$userid=getgpc('smartid','C');
+		global $auth;
 		$this->sql->query('node','select','node',array('row'=>'*','where'=>array(array('name'=>'userid','type'=>'eq','val'=>$userid))));
 		$this->view->set('node',$this->sql->GetAll('node'));
 		include(TPL.'node_show.html');
