@@ -16,10 +16,10 @@
     <div class="container">
 		<h2>ClientAPI测试</h2>
         <table class="table">
-		<tr><td>API:<br>如member/login</td><td>/api/<input type="text" id="postapi" class="form-control" placeholder="API" name="name" required>.json</td></tr>
+		<tr><td>API:<br>如member/login</td><td>/api/<input type="text" id="postapi" class="form-control" name="name" required>.json</td></tr>
 		<tr><td>请求方式:</td><td><select id="postway" class="form-control"><option value="get">GET</option><option value="post">POST</option></select></td></tr>
         <tr><td>数据:<br>JSON格式，如{"user":"admin"}</td>
-		<td><textarea id="postdata" class="form-control"></textarea></td>
+		<td><textarea id="postdata" class="form-control">{}</textarea></td>
 		</tr>
         <tr><td colspan="2" class="text-center"><input id="postsubmit" type="button" class="btn btn-lg btn-primary" value="提交"></td></tr>
 		<tr><td colspan="2"><pre id="result"></pre></td></tr>
