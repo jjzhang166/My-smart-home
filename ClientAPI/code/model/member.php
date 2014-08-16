@@ -19,7 +19,7 @@ class member extends base {
 		$pwd=getgpc('password','P');
 		$pwd=pwdcode($pwd); //对密码进行加密运算
 		if (empty($user) || empty($pwd)) return array('success'=>0,'errcode'=>100,'errmsg'=>'Parameter error');
-		$one=$this->sql->GetOne('select','user',array(row=>'*','where'=>array(array('name'=>'user','type'=>'eq','val'=>$user))));
+		$one=$this->sql->GetOne('select','user',array(row=>'*','where'=>array(array('name'=>'name','type'=>'eq','val'=>$user))));
 		if ($one===FALSE) return array('success'=>0,'errcode'=>2,'errmsg'=>'User not exists');
 		if ($one['password']==$pwd) { //登录成功，生成Auth
 			$auth=join('|',array($one['id'],$ip=$_SERVER['REMOTE_ADDR'],$one['email'],microtime(TRUE)));
