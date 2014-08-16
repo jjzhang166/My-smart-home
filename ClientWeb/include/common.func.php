@@ -114,9 +114,7 @@ function authcode ($str,$option) {
 function pwdcode ($str) {
 	$str=md5($str);
 	$str=md5(ENKEY.$str);
-	$str=md5($str.ENKEY);
 	$str=md5('SmartHome'.$str);
-	$str=md5($str.'SmartHome');
 	return $str;
 }
 function getClass ($name) {

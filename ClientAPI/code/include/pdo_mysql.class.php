@@ -300,10 +300,7 @@ class pdosysql {
 	 * @return NULL
 	*/
 	private function DisplayError ($info,$sql,$error) {
-		echo '<div id="sysqlerror"><h1 style="color:red">SYHM SQL Error!</h1><p style="color:#FF7A00">Error info:',$info,'</p><p style="color:green">Error SQL:',$sql,'</p><p style="color:blue">System info:';
-		$errinfo=$error->errorInfo();
-		echo $errinfo[2],'</p>';
-		exit;
+		exit(json_encode(array('success'=>0,'errcode'=>101,'errmsg'=>'Internal Server Error')));;
 	}
 
 }

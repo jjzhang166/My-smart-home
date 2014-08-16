@@ -20,11 +20,11 @@ class member extends base {
 	public function oncheck () {
 		$name=getgpc('name','P');
 		$pwd=getgpc('password','P');
-		// $pwd=pencode($pwd); 对密码进行加密运算，暂未使用
+		$pwd=pwdcode($pwd); //对密码进行加密运算
 		if (empty($name) || empty($pwd)) redirect(lang('member','userpwd_empty'),'-1');
 		$one=$this->sql->GetOne('select','user',array(row=>'*','where'=>array(array('name'=>'name','type'=>'eq','val'=>$name))));
 		if ($one['password']==$pwd) { //登录成功
-			$userid=$one['userid'];
+			$userid=$one['id'];
 			setcookie('smartid',$userid,time()+24*3600,'/');
 			redirect(lang('member','login_success').'<br>Userid:'.$userid,'index.php?m=node&a=show');
 		} else { //登录失败
@@ -51,7 +51,7 @@ class member extends base {
 			include(TPL.'member_emailuserid.html');
 		}
 	}
-	//注册
+	//注册，未启用
 	public function onregister () {
 		return FALSE;
 		if (ispost()) {
@@ -59,7 +59,7 @@ class member extends base {
 			$familyname=getgpc('familyname','P');
 			$pwd=getgpc('password','P');
 			$email=getgpc('email','P');
-			// $pwd=pencode($pwd); 对密码进行加密运算，暂未使用
+			$pwd=pwdcode($pwd); //对密码进行加密运算
 			if (empty($name) || empty($pwd) || empty($email)) redirect(lang('member','userpwd_empty'),'-1');
 			if (!preg_match('/^[A-Za-z0-9_]+$/',$name) && strlen($name)>20) redirect(lang('member','reg_namefail'),'-1');
 			if (!preg_match('/^[_.0-9a-z-]+@([0-9a-z][0-9a-z-]+.)+[a-z]{2,3}$/',$email)) redirect(lang('member','reg_emailfail'),'-1');
