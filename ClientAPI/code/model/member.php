@@ -24,7 +24,7 @@ class member extends base {
 		if ($one['password']==$pwd) { //登录成功，生成Auth
 			$auth=join('|',array($one['id'],$ip=$_SERVER['REMOTE_ADDR'],$one['email'],microtime(TRUE)));
 			$auth=md5($auth);
-			$this->sql->query('addauth','insert','auth',array('insert'=>array('row'=>array('uid','overdue'),'val'=>array($one['id'],date('Y-m-d H:i:s',strtotime('+3 Month'))))));
+			$this->sql->query('addauth','insert','auth',array('insert'=>array('row'=>array('auth','uid','overdue'),'val'=>array($auth,$one['id'],date('Y-m-d H:i:s',strtotime('+3 Month'))))));
 			return array('success'=>1,'auth'=>$auth);
 		} else { //登录失败
 			return array('success'=>0,'errcode'=>1,'errmsg'=>'Wrong password');

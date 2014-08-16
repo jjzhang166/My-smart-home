@@ -300,7 +300,7 @@ class pdosysql {
 	 * @return NULL
 	*/
 	private function DisplayError ($info,$sql,$error) {
-		exit(json_encode(array('success'=>0,'errcode'=>101,'errmsg'=>'Internal Server Error','sqlmsg'=>$error->errorInfo())));;
+		exit(json_encode(array('success'=>0,'errcode'=>101,'errmsg'=>'Internal Server Error','sqlmsg'=>$error->errorInfo())));
 	}
 
 }
