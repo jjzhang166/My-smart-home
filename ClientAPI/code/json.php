@@ -27,6 +27,8 @@ $_ENV=array();
 unset($HTTP_GET_VARS,$HTTP_POST_VARS,$HTTP_COOKIE_VARS,$HTTP_SERVER_VARS,$HTTP_ENV_VARS);
 $m=getgpc('m');
 $a=getgpc('a');
+$isLogin=FALSE;
+$uid=0;
 $auth=getgpc('auth','R');;
 if (in_array($m,array('index','member','node'),TRUE)) {
 	if(is_file('model/'.$m.'.php')) {
@@ -37,6 +39,17 @@ if (in_array($m,array('index','member','node'),TRUE)) {
 	$_ENV['_model']=$m::getInstance();
 	$method='on'.$a;
 	if(method_exists($_ENV['_model'],$method) && $a{0}!='_') {
+		if (!empty($auth)) {
+			$dbauth=$_ENV['_model']->sql->GetOne('select','auth',array('row'=>'*','where'=>array(array('name'=>'auth','type'=>'eq','val'=>$auth))));
+			if (!empty($dbauth['overdue'])) {
+				if (intval(str_replace('-','',$dbauth['overdue']))<intval(date('Ymd'))) { //Auth已过期
+					$_ENV['_model']->sql->query('removeauth','delete','auth',array('where'=>array(array('name'=>'auth','type'=>'eq','val'=>$auth))));
+				} else {
+					$isLogin=TRUE;
+					$uid=$dbauth['uid'];
+				}
+			}
+		}
 		$result=$_ENV['_model']->$method();
 		echo json_encode($result);
 	} else {
