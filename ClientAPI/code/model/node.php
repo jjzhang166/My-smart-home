@@ -13,10 +13,18 @@ class node extends base {
 	public function __construct () {
 		parent::init();
 	}
-	//显示所有节点
-	public function onshow () {
-		global $auth;
+	//获取某一节点组下的所有节点
+	public function ongetNodeByGroup () {
+		global $isLogin,$uid;
 		
+	}
+	//获取所有节点组
+	public function ongetAllGroup () {
+		global $isLogin,$uid;
+		if (!$isLogin) return array('success'=>0,'errcode'=>1,'errmsg'=>'Auth is not exists');
+		$this->sql->query('allgroup','select','nodegroup',array('row'=>'*'));
+		$r=array('success'=>1,'group'=>$this->sql->GetAll('allgroup'));
+		return $r;
 	}
 	//控制节点
 	public function oncommand () {

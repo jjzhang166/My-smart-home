@@ -28,8 +28,12 @@
 | 103 | 操作被禁止 |
 | 104 | 请求的API不存在 |
 
-## 用户相关
+## 用户相关（member）
 
 * 登录：[login](member/login.md)
 
 * 获取“我的信息”：[myInfo](member/myInfo.md)
+
+## 节点相关（node）
+
+* 获取所有节点组：[getAllGroup](node/getAllGroup.md)

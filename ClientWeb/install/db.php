@@ -57,14 +57,31 @@ $sql['auth']='CREATE TABLE `#@__auth` (
 /*
  * 用户组表：usergroup
  * id smallint(6) 用户组ID
+ * name varchar(255) 名称
  * view longtext 允许查看的节点组，例如|1|3|8|
  * control longtext 允许控制的节点组，例如|1|3|8|
 */
 $sql['usergroup']='CREATE TABLE `#@__usergroup` (
 	`id` smallint(6) AUTO_INCREMENT,
+	`name` varchar(255) NOT NULL,
 	`view` varchar(255) NOT NULL,
 	`control` varchar(255) NOT NULL,
 	PRIMARY KEY(`id`),
 	INDEX(`view`),
 	INDEX(`control`)
 )ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;';
+/*
+ * 节点组表：nodegroup
+ * id smallint(6) 节点组ID
+ * name varchar(255) 名称
+*/
+$sql['nodegroup']='CREATE TABLE `#@__nodegroup` (
+	`id` smallint(6) AUTO_INCREMENT,
+	`name` varchar(255) NOT NULL,
+	PRIMARY KEY(`id`)
+)ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;';
+/*
+ * NoSQL节点组：nodegroup_id
+ * string 特定格式的所有节点
+ * 例如1,2,5,3
+*/
