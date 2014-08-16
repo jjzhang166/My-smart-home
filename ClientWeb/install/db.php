@@ -53,4 +53,18 @@ $sql['auth']='CREATE TABLE `#@__auth` (
 	`overdue` date NOT NULL,
 	PRIMARY KEY(`auth`),
 	INDEX(`overdue`)
+)ENGINE=MyISAM DEFAULT CHARSET=utf8;';
+/*
+ * 用户组表：usergroup
+ * id smallint(6) 用户组ID
+ * view longtext 允许查看的节点组，例如|1|3|8|
+ * control longtext 允许控制的节点组，例如|1|3|8|
+*/
+$sql['usergroup']='CREATE TABLE `#@__usergroup` (
+	`id` smallint(6) AUTO_INCREMENT,
+	`view` varchar(255) NOT NULL,
+	`control` varchar(255) NOT NULL,
+	PRIMARY KEY(`id`),
+	INDEX(`view`),
+	INDEX(`control`)
 )ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;';

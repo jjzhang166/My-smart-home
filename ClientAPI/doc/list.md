@@ -4,6 +4,8 @@
 
 ## 总则
 
+* API命名遵循[小驼峰式命名法](http://zh.wikipedia.org/wiki/%E9%A7%9D%E5%B3%B0%E5%BC%8F%E5%A4%A7%E5%B0%8F%E5%AF%AB)
+
 * 使用JavaScript调用API时，为了防止缓存，可加上随机参数，此处定为r，例如`api/member/login.json?r=12345821`，此参数不会被使用
 
 ## 全局返回
@@ -30,3 +32,4 @@
 
 * 登录：[login](member/login.md)
 
+* 获取“我的信息”：[myInfo](member/myInfo.md)

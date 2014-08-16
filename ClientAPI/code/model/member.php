@@ -30,5 +30,14 @@ class member extends base {
 			return array('success'=>0,'errcode'=>1,'errmsg'=>'Wrong password');
 		}
 	}
+	//获取用户基本信息
+	public function onmyInfo () {
+		global $isLogin,$uid;
+		if (!$isLogin) return array('success'=>0,'errcode'=>1,'errmsg'=>'Auth is not exists');
+		$user=$this->sql->GetOne('select','user',array('row'=>'*','where'=>array(array('name'=>'id','type'=>'eq','val'=>$uid))));
+		$usertype=$user['type'];
+		$usergroup=$this->sql->GetOne('select','usergroup',array('row'=>'*','where'=>array(array('name'=>'id','type'=>'eq','val'=>$usertype))));
+		return array('success'=>1,'name'=>$user['name'],'group'=>$usertype,'isAdmin'=>intval($user['isAdmin']),'view'=>$usergroup['view'],'control'=>$usergroup['control']);
+	}
 }
 ?>
