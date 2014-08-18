@@ -5,67 +5,38 @@
 ### server
 ===
 
-服务器端程序(主要在ubuntu10.10上测试, linux平台编译，运行都是没问题的)
+服务器端程序(主要在Ubuntu12.04上测试, linux平台编译，运行都是没问题的)
 
-
-`编译:`
-    
-    cd src
-    make distclean 
-    make && make install
-
-    
-
-`运行:`
-    
-    php mysql.php  (创建数据库和表格，及插入调试用户及数据，脚本在目录 debug_script)
-    ./redis-server --loglevel verbose (--loglevel verbose 表示带调试信息，默认端口为6379)
-    python fakeClient.py (模拟真实用户及智能数据节点，可根据实际情况修改)
-    
-    
-
-
-### android_client  
-===
-andriod平台的客户端，使用eclipse打开即可。   
-假如没有android开发环境， 可直接下载最新apk安装即可 : http://git.oschina.net/xmeter/My-smart-home/blob/master/android_client/bin/MyNode.apk
-
-### restful  
-===
-提供简单的restful api (get put post delete)，可通过http协议访问，返回json数据结果集
-
+使用方法请参考[编译和安装](http://git.oschina.net/xmeter/My-smart-home/wikis/%E7%BC%96%E8%AF%91%E5%92%8C%E5%AE%89%E8%A3%85)
 
 ### tools 
 ===
 提供些由于网络问题不好下的，软件包及调试工具
 
-PS：感觉放这里不怎么厚道，于是决定放网盘的说
-
-PS2.0: 我也这么认为，我错了，每次下载代码都花掉太多时间
-
-### iOS_client
+### iOS_Client、Android_Client、FirefoxOS_Client
 ===
-iOS平台的客户端，使用xcode5或以上打开即可。
 
+各平台的客户端
 
-### debug_script
+* iOS客户端使用xcode5或以上打开即可
+
+* Andriod客户端使用eclipse打开即可
+
+ 假如没有android开发环境， 可直接下载[已编译的Apk](http://git.oschina.net/xmeter/My-smart-home/blob/Client/Android_client/bin/MyNode.apk)
+
+* FirefoxOS客户端使用除记事本外的文本编辑器打开即可
+
+**PS:现在客户端相关移至Client分支，确认无误后合并至master**
+
+### ClientAPI、ClientWeb、ServerAPI、ServerWeb
 ===
-mysql数据库初始化，测试用例的一些脚本
+http服务器代码，有问题请[提交Issue](http://git.oschina.net/xmeter/My-smart-home/issues/new)
 
-**所有脚本都是和服务器相关，所以脚本移动到server/mytest，这里的将不再更新维护**
-
-
-### www
-===
-http服务器代码，简单的web控制，有任何问题,或者要添加测试用户等，随时联系:
-
-<liyongming1982@163.com> <ckrissun@gmail.com>  <896640547@qq.com>
-
-PS:http服务器方面在Web分支上开发，有问题和建议请提交Issue
+**PS:现在Web相关移至Server分支，确认无误后合并至master**
 
 ### webhook
+
 代码自动部署，持续集成
-     
 
 ### hardware
 ===
