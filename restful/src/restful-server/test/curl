@@ -1,8 +1,0 @@
-#!/bin/bash
-
-# get post put delete
-
-#curl -X GET http://127.0.0.1:8080/
-curl   -X  GET  -d '{"score":"99","name"="lizi"}' http://127.0.0.1:8080/
-
-#curl -v -X POST -d '{"score":"99","name"="lizi"}'  http://127.0.0.1:8080/
