@@ -13,43 +13,29 @@ class member extends base {
 	public function __construct () {
 		parent::init();
 	}
+	//登录
 	public function onlogin () {
-		include(TPL.'member_login.html');
-	}
-	//进行登录，检查用户名和密码
-	public function oncheck () {
-		$name=getgpc('name','P');
-		$pwd=getgpc('password','P');
-		$pwd=pwdcode($pwd); //对密码进行加密运算
-		if (empty($name) || empty($pwd)) redirect(lang('member','userpwd_empty'),'-1');
-		$one=$this->sql->GetOne('select','user',array(row=>'*','where'=>array(array('name'=>'name','type'=>'eq','val'=>$name))));
-		if ($one['password']==$pwd) { //登录成功
-			$userid=$one['id'];
-			setcookie('smartid',$userid,time()+24*3600,'/');
-			redirect(lang('member','login_success').'<br>Userid:'.$userid,'index.php?m=node&a=show');
-		} else { //登录失败
-			redirect(lang('member','login_fail'),'-1');
+		if (ispost()) {
+			$name=getgpc('name','P');
+			$pwd=getgpc('password','P');
+			$pwd=pwdcode($pwd); //对密码进行加密运算
+			if (empty($name) || empty($pwd)) redirect(lang('member','userpwd_empty'),'-1');
+			$one=$this->sql->GetOne('select','user',array(row=>'*','where'=>array(array('name'=>'name','type'=>'eq','val'=>$name))));
+			if ($one['password']==$pwd) { //登录成功
+				$userid=strval($one['id']);
+				setcookie('smarthome',authcode($userid."\r".$one['isAdmin'],'ENCODE'),time()+24*3600,'/');
+				redirect(lang('member','login_success'),'index.php?m=node&a=show');
+			} else { //登录失败
+				redirect(lang('member','login_fail'),'-1');
+			}
+		} else {
+			include(TPL.'member_login.html');
 		}
 	}
 	//退出
 	public function onloginout () {
-		setcookie('smartid','out',time()-3600,'/');
+		setcookie('smarthome','out',time()-3600,'/');
 		redirect(lang('member','login_out'),'index.php?m=member&a=login');
-	}
-	//emailuserid，暂未启用
-	public function onemailuserid () {
-		return FALSE;
-		if (ispost()) {
-			$email=getgpc('email','P');
-			$userid=md5($email);
-			$sql = sprintf("select * from alluser where email='%s'",$email);  
-			if(mysql_num_rows($result)>0) {
-			die("sorry the email has been used");
-			}
-			$sql = sprintf("insert into emailmd5 values('%s','%s')",$email,$userid);  
-		} else {
-			include(TPL.'member_emailuserid.html');
-		}
 	}
 	//注册，未启用
 	public function onregister () {

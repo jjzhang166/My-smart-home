@@ -41,7 +41,14 @@
 			<div class="navbar-default navbar-static-side" role="navigation">
 				<div class="sidebar-collapse collapse">
 					<ul class="nav" id="side-menu">
-						<li><a href="index.php?m=node&a=show">节点</a></li>
+					<li <?php if ($_ENV['_now']=='node') echo 'class="active"'; ?>>
+							<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 节点<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li><a href="index.php?m=node&a=showview"> 查看节点</a></li>
+								<li><a href="index.php?m=node&a=showcontrol"> 控制节点</a></li>
+								<li><a href="index.php?m=node&a=showcontrol"> 控制节点</a></li>
+							</ul>
+						</li>
 					</ul>
 					<!-- /#side-menu -->
 				</div>
