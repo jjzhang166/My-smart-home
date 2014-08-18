@@ -52,6 +52,7 @@ $sql['auth']='CREATE TABLE `#@__auth` (
 	`uid` bigint(10) NOT NULL,
 	`overdue` date NOT NULL,
 	PRIMARY KEY(`auth`),
+    INDEX(`uid`),
 	INDEX(`overdue`)
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;';
 /*
