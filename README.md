@@ -20,7 +20,7 @@
 
 * Andriod客户端使用eclipse打开即可
 
- 假如没有android开发环境， 可直接下载[已编译的Apk](http://git.oschina.net/xmeter/My-smart-home/blob/Client/Android_client/bin/MyNode.apk)
+ 假如没有android开发环境， 可直接下载[已编译的Apk](http://git.oschina.net/xmeter/My-smart-home/blob/Client/Android_Client/bin/MyNode.apk)
 
 * FirefoxOS客户端使用除记事本外的文本编辑器打开即可
 
@@ -48,55 +48,41 @@ http服务器代码，有问题请[提交Issue](http://git.oschina.net/xmeter/My
 
 > 希望有新的小伙伴加入！
 
-> 你还可以看看[自我介绍](http://git.oschina.net/xmeter/My-smart-home/issues/24)
+# 联系方式
 
 ***
 
-> liyongming1982@163.com _管理员_
+* [李子](git.oschina.net/xmeter) liyongming1982@163.com _管理员_
 
-> 服务器 硬件 Android Client
+服务器、硬件、Android Client
 
-***
+* [Rex](http://git.oschina.net/ckrissun) ckrissun@gmail.com _管理员_
 
-> ckrissun@gmail.com _管理员_
+服务器、协议、硬件
 
-> 服务器 协议 硬件
+* [泷涯](http://git.oschina.net/sy) 896640547@qq.com _管理员_
 
-***
+数据库、Web、API
 
-> 896640547@qq.com _管理员_
+* [阿里云晕哋](http://git.oschina.net/aliyuns) siz@sonwa.cn
 
-> 负责Web及API方面
+iOS Client
 
-***
+* [fireman](http://git.oschina.net/colma) david_lxh@aliyun.com
 
-> siz@sonwa.cn
+特别感谢fireman，把Web服务移植到树莓派 (并写下文档供后来者参考)
 
-> iPhone Client
+* [Raythan](http://git.oschina.net/Raythan) raythandong@gmail.com
 
-***
+硬件
 
-> david_lxh@aliyun.com
+* [孤鹰](http://git.oschina.net/604217454) 604217454@qq.com
 
-> 特别感谢fireman,把Web服务移植到树莓派 (并写下文档供后来者参考)
+iOS Client
 
-***
+* [mzer](http://git.oschina.net/liduanjun) liduanjun@126.com
 
-> raythandong@gmail.com
-
-> 硬件
-
-***
-
-> 604217454@qq.com
-
-> iPhone Client
-
-***
-
-> liduanjun@126.com
-
-> 硬件及Web
+硬件及Web
 
 ## 感谢
 
