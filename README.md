@@ -2,19 +2,17 @@
 
 ***
 
-### server
-===
+## server
 
 服务器端程序(主要在Ubuntu12.04上测试, linux平台编译，运行都是没问题的)
 
 使用方法请参考[编译和安装](http://git.oschina.net/xmeter/My-smart-home/wikis/%E7%BC%96%E8%AF%91%E5%92%8C%E5%AE%89%E8%A3%85)
 
-### tools 
-===
+## tools 
+
 提供些由于网络问题不好下的，软件包及调试工具
 
-### iOS_Client、Android_Client、FirefoxOS_Client
-===
+## iOS_Client、Android_Client、FirefoxOS_Client
 
 各平台的客户端
 
@@ -28,18 +26,18 @@
 
 **PS:现在客户端相关移至Client分支，确认无误后合并至master**
 
-### ClientAPI、ClientWeb、ServerAPI、ServerWeb
-===
+## ClientAPI、ClientWeb、ServerAPI、ServerWeb
+
 http服务器代码，有问题请[提交Issue](http://git.oschina.net/xmeter/My-smart-home/issues/new)
 
 **PS:现在Web相关移至Server分支，确认无误后合并至master**
 
-### webhook
+## webhook
 
 代码自动部署，持续集成
 
-### hardware
-===
+## hardware
+
 硬件ardunio以及相关传感器的demo。(LM35，MQ2 MQ7 , W5100等)
      
 * [硬件介绍](http://git.oschina.net/xmeter/My-smart-home/wikis/%E7%A1%AC%E4%BB%B6%E9%83%A8%E5%88%86%E4%BB%8B%E7%BB%8D)
@@ -47,8 +45,6 @@ http服务器代码，有问题请[提交Issue](http://git.oschina.net/xmeter/My
 ***
 
 > 更详细的说明，请移步 [WiKi](http://git.oschina.net/xmeter/My-smart-home/wikis/Home)
-
-> 联系方式：http://git.oschina.net/xmeter/My-smart-home/wikis/%E8%81%94%E7%B3%BB%E6%96%B9%E5%BC%8F
 
 > 希望有新的小伙伴加入！
 
