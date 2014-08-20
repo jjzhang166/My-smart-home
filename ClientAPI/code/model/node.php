@@ -21,11 +21,13 @@ class node extends base {
 		if (empty($id)) return array('success'=>0,'errcode'=>100,'errmsg'=>'Parameter error');
 		$user=$this->sql->GetOne('select','user',array('row'=>'*','where'=>array(array('name'=>'id','type'=>'eq','val'=>$uid))));
 		$usertype=$user['type'];
-		$num=$this->sql->GetNum('usergroup',array('row'=>'*','where'=>array(array('name'=>'id','type'=>'eq','val'=>$usertype),array('name'=>'view','type'=>'like','val'=>'%|'.$id.'|%'))));
-		if ($num==0) {
-			$num=$this->sql->GetNum('usergroup',array('row'=>'*','where'=>array(array('name'=>'id','type'=>'eq','val'=>$usertype),array('name'=>'control','type'=>'like','val'=>'%|'.$id.'|%'))));
+		if ($user['view']!='|*|' && $user['control']!='|*|' && $user['isAdmin']!=1) { //检查用户是否有权限查看
+			$num=$this->sql->GetNum('usergroup',array('row'=>'*','where'=>array(array('name'=>'id','type'=>'eq','val'=>$usertype),array('name'=>'view','type'=>'like','val'=>'%|'.$id.'|%'))));
 			if ($num==0) {
-				return array('success'=>0,'errcode'=>3,'errmsg'=>'User has not permission to view');
+				$num=$this->sql->GetNum('usergroup',array('row'=>'*','where'=>array(array('name'=>'id','type'=>'eq','val'=>$usertype),array('name'=>'control','type'=>'like','val'=>'%|'.$id.'|%'))));
+				if ($num==0) {
+					return array('success'=>0,'errcode'=>3,'errmsg'=>'User has not permission to view');
+				}
 			}
 		}
 		//查询节点组信息
