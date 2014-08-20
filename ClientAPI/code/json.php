@@ -41,7 +41,7 @@ if (in_array($m,array('index','member','node'),TRUE)) {
 	if(method_exists($_ENV['_model'],$method) && $a{0}!='_') {
 		if (!empty($auth)) {
 			$dbauth=$_ENV['_model']->sql->GetOne('select','auth',array('row'=>'*','where'=>array(array('name'=>'auth','type'=>'eq','val'=>$auth))));
-			if (!empty($dbauth['overdue'])) {
+			if (!empty($dbauth['overdue'])) { //Auth存在数据库中
 				if (intval(str_replace('-','',$dbauth['overdue']))<intval(date('Ymd'))) { //Auth已过期
 					$_ENV['_model']->sql->query('removeauth','delete','auth',array('where'=>array(array('name'=>'auth','type'=>'eq','val'=>$auth))));
 				} else {

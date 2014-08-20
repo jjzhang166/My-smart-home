@@ -1,12 +1,12 @@
 [<<返回API列表](../list.md)
 
-# WebAPI：获取某一节点组下的所有节点
+# WebAPI：获取某一节点组的信息
 
 ***
 
 ## 基本信息
 
-* 地址：`api/node/getNodeByGroup.json`
+* 地址：`api/node/getGroupInfo.json`
 
 * 请求方式：POST/GET
 
@@ -37,7 +37,7 @@
 
 ## 请求示例
 
-	curl -X POST http://client.smarthome.sylingd.com/api/node/getNodeByGroup.json -d 'auth=21232f297a57a5a743894a0e4a801fc3&id=1'
+	curl -X POST http://client.smarthome.sylingd.com/api/node/getGroupInfo.json -d 'auth=21232f297a57a5a743894a0e4a801fc3&id=1'
 
 如果成功，返回信息如下：
 
@@ -80,4 +80,5 @@ node可能为空数组
 | 错误码 | 描述 |
 | --- | --- |
 | 1 | Auth不存在或已过期 |
-| 2 | 用户没有查看权限 |
+| 2 | 节点组不存在 |
+| 3 | 用户没有查看权限 |
