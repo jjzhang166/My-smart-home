@@ -11,13 +11,13 @@ $sql=array();
 $sql['node']='CREATE TABLE `#@__node` (
 	`id` bigint(10) AUTO_INCREMENT,
 	`type` smallint(6) NOT NULL,
+	`category` smallint(6) NOT NULL,
 	PRIMARY KEY(`id`),
 	INDEX(`type`)
 )ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;';
 /*
  * NoSQL节点：node_id
  * name string 名称
- * command ??
  * value ??
 */
 /*
@@ -52,6 +52,7 @@ $sql['auth']='CREATE TABLE `#@__auth` (
 	`uid` bigint(10) NOT NULL,
 	`overdue` date NOT NULL,
 	PRIMARY KEY(`auth`),
+    INDEX(`uid`),
 	INDEX(`overdue`)
 )ENGINE=MyISAM DEFAULT CHARSET=utf8;';
 /*

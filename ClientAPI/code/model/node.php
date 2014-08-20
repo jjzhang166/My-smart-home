@@ -16,7 +16,25 @@ class node extends base {
 	//获取某一节点组下的所有节点
 	public function ongetNodeByGroup () {
 		global $isLogin,$uid;
-		
+		if (!$isLogin) return array('success'=>0,'errcode'=>1,'errmsg'=>'Auth is not exists');
+		$id=intval(getgpc('id','R'));
+		if (empty($id)) return array('success'=>0,'errcode'=>100,'errmsg'=>'Parameter error');
+		$user=$this->sql->GetOne('select','user',array('row'=>'*','where'=>array(array('name'=>'id','type'=>'eq','val'=>$uid))));
+		$usertype=$user['type'];
+		$num=$this->sql->GetNum('nodegroup',array('row'=>'*','where'=>array(array('name'=>'id','type'=>'eq','val'=>$usertype),array('name'=>'view','type'=>'like','val'=>'%|'.$id.'|%'))));
+		if ($num==0) {
+			$num=$this->sql->GetNum('nodegroup',array('row'=>'*','where'=>array(array('name'=>'id','type'=>'eq','val'=>$usertype),array('name'=>'control','type'=>'like','val'=>'%|'.$id.'|%'))));
+			if ($num==0) {
+				return array('success'=>0,'errcode'=>2,'errmsg'=>'User has not permission to view');
+			}
+		}
+		$this->sql->query('getnodes','select','node',array('row'=>'id','where'=>array(array('name'=>'type','type'=>'eq','val'=>$id))));
+		$r=array();
+		while ($row=$this->sql->GetArray('getnodes')) {
+			$tmp=json_decode($this->nosql->get('node_'.$row['id']),1);
+			$tmp['id']=$row['id'];
+		}
+		return array('success'=>1,'node'=>$r);
 	}
 	//获取所有节点组
 	public function ongetAllGroup () {
