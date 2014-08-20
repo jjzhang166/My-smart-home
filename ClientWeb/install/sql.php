@@ -20,7 +20,8 @@ $sql['node']='CREATE TABLE `#@__node` (
 /*
  * NoSQL节点：node_id
  * name string 名称
- * value ??
+ * state 当前状态
+ * attach 附加属性，为JSON
 */
 /*
  * 用户表：user

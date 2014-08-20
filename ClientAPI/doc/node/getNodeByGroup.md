@@ -27,7 +27,12 @@
 
 | 名称 | 类型 | 描述 | 示例 |
 | --- | --- | --- | --- |
-| node | 数组 | 节点组下的所有节点 | [{"id":1,"name":"Light-Kitchen","category":1,"value":"on"},{"id":2,"name":"TV-bedroom","category":2,"value":"on"}] |
+| node | 数组 | 节点组下的所有节点 | [{"id":1,"name":"Light-Kitchen","category":1,"state":"on","attach":{"brightness":80}},{"id":2,"name":"TV-bedroom","category":2,"state":"on","attach":{}}] |
+| node[][id] | 数字 | 节点ID | 1 |
+| node[][name] | 字符串 | 节点名称 | 1 |
+| node[][category] | 数字 | 节点类型，参见[数据库与节点](http://git.oschina.net/xmeter/My-smart-home/wikis/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E8%8A%82%E7%82%B9) | 1 |
+| node[][state] | 字符串 | 当前状态，参见[数据库与节点](http://git.oschina.net/xmeter/My-smart-home/wikis/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E8%8A%82%E7%82%B9) | on |
+| node[][attach] | 数组 | 附加属性，参见[数据库与节点](http://git.oschina.net/xmeter/My-smart-home/wikis/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E8%8A%82%E7%82%B9) | {"brightness":80} |
 | errcode | 数字 | 错误码，参见附表，仅失败时存在 | 0 |
 
 ## 请求示例
@@ -43,13 +48,17 @@
 				"id": 1,
 				"name": "Light-Kitchen",
 				"category": 1,
-				"value": "on"
+				"state": "on",
+				"attach": {
+					"brightness": 80
+				}
 			},
 			{
 				"id": 2,
 				"name": "TV-bedroom",
 				"category": 2,
-				"value": "on"
+				"state": "on",
+				"attach": {}
 			}
 		]
 	}
