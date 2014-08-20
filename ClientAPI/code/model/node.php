@@ -14,7 +14,7 @@ class node extends base {
 		parent::init();
 	}
 	//获取某一节点组的信息
-	public function ongetNodeByGroup () {
+	public function ongetGroupInfo () {
 		global $isLogin,$uid;
 		if (!$isLogin) return array('success'=>0,'errcode'=>1,'errmsg'=>'Auth is not exists');
 		$id=intval(getgpc('id','R'));
