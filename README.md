@@ -8,6 +8,10 @@
 
 使用方法请参考[编译和安装](http://git.oschina.net/xmeter/My-smart-home/wikis/%E7%BC%96%E8%AF%91%E5%92%8C%E5%AE%89%E8%A3%85)
 
+友情提示go语言服务器版本请移步
+
+http://git.oschina.net/ckrissun/smarthome-server
+
 ## tools 
 
 提供些由于网络问题不好下的，软件包及调试工具
