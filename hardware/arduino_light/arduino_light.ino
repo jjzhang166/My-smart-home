@@ -7,7 +7,7 @@ byte server[] = { 115,29,235,211 };
 int port=6379;
 EthernetClient client;
 char * userid="2745dd5ef44dd3f7a9a19e6d1491f18f";
-int led = 12;
+int led = 9;
 //  !!!!! This number will overflow (go back to zero), after approximately 50 days. 
 unsigned long previoustime;
 unsigned long currenttime;
@@ -45,8 +45,8 @@ char  tempBuf [256] ="chat login yongming yongming";
 void processData()
 {
      argc=make_argv(buf, sizeof(argv)/sizeof(argv[0]), argv);
-     //Serial.println("argc is :");
-     //Serial.println(argc);
+     Serial.println("argc is :");
+     Serial.println(argc);
      if(argc<4)
      {
         
@@ -54,15 +54,15 @@ void processData()
      }   
     for (int i=0;i<argc;i++)
     {
-        //Serial.println(argv[i]);
+        Serial.println(argv[i]);
     }
-    if(strstr(argv[argc-1],"open"))
+    if(strstr(argv[argc-3],"open"))
     {
        Serial.println("open");
        pinMode(led, OUTPUT); 
         digitalWrite(led, HIGH);
     } 
-    if(strstr(argv[argc-1],"close"))
+    if(strstr(argv[argc-3],"close"))
     {
        Serial.println("close");
        pinMode(led, OUTPUT); 
@@ -105,13 +105,13 @@ void setup()
   if (client.connect(server, port))
   {
     Serial.println("connected");
-    client.println("node login 2745dd5ef44dd3f7a9a19e6d1491f18f light\r\n");
+    client.println("node login 2745dd5ef44dd3f7a9a19e6d1491f18f light r r \r\n");
   } else {
     if (client.connect(server, port))
     {
           digitalWrite(led, HIGH); 
           Serial.println("connected");
-          client.println("node login 2745dd5ef44dd3f7a9a19e6d1491f18f light\r\n");
+          client.println("node login 2745dd5ef44dd3f7a9a19e6d1491f18f light r r\r\n");
     }
     else
     {
@@ -125,12 +125,14 @@ void setup()
 void sendMessage()
 {
      currenttime= millis();
-     if(currenttime-previoustime>3000)
+     if(currenttime-previoustime>30000)
      {
-        Serial.println(previoustime);
-        Serial.println(currenttime);
+        //Serial.println(previoustime);
+        //Serial.println(currenttime);
         previoustime = millis();
-        client.println("node say  master name=light,state=open\r\n");
+        client.println("node say  family  name=light,value=open r r\r\n");
+        client.println("node heartbeat r r r r\r\n");
+
      } 
 }
 
@@ -141,7 +143,7 @@ void loop()
   while (client.available()) {
     char c = client.read();
     readline(c);
-   // Serial.print(c);
+    Serial.print(c);
   }
   if (!client.connected()) {
     Serial.println();
