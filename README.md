@@ -16,6 +16,10 @@ http://git.oschina.net/ckrissun/smarthome-server
 
 提供些由于网络问题不好下的，软件包及调试工具
 
+## opencv/facedect
+
+人脸检测的源代码及例子(基于opencv + haar)
+
 ## iOS_Client、Android_Client、FirefoxOS_Client
 
 各平台的客户端
