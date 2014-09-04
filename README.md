@@ -20,6 +20,12 @@ http://git.oschina.net/ckrissun/smarthome-server
 
 人脸检测的源代码及例子(基于opencv + haar)
 
+##  FastDFS
+
+提供分布式云存储服务 ，感谢 Happy Fish / YuQing 的辛勤劳动
+
+更多详细信息：http://www.csource.org/ 或者 googlecode有此项目
+
 ## iOS_Client、Android_Client、FirefoxOS_Client
 
 各平台的客户端
