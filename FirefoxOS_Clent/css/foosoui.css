@@ -1,0 +1,525 @@
+/* 全局样式 */
+body {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	background-color: rgb(245,245,245);
+}
+
+a {
+	text-decoration: none;
+}
+
+#wrapper,
+.page {
+	height: 100%;
+	box-sizing: border-box;
+}
+
+.content {
+	width: 100%;
+	padding: 10px;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+#bg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: none;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0,0,0,0.6);
+	transition: 0.1s;
+	z-index: 90;
+}
+
+.text-center {
+	text-align: center;
+}
+/* 组件：按钮 */
+.btn {
+	display: inline-block;
+	padding: 6px 12px;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: top;
+	cursor: pointer;
+	-moz-user-select: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	text-decoration: none;
+	background-image: none;
+	margin:2px;
+}
+
+.btn:active,
+.btn.active {
+	outline: 0;
+}
+
+.btn.disabled,
+.btn[disabled] {
+	pointer-events: none;
+	cursor: not-allowed;
+	box-shadow: none;
+	opacity: 0.65;
+}
+
+.btn-block {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.btn-danger,.btn-danger:visited {
+	color: white;
+	background-color: rgb(240,0,0);
+	border-color: rgb(240,0,0);
+}
+
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active,
+.btn-danger.active {
+	color: white;
+	background-color: #CC0000;
+	border-color: #CC0000;
+}
+
+.btn-danger.disabled,
+.btn-danger[disabled],
+.btn-danger.disabled:hover,
+.btn-danger[disabled]:hover,
+.btn-danger.disabled:focus,
+.btn-danger[disabled]:focus,
+.btn-danger.disabled:active,
+.btn-danger[disabled]:active,
+.btn-danger.disabled.active,
+.btn-danger[disabled].active {
+	background-color: #CC0000;
+	border-color: #CC0000;
+}
+
+.btn-success,.btn-success:visited {
+	color: white;
+	background-color: rgb(45,182,0);
+	border-color: rgb(45,182,0);
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.active {
+	color: white;
+	background-color: #009900;
+	border-color: #009900;
+}
+
+.btn-success.disabled,
+.btn-success[disabled],
+.btn-success.disabled:hover,
+.btn-success[disabled]:hover,
+.btn-success.disabled:focus,
+.btn-success[disabled]:focus,
+.btn-success.disabled:active,
+.btn-success[disabled]:active,
+.btn-success.disabled.active,
+.btn-success[disabled].active {
+	background-color: #009900;
+	border-color: #009900;
+}
+/* 组件：输入框 */
+.input {
+	display: inline-block;
+	border-radius: 0;
+	padding: 5px;
+	min-height: 20px;
+	font-size: 15px;
+	line-height: 20px;
+	outline: none;
+	border: 1px solid #ccc;
+	min-width: 200px;
+	color: black;
+	border-radius: 4px;
+	background-image: none;
+	margin: 2px;
+	transition: 0.2s;
+}
+
+.input-success:focus {
+	border: 1px solid rgb(45,182,0);
+}
+
+.input-danger:focus {
+	border: 1px solid rgb(240,0,0);
+}
+
+.input.hasSuccess,
+.input.hasSuccess:focus {
+	border: 1px solid rgb(45,182,0);
+}
+
+.input.hasDanger,
+.input.hasDanger:focus {
+	border: 1px solid rgb(240,0,0);
+}
+
+/* 组件：开关 */
+.switcher {
+	display: inline-block;
+	width: 39px;
+	height: 22px;
+}
+
+.switcher * {
+	transition:0.5s;
+}
+
+.switcher .line {
+	width: 37px;
+	height: 10px;
+	border-radius: 5px;
+	position: absolute;
+	margin-top: 5px;
+	background-color: white;
+	border: 1px solid #DDDDDD;
+	padding: 0;
+}
+
+.switcher .button {
+	width: 20px;
+	height: 20px;
+	border-radius: 50px;
+	background: white;
+	position: absolute;
+	margin-left: 0;
+	border: 1px solid #DDDDDD;
+}
+
+.switcher.on .line {
+	padding: 1px;
+	border: 0;
+}
+
+.switcher.on .button {
+	margin-left: 18px;
+}
+
+.switcher.disabled,
+.switcher[disabled] {
+	opacity: 0.6;
+}
+
+/* 组件：提示条 */
+.alertBar {
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 10;
+	height: 32px;
+	line-height: 32px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font-size: 18px;
+	padding: 5px;
+	text-align: center;
+}
+
+.alertBar.alert-success {
+	background-color: rgb(45,182,0);
+	color: white;
+}
+
+.alertBar.alert-danger {
+	background-color: #CC0000;
+	color: white;
+}
+/* 组件：提示框 */
+.alertBox {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 300px;
+	margin-left: -150px;
+	background-color: #FFF;
+	border-radius: 5px;
+	z-index: 95;
+}
+
+.alertBox>* {
+	display: block;
+}
+
+.alertBox .alertBox-title {
+	height: 30px;
+	padding: 5px;
+	text-align: center;
+	font-size: 20px;
+	line-height: 30px;
+	background-color: #DDDDDD;
+}
+
+.alertBox .alertBox-content {
+	padding: 5px;
+	font-size: 17px;
+	line-height: 20px;
+	text-align: center;
+}
+
+.alertBox .alertBox-btn {
+	background-color: #DDDDDD;
+}
+
+.alertBox .alertBox-btn>* {
+	padding: 10px;
+	margin: 0;
+	border: 0;
+	height: 40px;
+	font-size: 16px;
+	line-height: 40px;
+	text-align: center;
+	box-sizing: border-box;
+	background-image:none;
+}
+
+.alertBox .alertBox-btn.alertBox-twoBtn * {
+	width: 50%;
+}
+
+.alertBox .alertBox-btn.alertBox-oneBtn * {
+	width: 100%;
+}
+/* 标题栏 */
+.titlebar {
+	width: 100%;
+	height: 40px;
+	overflow: hidden;
+}
+
+.titlebar.fixed-top {
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+}
+
+.titlebar>* {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	display: inline-block;
+	vertical-align: top;
+	height: 40px;
+	line-height: 30px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.titlebar .button {
+	font-size: 20px;
+	width:30px;
+	text-align:center;
+}
+
+.titlebar .title {
+	font-size: 20px;
+	padding-left: 5px;
+	width: 30%;
+}
+
+.titlebar .right-btns {
+	padding-right: 5px;
+	float: right;
+	font-size: 20px;
+}
+
+.titlebar .right-btns a {
+	padding-bottom: 2px;
+}
+
+.titlebar .right-btns a:hover,
+.titlebar .right-btns a.active {
+	padding-bottom: 0;
+}
+/* 菜单栏 */
+.menu {
+	display: block;
+	height: 100%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	position: fixed;
+	left: -1000px;
+	top: 0;
+	z-index: 99;
+	min-width: 200px;
+}
+
+.menu ul {
+	list-style: none;
+	padding-left: 0;
+	margin: 0;
+}
+
+.menu-group .item {
+	display: block;
+}
+
+.menu-group>.item>a {
+	display: block;
+	height: 30px;
+	line-height: 30px;
+	font-size: 18px;
+	padding: 15px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.menu-group>.item>a .fa {
+	font-size: 25px;
+	margin-right: 10px;
+}
+
+.menu-group>.item.item-lg>a {
+	height: 80px;
+	line-height: 80px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.menu-group>.item .item a {
+	font-size: 14px;
+	display: block;
+	height: 35px;
+	line-height: 35px;
+	padding: 5px;
+	padding-left: 20px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.menu-group>.item .item a .fa {
+	width:15px;
+	text-align:center;
+	margin-right: 10px;
+}
+
+.menu-group .item .more {
+	float: right;
+	font-size: 20px;
+	display: inline-block;
+}
+
+.menu-group .item ul {
+	display: none;
+}
+
+.menu-group .item.active ul {
+	display: block;
+}
+
+.menu-group>.item .item a.active,
+.menu-group>.item .item a:active {
+	opacity: 0.5;
+}
+/* 组件：列表 */
+.list {
+	display: block;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	vertical-align: top;
+}
+
+.list .item {
+	display: block;
+}
+
+.list .item>* {
+	display: inline-block;
+}
+
+.list .item .option {
+	float: right;
+}
+
+.list-round {
+
+}
+
+.list-round .item {
+	padding: 10px;
+	height: 20px;
+	line-height: 20px;
+	font-size: 15px;
+	border-left: 1px solid #DBDBDB;
+	border-right: 1px solid #DBDBDB;
+	border-bottom: 1px solid #DBDBDB;
+	background-color: white;
+}
+
+.list-round .item:first-child {
+	border-radius: 5px 5px 0 0;
+	border-top: 1px solid #DBDBDB;
+}
+
+.list-round .item:last-child {
+	border-radius: 0 0 5px 5px;
+}
+
+.list-card {
+}
+
+.list-card .item {
+	margin: 10px;
+	padding: 17px;
+	min-height: 40px;
+	line-height: 40px;
+	background-color: white;
+	border: 1px solid #DBDBDB;
+}
+
+.lost-card .item .name {
+	font-size: 30px;
+}
+
+.list-default {
+	border: 1px solid #DBDBDB;
+}
+
+.list-default .item {
+	padding: 10px;
+	min-height: 20px;
+	line-height: 20px;
+	font-size: 15px;
+	background: -moz-linear-gradient(top,#FFF,#EEE);
+	background: -webkit-linear-gradient(top,#FFF,#EEE);
+	border-bottom: 1px solid #DBDBDB;
+}
+
+.list-default .item:last-child {
+	border-bottom: 0;
+}
+/* 组件：Welcome */
+.welcome .header {
+	width: 100%;
+	height: 200px;
+	line-height: 200px;
+	font-size: 60px;
+	text-align: center;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+.welcome .content {
+	width: 100%;
+	margin-top: 10px;
+	padding: 10px;
+	text-align: center;
+}

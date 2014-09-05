@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Menu And TitleBar</title>
+		<link href="css/font-awesome.min.css" rel="stylesheet">
+		<link href="css/foosoui.css" rel="stylesheet">
+		<link href="css/foosoui-black.css" rel="stylesheet">
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="menu" class="menu">
+				<ul class="menu-group">
+					<li class="item item-lg"><a>I am big</a></li>
+					<li class="item"><a href="demo-welcome.html"><i class="fa fa-home"></i>首页</a></li>
+					<li class="item" data-toggle="dropdown">
+						<a><i class="fa fa-angle-left more"></i><i class="fa fa-list"></i>列表</a>
+						<ul>
+							<li class="item"><a href="demo-list-default.html"><i class="fa fa-list-ol"></i>Default</a></li>
+							<li class="item"><a href="demo-list-card.html"><i class="fa fa-credit-card"></i>Card</a></li>
+							<li class="item"><a href="demo-list-round.html"><i class="fa fa-circle-o"></i>Round</a></li>
+						</ul>
+					</li>
+					<li class="item"><a href="demo-alertBar.html"><i class="fa fa-comment"></i>提示条</a></li>
+					<li class="item"><a href="demo-alertBox.html"><i class="fa fa-comments"></i>提示框</a></li>
+					<li class="item active" data-toggle="dropdown">
+						<a><i class="fa fa-angle-left more"></i>Test3</a>
+						<ul>
+							<li class="item"><a>Test two</a></li>
+						</ul>
+					</li>
+					<li class="item"><a>Test4</a></li>
+				</ul>
+			</div><!-- /#menu -->
+			<div class="page">
+				<div class="titlebar">
+					<div class="button btn-menu" data-menu="#menu"><i class="fa fa-bars"></i></div>
+					<div class="title">Menu And TitleBar:title demo:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</div>
+					<div class="right-btns">
+						<a class="fa fa-bookmark"></a>
+						<a class="fa fa-cog active"></a>
+					</div>
+				</div><!-- /.titlebar -->
+				<div class="content">
+				</div>
+			</div><!-- /.page -->
+		</div><!-- /#wrapper -->
+		<div id="bg"></div>
+		<script src="js/zepto.min.js"></script>
+		<script src="js/foosoui.js"></script>
+		<script src="js/test.js"></script>
+	</body>
+</html>

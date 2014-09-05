@@ -1,0 +1,126 @@
+/* 组件：按钮 */
+.btn-default,.btn-default:visited {
+	color: #222222;
+	background-color: #FFF;
+	border-color: #CCCCCC;
+}
+
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.active {
+	background-color: #DDDDDD;
+	border-color: #CCCCCC;
+}
+
+.btn-default.disabled,
+.btn-default[disabled],
+.btn-default.disabled:hover,
+.btn-default[disabled]:hover,
+.btn-default.disabled:focus,
+.btn-default[disabled]:focus,
+.btn-default.disabled:active,
+.btn-default[disabled]:active,
+.btn-default.disabled.active,
+.btn-default[disabled].active {
+	background-color: #DDDDDD;
+	border-color: #CCCCCC;
+}
+/* 组件：输入框 */
+.input-default:focus {
+	border: 1px solid #777777;
+}
+/* 组件：开关 */
+.switcher.on .line {
+	background: #777777;
+}
+
+/* 组件：提示条 */
+.alertBar.alert-default {
+	background-color: #FFF;
+	color: black;
+}
+/* 组件：提示框 */
+.alertBox.alertBox-default {
+	background-color: #FFF;
+}
+
+.alertBox.alertBox-default .alertBox-title {
+	background-color: #EEEEEE;
+	color: #222222;
+}
+
+.alertBox.alertBox-default .alertBox-btn {
+	border-top: 1px solid #DDDDDD;
+}
+
+.alertBox.alertBox-default .alertBox-btn * {
+	background-color: #FFF;
+}
+
+.alertBox.alertBox-default .alertBox-btn.alertBox-twoBtn>*:first-child {
+	border-right: 1px solid #DDDDDD;
+}
+/* 组件：标题栏 */
+.titlebar {
+	background-color: #FFF;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+.titlebar .btn {
+	color: #222222;
+	border-left: 1px solid #CCCCCC;
+	border-right: 1px solid #CCCCCC;
+}
+
+.titlebar .title {
+	color: #222222;
+}
+
+.titlebar .right-btns {
+	color: #222222;
+}
+
+.titlebar .right-btns a {
+	opacity: 0.8;
+	transition: 0.2s;
+}
+
+.titlebar .right-btns a:hover,
+.titlebar .right-btns a.active {
+	border-bottom: 2px solid #222222;
+	opacity: 1;
+}
+/* 菜单栏 */
+.menu {
+	background-color: #FFF;
+	color: #222222;
+}
+
+.menu-group .item {
+}
+
+.menu-group>.item>a {
+	border-bottom: 2px solid #EEEEEE;
+	color: #222222;
+}
+
+.menu-group>.item.item-lg>a {
+	color: #222222;
+}
+
+.menu-group>.item .item a {
+	color: #222222;
+}
+
+.menu-group>.item.active>a,
+.menu-group>.item:active>a {
+	background-color: #DDDDDD;
+}
+
+/* 组件：Welcome */
+.welcome .header {
+	color: #222222;
+	background-color: #FFF;
+border-bottom:1px solid #CCCCCC;
+}

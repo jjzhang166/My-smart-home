@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Article list</title>
+		<link href="css/font-awesome.min.css" rel="stylesheet">
+		<link href="css/foosoui.css" rel="stylesheet">
+		<link href="css/foosoui-black.css" rel="stylesheet">
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="menu" class="menu">
+				<ul class="menu-group">
+					<li class="item big"><a>I am big</a></li>
+					<li class="item"><a>Test1</a></li>
+					<li class="item" data-toggle="dropdown">
+						<a>Test2<i class="fa fa-angle-left"></i></a>
+						<ul>
+							<li class="item"><a>Test one</a></li>
+						</ul>
+					</li>
+					<li class="item active" data-toggle="dropdown">
+						<a>Test3<i class="fa fa-angle-left"></i></a>
+						<ul>
+							<li class="item"><a>Test two</a></li>
+						</ul>
+					</li>
+					<li class="item"><a>Test4</a></li>
+				</ul>
+			</div><!-- /#menu -->
+			<div class="page">
+				<div class="titlebar">
+					<div class="btn-menu btn" data-menu="#menu"><i class="fa fa-bars"></i></div>
+					<div class="title">Article list</div>
+					<div class="right-btns">
+						<a class="fa fa-bookmark"></a>
+						<a class="fa fa-cog active"></a>
+					</div>
+				</div><!-- /.titlebar -->
+				<div class="content">
+					<ul class="list list-article">
+						<li class="item"><span class="name">Article</span><span class="option"><i class="fa fa-angle-right"></i></span></li>
+						<li class="item"><span class="name">Article</span><span class="option"><i class="fa fa-angle-right"></i></span></li>
+						<li class="item"><span class="name">Article</span><span class="option"><i class="fa fa-angle-right"></i></span></li>
+						<li class="item"><span class="name">Article</span><span class="option"><i class="fa fa-angle-right"></i></span></li>
+						<li class="item"><span class="name">Article</span><span class="option"><i class="fa fa-angle-right"></i></span></li>
+						<li class="item"><span class="name">Article</span><span class="option"><i class="fa fa-angle-right"></i></span></li>
+						<li class="item"><span class="name">Article</span><span class="option"><i class="fa fa-angle-right"></i></span></li>
+						<li class="item"><span class="name">Article</span><span class="option"><i class="fa fa-angle-right"></i></span></li>
+					</ul>
+				</div>
+			</div><!-- /.page -->
+		</div><!-- /#wrapper -->
+		<div id="bg"></div>
+		<script src="js/zepto.min.js"></script>
+		<script src="js/foosoui.js"></script>
+		<script src="js/test.js"></script>
+	</body>
+</html>

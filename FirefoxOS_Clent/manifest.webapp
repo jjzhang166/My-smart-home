@@ -1,0 +1,13 @@
+{
+  "name": "Smart Home",
+  "description": "My Smart Home Client for FirefoxOS",
+  "launch_path": "/index.html",
+  "developer": {
+    "name": "ShuangYa",
+    "url": "http://smarthome.sylingd.com"
+  },
+  "icons": {
+    "128": "/images/icon/128.png"
+  },
+  "default_locale": "en"
+}
