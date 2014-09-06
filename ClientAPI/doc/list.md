@@ -37,3 +37,7 @@
 ## 节点相关（node）
 
 * 获取所有节点组：[getAllGroup](node/getAllGroup.md)
+
+* 获取某一节点组下的所有节点：[getNodeByGroup](node/getNodeByGroup.md)
+
+* 控制节点（开发中）：[controlNode](node/controlNode.md)

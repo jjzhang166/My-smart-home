@@ -37,7 +37,9 @@ class member extends base {
 		$user=$this->sql->GetOne('select','user',array('row'=>'*','where'=>array(array('name'=>'id','type'=>'eq','val'=>$uid))));
 		$usertype=$user['type'];
 		$usergroup=$this->sql->GetOne('select','usergroup',array('row'=>'*','where'=>array(array('name'=>'id','type'=>'eq','val'=>$usertype))));
-		return array('success'=>1,'name'=>$user['name'],'group'=>$usertype,'isAdmin'=>intval($user['isAdmin']),'view'=>explode('|',trim($usergroup['view'],'|')),'control'=>explode('|',trim($usergroup['control'],'|')));
+		$control=explode('|',trim($usergroup['control'],'|'));
+		$view=sort(array_merge(explode('|',trim($usergroup['view'],'|')),$control)); //能控制的，必定能查看
+		return array('success'=>1,'name'=>$user['name'],'group'=>$usertype,'isAdmin'=>intval($user['isAdmin']),'view'=>$view,'control'=>$control);
 	}
 }
 ?>

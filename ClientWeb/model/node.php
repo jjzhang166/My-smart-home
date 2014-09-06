@@ -12,11 +12,15 @@ class node extends base {
 	}
 	public function __construct () {
 		parent::init();
+		$_ENV['_now']='node';
 	}
-	//显示所有节点
-	public function onshow () {
-		$userid=getgpc('smartid','C');
-		$this->sql->query('node','select','node',array('row'=>'*','where'=>array(array('name'=>'userid','type'=>'eq','val'=>$userid))));
+	//查看节点
+	public function onshowview () {
+		global $uid;
+		$one=$this->sql->GetOne('select','user',array('row'=>'type','where'=>array(array('name'=>'id','type'=>'eq','val'=>$uid))));
+		$usertype=$one['type'];
+		$one=$this->sql->query
+		$this->sql->query('node','select','node',array('row'=>'*',')));
 		$this->view->set('node',$this->sql->GetAll('node'));
 		include(TPL.'node_show.html');
 	}

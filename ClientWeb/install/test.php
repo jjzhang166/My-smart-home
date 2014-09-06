@@ -1,6 +1,6 @@
 <?php
 /*
- * 安装文件
+ * 测试用一键安装文件
  * 建立MySQL数据库
 */
 //抑制所有错误信息
@@ -17,6 +17,7 @@ echo 'My Smart Home 正在安装，请稍候',"\n";
 echo '---------------------------',"\n";
 echo '尝试连接到MySQL数据库...',"\n";
 require('../data/db.inc.php');
+require('../include/common.func.php');
 @list($dbhost,$dbport)=explode(':',SQLHOST);
 !$dbport && $dbport=3306;
 $link=mysqli_init();
@@ -44,36 +45,32 @@ echo '---------------------------',"\n";
 echo '建立数据表成功',"\n";
 echo '---------------------------',"\n";
 //初始化管理员信息
-do {
-	if (isset($user)) echo '格式不正确！',"\n";
-	echo '请设置管理员用户名（数字/字母/下划线，20字以内）：';
-	$user=trim(fgets(STDIN));
-} while (!preg_match('/^[A-Za-z0-9_]+$/',$user) && strlen($user)>20);
-do {
-	if (isset($email)) echo '请输入正确的邮箱！',"\n";
-	echo '请输入您的邮箱：';
-	$email=trim(fgets(STDIN));
-} while (!preg_match('/^[_.0-9a-z-]+@([0-9a-z][0-9a-z-]+.)+[a-z]{2,3}$/',$email));
-do {
-	if (isset($pwd1)) echo '两次输入的密码不一致！',"\n";
-	echo '请设置管理员密码：';
-	$pwd1=trim(fgets(STDIN));
-	echo '请再输一次：';
-	$pwd2=trim(fgets(STDIN));
-} while ($pwd1!=$pwd2);
-$pwd=$pwd1;
+$user='admin';
+$email='896640547@qq.com';
+$pwd=pwdcode('admin');
 echo '初始化管理员数据，请稍候',"\n";
-mysqli_query($link,"INSERT INTO `".DBPREFIX."user` (`name`,`password`,`email`,`type`) VALUES ('$user','".pwdcode($pwd)."','$email','1')");
+mysqli_query($link,"INSERT INTO `".DBPREFIX."user` (`id`,`type`,`name`,`password`,`email`,`isAdmin`) VALUES ('1','1','$user','".pwdcode($pwd)."','$email','1')");
 echo '---------------------------',"\n";
 echo '初始化管理员数据成功',"\n";
 echo '---------------------------',"\n";
-echo '初始化其他数据，请稍候',"\n";
+echo '初始化基本数据，请稍候',"\n";
 echo '---------------------------',"\n";
 //插入初始数据
 foreach ($sqldata as $val) {
+echo 'Wait...',"\n";
 	mysqli_query($link,str_replace('#@__',DBPREFIX,$val));
 }
 echo '初始化数据完成',"\n";
+echo '---------------------------',"\n";
+echo '初始化测试数据，请稍候',"\n";
+echo '---------------------------',"\n";
+$testdata=array();
+$testdata[]="INSERT INTO `#@__nodegroup`(`id`,`name`) VALUES ('1','Light'),('2','TV')";
+foreach ($testdata as $val) {
+echo 'Wait...',"\n";
+	mysqli_query($link,str_replace('#@__',DBPREFIX,$val));
+}
+echo '初始化测试数据完成',"\n";
 echo '---------------------------',"\n";
 echo '安装成功."\n"';
 ?>
