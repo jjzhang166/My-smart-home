@@ -21,7 +21,7 @@ class control {
 	 * @param int $port 服务器端口
 	*/
 	public function connect ($host,$port) {
-		if (!preg_match('/^(([01]?[/d]{1,2})|(2[0-4][/d])|(25[0-5]))(/.(([01]?[/d]{1,2})|(2[0-4][/d])|(25[0-5]))){3}$/',$host)) $host=gethostbyname($host); //将非IP转化为IP
+		if (!preg_match('/^(([01]?[\d]{1,2})|(2[0-4][\d])|(25[0-5]))(\.(([01]?[\d]{1,2})|(2[0-4][\d])|(25[0-5]))){3}$/',$host)) $host=gethostbyname($host); //将非IP转化为IP
 		$this->host=$host;
 		$this->port=$port;
 		if ($host=='127.0.0.1') { //本地连接
@@ -47,6 +47,21 @@ class control {
 		return $r;
 	}
 	/*
+	 * 生成命令
+	 * @access public
+	 * @param string $type 命令类型，例如node
+	 * @param array $data 参数，例如(array('say'=>'ok'),'r')
+	 * @return string
+	*/
+	public function mkCommand ($type,$data) {
+	$r=$type;
+	for ($i=0;$i<=4;$i++) {
+	$r.=' ';
+	if (is_array($data[$i])) $r.=join($data[$i],',');
+	else $r.='r';
+	}
+	return $r;
+	/*
 	 * 报错
 	 * @access private
 	 * @param string $msg 错误描述
@@ -54,7 +69,7 @@ class control {
 	private function DisplayError ($msg) {
 		$systemmsg=socket_last_error($this->linkID);
 		$this->close();
-		exit(json_encode(array('success'=>0,'errcode'=>101,'errmsg'=>'Internal Server Error')));
+		exit(json_encode(array('success'=>0,'errcode'=>101,'errmsg'=>'Internal Server Error','errtype'=>'socket')));
 	}
 	/*
 	 * 关闭连接

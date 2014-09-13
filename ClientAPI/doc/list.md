@@ -40,4 +40,6 @@
 
 * 获取某一节点组下的所有节点：[getNodeByGroup](node/getNodeByGroup.md)
 
+* 获取节点信息：[getNodeInfo](node/getNodeInfo.md)
+
 * 控制节点（开发中）：[controlNode](node/controlNode.md)

@@ -21,13 +21,10 @@ class node extends base {
 		if (empty($id)) return array('success'=>0,'errcode'=>100,'errmsg'=>'Parameter error');
 		$user=$this->sql->GetOne('select','user',array('row'=>'*','where'=>array(array('name'=>'id','type'=>'eq','val'=>$uid))));
 		$usertype=$user['type'];
-		if ($user['view']!='|*|' && $user['control']!='|*|' && $user['isAdmin']!=1) { //检查用户是否有权限查看
-			$num=$this->sql->GetNum('usergroup',array('row'=>'*','where'=>array(array('name'=>'id','type'=>'eq','val'=>$usertype),array('name'=>'view','type'=>'like','val'=>'%|'.$id.'|%'))));
-			if ($num==0) {
-				$num=$this->sql->GetNum('usergroup',array('row'=>'*','where'=>array(array('name'=>'id','type'=>'eq','val'=>$usertype),array('name'=>'control','type'=>'like','val'=>'%|'.$id.'|%'))));
-				if ($num==0) {
-					return array('success'=>0,'errcode'=>3,'errmsg'=>'User has not permission to view');
-				}
+		if ($user['isAdmin']!=1) { //检查用户是否有权限查看
+			$one=$this->sql->GetOne('select','usergroup',array('row'=>'view,control','where'=>array(array('name'=>'id','type'=>'eq','val'=>$usertype))));
+			if (strpos('|'.$id.'|',$one['view']===FALSE && strpos('|'.$id.'|',$one['control']===FALSE && $one['view']!='|*|' && $one['control']!='|*|') {
+				return array('success'=>0,'errcode'=>3,'errmsg'=>'User has not permission to view');
 			}
 		}
 		//查询节点组信息
@@ -39,6 +36,8 @@ class node extends base {
 		while ($row=$this->sql->GetArray('getnodes')) {
 			$tmp=json_decode($this->nosql->get('node_'.$row['id']),1);
 			$tmp['id']=$row['id'];
+			unset($tmp['category']);
+			$r[]=$tmp;
 		}
 		return array('success'=>1,'name'=>$nodegroup['name'],'node'=>$r);
 	}
@@ -46,8 +45,9 @@ class node extends base {
 	public function ongetAllGroup () {
 		global $isLogin,$uid;
 		if (!$isLogin) return array('success'=>0,'errcode'=>1,'errmsg'=>'Auth is not exists');
-		$user=$this->sql->GetOne('select','user',array('row'=>'*','where'=>array(array('name'=>'id','type'=>'eq','val'=>$uid))));
-		if ($user['view']!='|*|' && $user['control']!='|*|' && $user['isAdmin']!=1) return array('success'=>0,'errcode'=>2,'errmsg'=>'User has not permission to view');
+		$user=$this->sql->GetOne('select','user',array('row'=>'type,isAdmin','where'=>array(array('name'=>'id','type'=>'eq','val'=>$uid))));
+		$usergroup=$this->sql->GetOne('select','usergroup',array('row'=>'view,control','where'=>array(array('name'=>'id','type'=>'eq','val'=>$user['type']))));
+		if ($usergroup['view']!='|*|' && $usergroup['control']!='|*|' && $user['isAdmin']!=1) return array('success'=>0,'errcode'=>2,'errmsg'=>'User has not permission to view');
 		$this->sql->query('allgroup','select','nodegroup',array('row'=>'*'));
 		$r=array('success'=>1,'group'=>$this->sql->GetAll('allgroup'));
 		return $r;
@@ -56,14 +56,47 @@ class node extends base {
 	public function ongetNodeInfo () {
 		global $isLogin,$uid;
 		if (!$isLogin) return array('success'=>0,'errcode'=>1,'errmsg'=>'Auth is not exists');
-		$this->sql->query('allgroup','select','nodegroup',array('row'=>'*'));
-		$r=array('success'=>1,'group'=>$this->sql->GetAll('allgroup'));
+		$id=intval(getgpc('id','R'));
+		if (empty($id)) return array('success'=>0,'errcode'=>100,'errmsg'=>'Parameter error');
+		$node=json_decode($this->nosql->get('node_'.$id),1);
+		if (!is_array($node)) return array('success'=>0,'errcode'=>2,'errmsg'=>'Node not exists');
+		$user=$this->sql->GetOne('select','user',array('row'=>'*','where'=>array(array('name'=>'id','type'=>'eq','val'=>$uid))));
+		$usertype=$user['type'];
+		if ($user['isAdmin']!=1) { //检查用户是否有权限查看
+			$one=$this->sql->GetOne('select','usergroup',array('row'=>'view,control','where'=>array(array('name'=>'id','type'=>'eq','val'=>$usertype))));
+			if (strpos('|'.$node['category'].'|',$one['view']===FALSE && strpos('|'.$node['category'].'|',$one['control']===FALSE && $one['view']!='|*|' && $one['control']!='|*|') {
+				return array('success'=>0,'errcode'=>3,'errmsg'=>'User has not permission to view');
+			}
+		}
+		$r=array('success'=>1,'node'=>$node);
 		return $r;
 	}
 	//控制节点
-	public function oncontrolNode () {
+	public function oncontrol () {
 		global $isLogin,$uid;
-		$id=getgpc('id','R');
+		if (!$isLogin) return array('success'=>0,'errcode'=>1,'errmsg'=>'Auth is not exists');
+		$id=intval(getgpc('id','R'));
+		if (empty($id)) return array('success'=>0,'errcode'=>100,'errmsg'=>'Parameter error');
+		$node=json_decode($this->nosql->get('node_'.$id),1);
+		if (!is_array($node)) return array('success'=>0,'errcode'=>2,'errmsg'=>'Node not exists');
+		$user=$this->sql->GetOne('select','user',array('row'=>'*','where'=>array(array('name'=>'id','type'=>'eq','val'=>$uid))));
+		$usertype=$user['type'];
+		if ($user['isAdmin']!=1) { //检查用户是否有权限
+			$one=$this->sql->GetOne('select','usergroup',array('row'=>'view,control','where'=>array(array('name'=>'id','type'=>'eq','val'=>$usertype))));
+			if (strpos('|'.$node['category'].'|',$one['control']===FALSE && $one['control']!='|*|') {
+				return array('success'=>0,'errcode'=>3,'errmsg'=>'User has not permission to view');
+			}
+		}
+		$command=getgpc('command','R');
+		if (empty($command)) return array('success'=>0,'errcode'=>100,'errmsg'=>'Parameter error');
+		//$control=getClass('control');
+		//$control->connect(HOME_HOST,HOME_PORT);
+		//$
+		//$r=$control->control(
+		// $this->sql->query('command','update','node',array('update'=>array('')));
+		// $credis_string=sprintf('exec/credis-php hset %s command %s',$nodeid,$command);
+		// exec($credis_string);
+		redirect(lang('node','command_ok'),'index.php?m=node&a=show');
 	}
 }
 ?>
