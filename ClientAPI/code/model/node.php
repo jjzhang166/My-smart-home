@@ -23,7 +23,7 @@ class node extends base {
 		$usertype=$user['type'];
 		if ($user['isAdmin']!=1) { //检查用户是否有权限查看
 			$one=$this->sql->GetOne('select','usergroup',array('row'=>'view,control','where'=>array(array('name'=>'id','type'=>'eq','val'=>$usertype))));
-			if (strpos('|'.$id.'|',$one['view']===FALSE && strpos('|'.$id.'|',$one['control']===FALSE && $one['view']!='|*|' && $one['control']!='|*|') {
+			if (strpos('|'.$id.'|',$one['view']===FALSE) && strpos('|'.$id.'|',$one['control']===FALSE) && $one['view']!='|*|' && $one['control']!='|*|') {
 				return array('success'=>0,'errcode'=>3,'errmsg'=>'User has not permission to view');
 			}
 		}
@@ -64,7 +64,7 @@ class node extends base {
 		$usertype=$user['type'];
 		if ($user['isAdmin']!=1) { //检查用户是否有权限查看
 			$one=$this->sql->GetOne('select','usergroup',array('row'=>'view,control','where'=>array(array('name'=>'id','type'=>'eq','val'=>$usertype))));
-			if (strpos('|'.$node['category'].'|',$one['view']===FALSE && strpos('|'.$node['category'].'|',$one['control']===FALSE && $one['view']!='|*|' && $one['control']!='|*|') {
+			if (strpos('|'.$node['category'].'|',$one['view']===FALSE) && strpos('|'.$node['category'].'|',$one['control']===FALSE) && $one['view']!='|*|' && $one['control']!='|*|') {
 				return array('success'=>0,'errcode'=>3,'errmsg'=>'User has not permission to view');
 			}
 		}
@@ -83,7 +83,7 @@ class node extends base {
 		$usertype=$user['type'];
 		if ($user['isAdmin']!=1) { //检查用户是否有权限
 			$one=$this->sql->GetOne('select','usergroup',array('row'=>'view,control','where'=>array(array('name'=>'id','type'=>'eq','val'=>$usertype))));
-			if (strpos('|'.$node['category'].'|',$one['control']===FALSE && $one['control']!='|*|') {
+			if (strpos('|'.$node['category'].'|',$one['control']===FALSE) && $one['control']!='|*|') {
 				return array('success'=>0,'errcode'=>3,'errmsg'=>'User has not permission to view');
 			}
 		}
