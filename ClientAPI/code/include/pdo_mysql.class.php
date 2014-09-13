@@ -41,7 +41,7 @@ class pdosysql {
 		$this->dbPrefix=DBPREFIX;
 		@list($dbhost,$dbport)=explode(':',$this->dbHost);
 		!$dbport && $dbport=3306;
-		$dsn='mysql:host='.$dbhost.':'.$dbport.';dbname='.$this->dbName.';charset=utf8';
+		$dsn='mysql:host='.$dbhost.';port='.$dbport.';dbname='.$this->dbName.';charset=utf8';
 		try {
 			$this->linkID=new PDO($dsn,$this->dbUser,$this->dbPwd); //初始化PDO
 		} catch (PDOException $e) {
