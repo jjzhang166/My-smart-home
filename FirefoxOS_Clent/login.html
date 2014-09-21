@@ -4,23 +4,25 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Switcher</title>
+		<title>My Smart Home</title>
 		<link href="css/font-awesome.min.css" rel="stylesheet">
 		<link href="css/foosoui.css" rel="stylesheet">
 		<link href="css/foosoui-black.css" rel="stylesheet">
+		<style>.btn { width:70%;margin:5px auto; }</style>
 	</head>
 	<body>
 		<div id="wrapper">
-			<div class="titlebar">
-				<div class="button btn-back" data-to="url" data-url="demo-welcome.html"><i class="fa fa-angle-left"></i></div>
-				<div class="title">Switcher</div>
-			</div><!-- /.titlebar -->
-			<div class="content">
-				<input type="checkbox" id="test">
-			</div><!-- /#content -->
+			<div class="page page-show welcome" id="page1">
+				<div class="header">My Smart Home</div>
+				<div class="content">
+					<a href="login-local.html" class="btn btn-default btn-block" data-i18n="login-local"></a>
+					<a class="btn btn-default btn-block" data-i18n="login-cloud"></a>
+				</div>
+			</div>
 		</div> <!-- /#wrapper -->
 		<script src="js/zepto.min.js"></script>
 		<script src="js/foosoui.js"></script>
-		<script src="js/test.js"></script>
+		<script src="js/script.js"></script>
+		<script src="i18n/i18n.js"></script>
 	</body>
 </html>

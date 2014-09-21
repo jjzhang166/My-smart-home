@@ -1,12 +1,10 @@
 /* 组件：按钮 */
 .btn-default,.btn-default:visited {
-	color: #222222;
+	color: rgb(60,60,60);
 	background-color: #FFF;
 	border-color: #CCCCCC;
 }
 
-.btn-default:hover,
-.btn-default:focus,
 .btn-default:active,
 .btn-default.active {
 	background-color: #DDDDDD;
@@ -15,10 +13,6 @@
 
 .btn-default.disabled,
 .btn-default[disabled],
-.btn-default.disabled:hover,
-.btn-default[disabled]:hover,
-.btn-default.disabled:focus,
-.btn-default[disabled]:focus,
 .btn-default.disabled:active,
 .btn-default[disabled]:active,
 .btn-default.disabled.active,
@@ -33,6 +27,7 @@
 /* 组件：开关 */
 .switcher.on .line {
 	background: #777777;
+	border: 1px solid #777777;
 }
 
 /* 组件：提示条 */
@@ -43,11 +38,12 @@
 /* 组件：提示框 */
 .alertBox.alertBox-default {
 	background-color: #FFF;
+	box-shadow: 0 0 20px rgb(60,60,60);
 }
 
 .alertBox.alertBox-default .alertBox-title {
-	background-color: #EEEEEE;
-	color: #222222;
+	background-color: rgb(230,230,230);
+	color: rgb(60,60,60);
 }
 
 .alertBox.alertBox-default .alertBox-btn {
@@ -56,6 +52,10 @@
 
 .alertBox.alertBox-default .alertBox-btn * {
 	background-color: #FFF;
+}
+
+.alertBox.alertBox-default .alertBox-btn *:active {
+	background-color: rgb(240,240,240);
 }
 
 .alertBox.alertBox-default .alertBox-btn.alertBox-twoBtn>*:first-child {
@@ -67,18 +67,22 @@
 	border-bottom: 1px solid #CCCCCC;
 }
 
-.titlebar .btn {
-	color: #222222;
+.titlebar .button {
+	color: rgb(60,60,60);
 	border-left: 1px solid #CCCCCC;
 	border-right: 1px solid #CCCCCC;
 }
 
+.titlebar .button:active {
+	background-color: rgb(240,240,240);
+}
+
 .titlebar .title {
-	color: #222222;
+	color: rgb(60,60,60);
 }
 
 .titlebar .right-btns {
-	color: #222222;
+	color: rgb(60,60,60);
 }
 
 .titlebar .right-btns a {
@@ -86,41 +90,87 @@
 	transition: 0.2s;
 }
 
-.titlebar .right-btns a:hover,
 .titlebar .right-btns a.active {
-	border-bottom: 2px solid #222222;
+	border-bottom: 2px solid rgb(60,60,60);
 	opacity: 1;
 }
 /* 菜单栏 */
 .menu {
 	background-color: #FFF;
-	color: #222222;
+	color: rgb(60,60,60);
 }
 
 .menu-group .item {
 }
 
 .menu-group>.item>a {
-	border-bottom: 2px solid #EEEEEE;
-	color: #222222;
+	border-bottom: 1px solid #CCCCCC;
+	color: rgb(60,60,60);
+}
+
+.menu-group>.item.active ul {
+	border-bottom: 1px solid #CCCCCC;
 }
 
 .menu-group>.item.item-lg>a {
-	color: #222222;
+	color: rgb(60,60,60);
 }
 
 .menu-group>.item .item a {
-	color: #222222;
+	color: rgb(60,60,60);
 }
 
 .menu-group>.item.active>a,
 .menu-group>.item:active>a {
-	background-color: #DDDDDD;
+	background-color: #EEEEEE;
 }
 
 /* 组件：Welcome */
 .welcome .header {
-	color: #222222;
+	color: rgb(60,60,60);
 	background-color: #FFF;
 border-bottom:1px solid #CCCCCC;
+}
+
+/* 组件：list */
+
+.list-round .item {
+	border-color: #DBDBDB;
+	background-color: white;
+}
+
+.list-round .item:first-child {
+	border-color: #DBDBDB;
+}
+
+.list-card .item {
+	background-color: white;
+	border-color: #DBDBDB;
+}
+
+.list-default {
+	border-color: #DBDBDB;
+}
+
+.list-default .item {
+	background: -moz-linear-gradient(top,#FFF,#EEE);
+	border-color: #DBDBDB;
+}
+
+.list-light .item {
+	border-color: #DBDBDB;
+}
+
+.list-title.list-title-light {
+	border-color: #DBDBDB;
+}
+
+/* 组件：pull */
+.pull.pull-default {
+	color: #555555;
+}
+/* 组件：Welcome */
+.welcome .header {
+	color: rgb(60,60,60);
+	background-color: #FFF;
 }
