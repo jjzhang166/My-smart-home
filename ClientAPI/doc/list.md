@@ -44,6 +44,8 @@
 
 * 续期Auth：[renewAuth](member/renewAuth.md)
 
+* 添加用户组：[addGroup](member/addGroup.md)
+
 * 添加用户（开发中）：[addUser](member/addUser.md)
 
 ## 节点相关（node）
@@ -55,5 +57,7 @@
 * 获取某一节点信息：[getNodeInfo](node/getNodeInfo.md)
 
 * 获取我的节点组：[getMyGroup](node/getMyGroup.md)
+
+* 添加节点组：[addGroup](node/addGroup.md)
 
 * 控制节点（开发中）：[controlNode](node/controlNode.md)
