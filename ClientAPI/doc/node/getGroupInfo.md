@@ -12,6 +12,8 @@
 
 * 需要Auth：是
 
+* 需要管理员权限：否
+
 * 返回格式：JSON
 
 * 包含全局返回：是
@@ -27,6 +29,7 @@
 
 | 名称 | 类型 | 描述 | 示例 |
 | --- | --- | --- | --- |
+| name | 字符串 | 节点组名称 | Light |
 | node | 数组 | 节点组下的所有节点 | [{"id":1,"name":"Light-Kitchen","category":1,"state":"on","attach":{"brightness":80}},{"id":2,"name":"TV-bedroom","category":2,"state":"on","attach":{}}] |
 | node[][id] | 数字 | 节点ID | 1 |
 | node[][name] | 字符串 | 节点名称 | 1 |
@@ -43,6 +46,7 @@
 
 	{
 		"success": 1,
+		"name": "Light",
 		"node": [
 			{
 				"id": 1,
@@ -73,7 +77,7 @@
 
 ## 注意事项
 
-node可能为空数组
+* node可能为空数组
 
 ## 附表：错误码
 

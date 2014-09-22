@@ -6,11 +6,13 @@
 
 ## 基本信息
 
-* 地址：`api/member/myInfo.json`
+* 地址：`api/member/getMyInfo.json`
 
 * 请求方式：POST/GET
 
 * 需要Auth：是
+
+* 需要管理员权限：否
 
 * 返回格式：JSON
 
@@ -35,7 +37,7 @@
 
 ## 请求示例
 
-	curl -X POST http://client.smarthome.sylingd.com/api/member/myInfo.json -d 'auth=21232f297a57a5a743894a0e4a801fc3'
+	curl -X POST http://client.smarthome.sylingd.com/api/member/getMyInfo.json -d 'auth=21232f297a57a5a743894a0e4a801fc3'
 
 如果成功，返回信息如下：
 
@@ -58,7 +60,7 @@
 
 ## 注意事项
 
-view和control可能为空数组
+* view和control可能为空数组
 
 ## 附表：错误码
 

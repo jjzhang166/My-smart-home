@@ -36,6 +36,7 @@ if (in_array($m,array('index','member','node'),TRUE)) {
 	} else {
 		exit(json_encode(array('success'=>0,'errcode'=>104,'errmsg'=>'API Not Found')));
 	}
+	$m.='_model';
 	$_ENV['_model']=$m::getInstance();
 	$method='on'.$a;
 	if(method_exists($_ENV['_model'],$method) && $a{0}!='_') {

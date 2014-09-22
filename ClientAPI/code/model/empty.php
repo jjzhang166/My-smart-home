@@ -4,7 +4,7 @@ if (!defined('ROOT')) exit('SmartHome');
  * ģ�飺
  * @package Model
 */
-class  extends base {
+class _model extends base {
 	static private $_instance=NULL;
 	static public function getInstance () {
 		if (!self::$_instance) self::$_instance=new self;

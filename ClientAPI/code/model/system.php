@@ -1,10 +1,10 @@
 <?php
 if (!defined('ROOT')) exit('SmartHome');
 /*
- * 模块：首页
+ * 模块：
  * @package Model
 */
-class index extends base {
+class system_model extends base {
 	static private $_instance=NULL;
 	static public function getInstance () {
 		if (!self::$_instance) self::$_instance=new self;
@@ -13,8 +13,9 @@ class index extends base {
 	public function __construct () {
 		parent::init();
 	}
-	public function onbody () {
-		include(TPL.'index.html');
+	//获取系统版本
+	public function ongetVersion () {
+		
 	}
 }
 ?>
