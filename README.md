@@ -76,6 +76,11 @@ http服务器代码，有问题请[提交Issue](http://git.oschina.net/xmeter/My
 
 * [泷涯](http://git.oschina.net/sy) 896640547@qq.com _管理员_
 
+硬件 
+* [Pajoke] Hell-Prototypes    pajoke@163.com
+* 更多Pajoke介绍请移步 ：  http://www.hellprototypes.com
+
+
 数据库、Web、API
 
 * [阿里云晕哋](http://git.oschina.net/aliyuns) siz@sonwa.cn
