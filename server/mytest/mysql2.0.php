@@ -33,7 +33,7 @@ echo "create tables \r\n" ;
 
 mysql_query("CREATE  TABLE emailmd5  (email  VARCHAR(50) UNIQUE,saltmd5 VARCHAR(50))",$con);
 $i=mysql_query("CREATE  TABLE node  (id bigint(10) AUTO_INCREMENT , userid VARCHAR(50) ,nodeid VARCHAR(50),command VARCHAR(50) , value VARCHAR(50), PRIMARY KEY(id) ,INDEX(userid) )",$con);
-mysql_query("CREATE  TABLE user (id bigint(10) AUTO_INCREMENT , host VARCHAR(10),hostname VARCHAR(50),userid VARCHAR(50) ,name VARCHAR(50) UNIQUE,password VARCHAR(50),email VARCHAR(50), nickname VARCHAR(50) , PRIMARY KEY(id) ,INDEX(name),INDEX(email) )",$con);
+mysql_query("CREATE  TABLE user (id bigint(10) AUTO_INCREMENT , host TINYINT,hostname VARCHAR(50),userid VARCHAR(50) ,name VARCHAR(50) UNIQUE,password VARCHAR(50),email VARCHAR(50), nickname VARCHAR(50) , PRIMARY KEY(id) ,INDEX(name),INDEX(email) )",$con);
 
 // insert fake data
 $arr=array("yongming","rex","fireman","root");
@@ -45,7 +45,7 @@ foreach ($arr as $value)
   echo "name is : ".$name."\r\n";
   $email=$name."@gmail.com";
   echo "email is : ".$email."\r\n";
-  $str = sprintf("insert into user (host,hostname,userid,name,password,email,nickname)values('%s','%s','%s','%s','%s','%s','%s')","true",$name,md5($email),$name,$name,$email,$name);
+  $str = sprintf("insert into user (host,hostname,userid,name,password,email,nickname)values('1','%s','%s','%s','%s','%s','%s')",$name,md5($email),$name,$name,$email,$name);
    //echo "str is : \r\n".$str;
   $i=mysql_query($str,$con);
      if ($i)
@@ -56,12 +56,12 @@ foreach ($arr as $value)
     {
       echo "Error insert into user: \r\n " . mysql_error();
     }
-  
+
   foreach ($family as $value)
   {
      $familyname=$name.$value;
      $familyemail=$familyname."@163.com";
-     $str = sprintf("insert into user (host,hostname,userid,name,password,email,nickname)values('%s','%s','%s','%s','%s','%s','%s')","false",$name,md5($email),$familyname,$familyname,$familyemail,$familyname);
+     $str = sprintf("insert into user (host,hostname,userid,name,password,email,nickname)values('0','%s','%s','%s','%s','%s','%s')",$name,md5($email),$familyname,$familyname,$familyemail,$familyname);
      //echo "str is : \r\n".$str;
      $i = mysql_query($str,$con);
      if ($i)

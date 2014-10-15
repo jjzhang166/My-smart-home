@@ -8,17 +8,17 @@
 #include "mydump.h"
 #include <stdlib.h>
 
-#include <errno.h>  
-#include <unistd.h>  
-#include <sys/types.h>  
-#include <sys/ipc.h>  
-#include <sys/stat.h>  
-#include <sys/msg.h> 
+#include <errno.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/stat.h>
+#include <sys/msg.h>
 
 #include<mysql/mysql.h>
 
 #include "credis.h"
-// -lmysqlclient  for gcc 
+// -lmysqlclient  for gcc
 
 #define REDIS_THREAD_STACK_SIZE (1024*1024*4)
 
@@ -34,12 +34,12 @@ int insert_all_node(char * userid,char * username)
 
      char query[256] ={0x00} ;
      char buf[256]={0x00};
-     
+
      //mysql_query("CREATE  TABLE node  (userid VARCHAR(50) ,nodeid VARCHAR(50),command VARCHAR(50) , value VARCHAR(50))",$con);
      sprintf(query,"select  nodeid  from node where userid='%s' ;",userid);
      //redisLog(REDIS_VERBOSE,"query is %s \r\n",query);
 
-     
+
      mysql_init(&mysql);
      if(!mysql_real_connect(&mysql,"localhost","root",
                      "123456","mynode",0,NULL,0))
@@ -55,14 +55,14 @@ int insert_all_node(char * userid,char * username)
      }
      else
      {
-       
+
          res = mysql_use_result(&mysql);
-         while (row = mysql_fetch_row(res)) 
-         { 
+         while (row = mysql_fetch_row(res))
+         {
                sprintf(buf,"%s",row[0]);
                insertNodeToUserInfo(username,row[0]);
-         }  
-     
+         }
+
          mysql_free_result(res);
      }
      mysql_close(&mysql);
@@ -78,11 +78,11 @@ int insert_all_family(char * userid,char * hostname)
 
      char query[256] ={0x00} ;
      char buf[256]={0x00};
-     
-     sprintf(query,"select  name  from user where hostname='%s'  and  host='false';",hostname);
+
+     sprintf(query,"select  name  from user where hostname='%s'  and  host=0;",hostname);
      redisLog(REDIS_VERBOSE,"family query is %s \r\n",query);
 
-     
+
      mysql_init(&mysql);
      if(!mysql_real_connect(&mysql,"localhost","root",
                      "123456","mynode",0,NULL,0))
@@ -98,14 +98,14 @@ int insert_all_family(char * userid,char * hostname)
      else
      {
          res = mysql_use_result(&mysql);
-         while (row = mysql_fetch_row(res)) 
-         { 
-              
+         while (row = mysql_fetch_row(res))
+         {
+
                 sprintf(buf,"%s",row[0]);
                 //redisLog(REDIS_VERBOSE,"family query name is  %s \r\n",buf);
                 insertUserInfo(userid,row[0],hostname,0);
-         }  
-     
+         }
+
          mysql_free_result(res);
      }
      mysql_close(&mysql);
@@ -114,7 +114,7 @@ int insert_all_family(char * userid,char * hostname)
 
 int do_mysql_dump_redis(void *arg)
 {
-    
+
      MYSQL_RES *res;
      MYSQL_ROW row;
      MYSQL mysql;
@@ -123,8 +123,8 @@ int do_mysql_dump_redis(void *arg)
      char query[256] ={0x00} ;
      char hostname[256]={0x00};
      char userid[256]={0x00};
-     
-     
+
+
 
 
      mysql_init(&mysql);
@@ -138,7 +138,7 @@ int do_mysql_dump_redis(void *arg)
 
     // modiefid by yongming.li for family
 
-     sprintf(query,"select  userid,name,password  from user  where host='true';");
+     sprintf(query,"select  userid,name,password  from user  where host=1;");
      redisLog(REDIS_VERBOSE,"main query is %s \r\n",query);
      t=mysql_query(&mysql,query);
      if(t)
@@ -148,25 +148,25 @@ int do_mysql_dump_redis(void *arg)
      else
      {
          res = mysql_use_result(&mysql);
-         
-         while (row = mysql_fetch_row(res)) 
-         { 
+
+         while (row = mysql_fetch_row(res))
+         {
                // this is host
                sprintf(hostname,"%s",row[1]);
                sprintf(userid,"%s",row[0]);
 
                redisLog(REDIS_VERBOSE,"userid  is  %s and hostname is %s \r\n",userid,hostname);
-               
+
                insertUserInfo(userid,hostname,hostname,1);
                insert_all_node(userid,hostname);
                // this is family members
                insert_all_family(userid,hostname);
                i++;
-         }  
+         }
          mysql_free_result(res);
      }
       mysql_close(&mysql);
-      
+
       #if 0
       char temp_id[256]="454545454545";
       char temp_name[256]="fuck";
@@ -176,7 +176,7 @@ int do_mysql_dump_redis(void *arg)
       insertNodeToUserInfo(temp_name,temp_name_node);
       insertUserInfo(temp_id, temp_name_family,temp_name,0);
       #endif
-      
+
      return 0;
  }
 
@@ -237,7 +237,7 @@ int  mysql_is_exist(char * cmd)
       int t,r;
       MYSQL_RES *res;
       MYSQL_ROW row;
-      
+
       redisLog(REDIS_VERBOSE,"cmd is %s \r\n",cmd);
       mysql_query(&my_mysql_query,cmd);
       if(t)
@@ -272,7 +272,7 @@ void  mysqlRunCommand(char * cmd)
      return ;
 }
 
- 
+
 
 
 int mysql_dump_to_memory()
