@@ -93,6 +93,7 @@ void read_tftp_update_ip_config(void) {
 
 void main_menu(void) {
 	Serial.println(F("\r\nSelect:"));
+	Serial.println(F("0.Erase ALL System data config"));
 	Serial.println(F("1.Read URL and TFTP config"));
 	Serial.println(F("2.Config online update URL"));
 	Serial.println(F("3.Config TFTP update IP&MAC"));
@@ -235,6 +236,16 @@ void tftp_ip_config() {
 	Serial.println(F("DONE..."));
 }
 
+void erase_all_system_data(void) {
+	uint8_t all_0xFF[EXT_FLASH_PAGE_SIZE];
+	memset(all_0xFF, 0xFF, EXT_FLASH_PAGE_SIZE);
+	Serial.print(F("Start ERASE all system data..."));
+	ext_flash_write_system_data(0, all_0xFF, EXT_FLASH_PAGE_SIZE);
+	ext_flash_write_system_data(1, all_0xFF, EXT_FLASH_PAGE_SIZE);
+	ext_flash_write_system_data(2, all_0xFF, EXT_FLASH_PAGE_SIZE);
+	Serial.println(F("DONE"));
+}
+
 void setup() {
 	Serial.begin(115200);
 	delay(100);
@@ -248,6 +259,9 @@ void loop() {
 		delay(100);
 		bool update_menu = true;
 		switch(c) {
+		case '0':
+			erase_all_system_data();
+			break;
 		case '1':
 			Serial.println(F("URL config:"));
 			read_online_update_app_url();
