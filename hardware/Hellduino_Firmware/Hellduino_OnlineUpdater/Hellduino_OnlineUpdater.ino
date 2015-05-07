@@ -284,7 +284,7 @@ void loop()
 		Serial.println(err);
 	  }
 	  http.stop();
-	  Serial.println(F("\r\nwati 3S to retry ..."));
+	  Serial.println(F("\r\nwait 3S to retry ..."));
 	  delay(3000);
 	}while(retry--);
 
