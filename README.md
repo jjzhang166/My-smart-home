@@ -12,9 +12,12 @@
 
 http://git.oschina.net/ckrissun/smarthome-server
 
+## dserver
+ 下一版开发的重点，服务器端由集中式变为分布式架构。
+ 
 ## tools 
 
-提供些由于网络问题不好下的，软件包及调试工具
+提供些由于网络问题不好或者政策原因，软件包及调试工具
 
 ## opencv/facedect
 
